@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>کازابلانکا | Casablanca</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#080808;--bg2:#101010;--bg3:#161616;
+  --gold:#C9A87C;--gold2:#E2CBA8;--gold3:#9A7A55;
+  --w:#EDE8E0;--wd:rgba(237,232,224,.6);--wf:rgba(237,232,224,.1);
+  --bdr:rgba(201,168,124,.1);
+  --f-en:'Cinzel',serif;
+  --f-fa:'Vazirmatn','Tahoma',sans-serif;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --nh:78px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--w);font-family:var(--f-fa);font-size:16px;line-height:1.75;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{background:none;border:none;font:inherit;cursor:pointer}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--gold3);border-radius:2px}
+
+/* ── CURSOR ─────────────────── */
+#cd,#cr{position:fixed;top:0;left:0;pointer-events:none;z-index:9999;border-radius:50%;transform:translate(-50%,-50%)}
+#cd{width:7px;height:7px;background:var(--gold);transition:transform .15s,width .2s,height .2s}
+#cr{width:30px;height:30px;border:1px solid rgba(201,168,124,.4);z-index:9998;transition:width .3s var(--ease),height .3s var(--ease),border-color .3s}
+@media(hover:none){#cd,#cr{display:none}}
+
+/* ── NAVBAR ──────────────────── */
+#nav{position:fixed;top:0;left:0;right:0;height:var(--nh);z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 52px;transition:background .4s,box-shadow .4s,transform .4s var(--ease)}
+#nav.bg{background:rgba(8,8,8,.95);backdrop-filter:blur(18px);box-shadow:0 1px 0 var(--bdr)}
+
+.n-logo{display:flex;align-items:center;gap:12px;flex-shrink:0}
+.n-logo img{height:52px;width:auto;display:block;border-radius:6px}
+.n-logo-text{display:flex;flex-direction:column;line-height:1.1}
+.n-logo-text b{font-family:var(--f-en);font-size:19px;font-weight:700;letter-spacing:3px;color:var(--w)}
+.n-logo-text span{font-family:var(--f-en);font-size:8px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-top:2px}
+
+.n-right{display:flex;align-items:center;gap:26px}
+.n-links{display:flex;align-items:center;gap:30px;list-style:none}
+.n-links a{font-size:14px;color:var(--wd);position:relative;transition:color .3s;white-space:nowrap}
+.n-links a::after{content:'';position:absolute;bottom:-3px;left:0;right:0;height:1px;background:var(--gold);transform:scaleX(0);transition:transform .35s var(--ease)}
+.n-links a:hover{color:var(--w)}
+.n-links a:hover::after{transform:scaleX(1)}
+.n-cta{background:var(--gold)!important;color:#000!important;padding:9px 24px;border-radius:100px;font-weight:600;font-size:14px}
+.n-cta::after{display:none!important}
+.n-cta:hover{background:var(--gold2)!important}
+
+/* ── BURGER TRIGGER ──────────── */
+.n-burger{display:none;flex-direction:column;justify-content:center;align-items:center;gap:5px;width:46px;height:46px;border-radius:50%;border:1px solid var(--bdr);flex-shrink:0;position:relative;z-index:2600;transition:border-color .35s,background .35s,transform .3s var(--ease)}
+.n-burger span{display:block;width:18px;height:1.5px;background:var(--w);transition:transform .4s var(--ease),opacity .25s,width .3s,background .3s}
+.n-burger.open{background:var(--gold);border-color:var(--gold);transform:rotate(90deg)}
+.n-burger.open span{background:#000}
+.n-burger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.n-burger.open span:nth-child(2){opacity:0;width:0}
+.n-burger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+
+/* ── MOBILE FULLSCREEN MENU — circular reveal ─── */
+#mmenu{
+  position:fixed;inset:0;z-index:2500;
+  background:#060606;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  clip-path:circle(2% at calc(100% - 46px) 40px);
+  visibility:hidden;
+  transition:clip-path .85s cubic-bezier(.65,0,.35,1),visibility 0s linear .85s;
+  overflow:hidden;
+}
+#mmenu.open{
+  clip-path:circle(150% at calc(100% - 46px) 40px);
+  visibility:visible;
+  transition:clip-path .85s cubic-bezier(.65,0,.35,1),visibility 0s;
+}
+.mm-marquee{position:absolute;top:50%;left:0;right:0;transform:translateY(-50%) rotate(-4deg);white-space:nowrap;opacity:.045;pointer-events:none}
+.mm-marquee-track{display:inline-flex;gap:40px;font-family:var(--f-en);font-size:120px;font-weight:700;color:var(--gold);animation:mmscroll 22s linear infinite}
+@keyframes mmscroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.mm-glow{position:absolute;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,124,.14) 0%,transparent 70%);top:-10%;right:-18%;pointer-events:none}
+.mm-glow2{position:absolute;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,124,.09) 0%,transparent 70%);bottom:-8%;left:-18%;pointer-events:none}
+
+.mm-close{
+  position:absolute;top:18px;left:18px;
+  display:flex;align-items:center;gap:10px;
+  z-index:10;
+  opacity:0;transform:translateY(-12px);
+  transition:opacity .4s ease .35s,transform .4s var(--ease) .35s;
+}
+#mmenu.open .mm-close{opacity:1;transform:translateY(0)}
+.mm-close-circle{
+  width:46px;height:46px;border-radius:50%;
+  background:var(--gold);color:#000;
+  display:flex;align-items:center;justify-content:center;
+  transition:transform .4s var(--ease),background .3s;
+  flex-shrink:0;
+}
+.mm-close:hover .mm-close-circle{transform:rotate(90deg) scale(1.08);background:var(--gold2)}
+.mm-close-label{font-family:var(--f-fa);font-size:13px;color:var(--wd);font-weight:500}
+
+.mm-links{display:flex;flex-direction:column;align-items:center;gap:2px;position:relative;z-index:2;perspective:800px}
+.mm-link{
+  display:flex;align-items:baseline;gap:14px;
+  padding:13px 0;
+  opacity:0;transform:translateY(36px) rotateX(-25deg);
+  transition:opacity .6s var(--ease),transform .6s var(--ease);
+}
+#mmenu.open .mm-link{opacity:1;transform:translateY(0) rotateX(0)}
+#mmenu.open .mm-link:nth-child(1){transition-delay:.18s}
+#mmenu.open .mm-link:nth-child(2){transition-delay:.25s}
+#mmenu.open .mm-link:nth-child(3){transition-delay:.32s}
+#mmenu.open .mm-link:nth-child(4){transition-delay:.39s}
+.mm-num{font-family:var(--f-en);font-size:13px;color:var(--gold3);min-width:26px}
+.mm-en{font-family:var(--f-en);font-size:clamp(30px,8vw,42px);font-weight:600;color:var(--w);transition:color .3s,letter-spacing .3s}
+.mm-link:active .mm-en{color:var(--gold);letter-spacing:1px}
+.mm-fa{font-family:var(--f-fa);font-size:13px;color:var(--gold);letter-spacing:.5px}
+
+.mm-divider{width:54px;height:1px;background:var(--bdr);margin:22px 0;opacity:0;transition:opacity .5s ease .5s}
+#mmenu.open .mm-divider{opacity:1}
+.mm-cta-wrap{opacity:0;transform:translateY(20px);transition:opacity .55s var(--ease) .52s,transform .55s var(--ease) .52s}
+#mmenu.open .mm-cta-wrap{opacity:1;transform:translateY(0)}
+.mm-cta{background:var(--gold);color:#000;padding:15px 40px;border-radius:100px;font-family:var(--f-fa);font-size:15px;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:background .3s,transform .3s var(--ease)}
+.mm-cta:hover{background:var(--gold2);transform:scale(1.04)}
+
+/* ── HERO ────────────────────── */
+#hero{height:100vh;min-height:640px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.h-video-wrap{position:absolute;inset:0;overflow:hidden;background:var(--bg)}
+.h-video-wrap video{width:100%;height:100%;object-fit:cover;transform:scale(1.06);animation:kenburns 26s ease-in-out infinite alternate}
+@keyframes kenburns{from{transform:scale(1.04) translate(0,0)}to{transform:scale(1.16) translate(-1.2%,-1%)}}
+.h-video-ov{position:absolute;inset:0;background:
+  linear-gradient(180deg,rgba(8,8,8,.55) 0%,rgba(8,8,8,.45) 35%,rgba(8,8,8,.93) 100%),
+  radial-gradient(ellipse 80% 60% at 50% 30%,rgba(60,38,12,.2) 0%,transparent 65%)}
+.h-noise{position:absolute;inset:0;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");pointer-events:none}
+.h-ring{position:absolute;border-radius:50%;border:1px solid rgba(201,168,124,.07);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
+.h-r1{width:480px;height:480px}
+.h-r2{width:730px;height:730px;border-color:rgba(201,168,124,.045)}
+.h-r3{width:980px;height:980px;border-color:rgba(201,168,124,.03)}
+.h-content{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;text-align:center;gap:18px;padding:0 24px}
+
+/* fixed: label now uses Persian font properly + pill UI */
+.h-label{
+  display:inline-flex;align-items:center;gap:9px;
+  font-family:var(--f-fa);font-size:13px;font-weight:600;letter-spacing:.3px;
+  color:var(--gold);
+  padding:7px 18px 7px 8px;
+  border:1px solid rgba(201,168,124,.3);
+  border-radius:100px;
+  background:rgba(201,168,124,.06);
+  opacity:0;transform:translateY(14px);
+}
+.lbl-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0}
+
+.h-title{direction:ltr;font-family:var(--f-en);font-size:clamp(60px,11vw,150px);font-weight:700;line-height:.9;letter-spacing:-.02em;overflow:hidden}
+.h-word{display:inline-block;opacity:0;transform:translateY(105%)}
+.h-word-g{color:var(--gold)}
+.h-line{width:0;height:1px;background:var(--gold);margin:4px auto}
+.h-tag{font-size:clamp(15px,1.6vw,19px);font-weight:300;color:var(--wd);opacity:0;transform:translateY(14px);max-width:440px}
+.h-btns{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:6px;opacity:0;transform:translateY(14px)}
+.btn-g{display:inline-flex;align-items:center;gap:8px;font-family:var(--f-fa);font-size:14px;font-weight:600;color:#000;background:var(--gold);padding:13px 30px;border-radius:100px;position:relative;overflow:hidden;transition:color .3s}
+.btn-g::before{content:'';position:absolute;inset:0;background:var(--gold2);transform:translateX(101%);transition:transform .45s var(--ease)}
+.btn-g:hover::before{transform:translateX(0)}
+.btn-g span{position:relative;z-index:1}
+.btn-o{display:inline-flex;align-items:center;gap:8px;font-family:var(--f-fa);font-size:14px;color:var(--gold);border:1px solid rgba(201,168,124,.35);padding:13px 30px;border-radius:100px;transition:background .3s,border-color .3s,color .3s}
+.btn-o:hover{background:rgba(201,168,124,.1);border-color:var(--gold);color:var(--w)}
+.h-scroll{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0}
+.h-sline{width:1px;height:50px;background:linear-gradient(to bottom,var(--gold),transparent);animation:spulse 2s ease-in-out infinite}
+@keyframes spulse{0%,100%{opacity:.4}50%{opacity:1}}
+.h-scroll span{font-family:var(--f-en);font-size:9px;letter-spacing:4px;text-transform:uppercase;color:rgba(201,168,124,.4)}
+
+/* ── MARQUEE ─────────────────── */
+.mq{border-top:1px solid var(--bdr);border-bottom:1px solid var(--bdr);padding:14px 0;overflow:hidden;background:rgba(201,168,124,.02)}
+.mq-inner{display:flex;gap:52px;white-space:nowrap;animation:mq 30s linear infinite;direction:ltr}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.mq-item{display:inline-flex;align-items:center;gap:20px;font-family:var(--f-en);font-size:11px;letter-spacing:4px;text-transform:uppercase;color:rgba(201,168,124,.3);flex-shrink:0}
+.mq-item.fa{font-family:var(--f-fa);letter-spacing:1px}
+.mq-dot{width:3px;height:3px;background:var(--gold3);border-radius:50%;flex-shrink:0}
+
+/* ── LAYOUT HELPERS ──────────── */
+.sec{padding:96px 56px}
+.sec-dark{background:var(--bg2)}
+.inner{max-width:1260px;margin:0 auto}
+
+/* fixed: lbl is now a Persian-correct pill badge, replaces old line+Cinzel version */
+.lbl{
+  display:inline-flex;align-items:center;gap:9px;
+  font-family:var(--f-fa);font-size:13px;font-weight:600;letter-spacing:.3px;
+  color:var(--gold);
+  padding:7px 18px 7px 8px;
+  border:1px solid rgba(201,168,124,.3);
+  border-radius:100px;
+  background:rgba(201,168,124,.06);
+  margin-bottom:20px;
+}
+.lbl-c{margin-left:auto;margin-right:auto}
+
+.rv{opacity:0;transform:translateY(44px)}
+.rv-l{opacity:0;transform:translateX(-36px)}
+.rv-r{opacity:0;transform:translateX(36px)}
+.rv-s{opacity:0;transform:scale(.92)}
+
+/* ── STORY ───────────────────── */
+.story-g{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+.s-h{font-family:var(--f-fa);font-size:clamp(30px,3.5vw,46px);font-weight:600;line-height:1.3;margin-bottom:20px}
+.s-h em{display:block;font-style:italic;font-weight:300;color:var(--gold)}
+.s-p{font-size:15px;line-height:1.9;color:var(--wd);margin-bottom:14px}
+.stats{display:flex;background:var(--bg3);border:1px solid var(--bdr);border-radius:14px;overflow:hidden;margin-top:36px}
+.stat{flex:1;padding:22px 16px;text-align:center;border-left:1px solid var(--bdr)}
+.stat:last-child{border-left:none}
+.stat-n{display:block;font-family:var(--f-en);font-size:32px;font-weight:700;color:var(--gold);line-height:1;margin-bottom:6px}
+.stat-l{font-size:12px;color:var(--wd)}
+.s-visual{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:4/5;background:linear-gradient(135deg,#1c1408,#0c0c0c) center/cover;box-shadow:0 30px 90px rgba(0,0,0,.55);transform:perspective(1000px) rotateY(0) rotateX(0);transition:transform .15s linear,box-shadow .4s ease}
+.s-visual video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.02);transition:transform 1.4s var(--ease);opacity:0;transition:opacity .6s ease,transform 1.4s var(--ease)}
+.s-visual video.ready{opacity:1}
+.s-visual:hover video{transform:scale(1.09)}
+.s-visual-grain{position:absolute;inset:0;opacity:.05;mix-blend-mode:overlay;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.s-visual-ov{position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,8,8,.08) 0%,rgba(8,8,8,.04) 38%,rgba(8,8,8,.55) 82%,rgba(8,8,8,.78) 100%);pointer-events:none}
+.s-visual-vig{position:absolute;inset:0;box-shadow:inset 0 0 110px rgba(0,0,0,.55);pointer-events:none}
+
+/* steam */
+.s-steam{position:absolute;bottom:34%;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.55) 0%,transparent 72%);filter:blur(13px);opacity:0;pointer-events:none;mix-blend-mode:screen;z-index:1}
+.s-steam-1{right:44%;width:46px;height:64px;animation:steamRise 6.5s ease-in infinite}
+.s-steam-2{right:51%;width:32px;height:50px;animation:steamRise 7.5s ease-in infinite 1.8s}
+.s-steam-3{right:47%;width:28px;height:42px;animation:steamRise 5.8s ease-in infinite 3.6s}
+@keyframes steamRise{0%{transform:translateY(0) scale(.8);opacity:0}14%{opacity:.4}58%{opacity:.18}100%{transform:translateY(-130px) scale(1.7);opacity:0}}
+
+/* corner frame */
+.s-frame{position:absolute;inset:16px;pointer-events:none;z-index:2}
+.s-corner{position:absolute;width:24px;height:24px;border-color:var(--gold);opacity:.75;transition:opacity .4s ease}
+.s-corner.tl{top:0;right:0;border-top:1.5px solid;border-right:1.5px solid;border-radius:0 8px 0 0}
+.s-corner.br{bottom:0;left:0;border-bottom:1.5px solid;border-left:1.5px solid;border-radius:0 0 8px 0}
+
+/* live chip */
+.s-live{position:absolute;top:20px;right:20px;z-index:3;display:flex;align-items:center;gap:7px;background:rgba(8,8,8,.55);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.14);border-radius:100px;padding:6px 14px 6px 11px;font-size:11px;font-weight:600;color:var(--w);letter-spacing:.3px}
+.s-live-dot{width:7px;height:7px;border-radius:50%;background:#FF5D5D;flex-shrink:0;animation:liveBlink 1.7s ease-in-out infinite}
+@keyframes liveBlink{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(255,93,93,.55)}50%{opacity:.55;box-shadow:0 0 0 7px rgba(255,93,93,0)}}
+
+/* play/pause toggle */
+.s-play{position:absolute;bottom:20px;left:20px;z-index:3;width:42px;height:42px;border-radius:50%;background:rgba(8,8,8,.55);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.16);display:flex;align-items:center;justify-content:center;color:#fff;cursor:pointer;transition:background .3s,transform .3s var(--ease),border-color .3s}
+.s-play:hover{background:var(--gold);color:#000;border-color:var(--gold);transform:scale(1.08)}
+.s-play svg{width:14px;height:14px}
+.s-play .ic-play{display:none}
+.s-play.paused .ic-pause{display:none}
+.s-play.paused .ic-play{display:block}
+
+.s-badge{position:absolute;bottom:20px;right:20px;z-index:3;background:rgba(8,8,8,.88);backdrop-filter:blur(10px);border:1px solid var(--bdr);border-radius:10px;padding:12px 18px;text-align:center}
+.s-badge strong{display:block;font-family:var(--f-en);font-size:20px;color:var(--gold);line-height:1}
+.s-badge span{font-size:11px;color:var(--wd);margin-top:3px;display:block}
+
+/* ── MENU CHOICE ─────────────── */
+.mc-title{direction:ltr;font-family:var(--f-en);font-size:clamp(34px,5vw,62px);font-weight:600;color:var(--w);margin:8px 0}
+.mc-sub{font-size:15px;color:var(--wd)}
+.mc-cards{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:48px}
+.mc-card{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:5/6;display:flex;align-items:flex-end;cursor:default}
+.mc-card-bg{position:absolute;inset:0}
+.mc-card-bg img{width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease)}
+#card-cafe .mc-card-bg{background:linear-gradient(135deg,#1a100a,#0e0a06)}
+#card-rest .mc-card-bg{background:linear-gradient(135deg,#0a0e1a,#060a0e)}
+.mc-card:hover .mc-card-bg img{transform:scale(1.06)}
+.mc-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,.95) 0%,rgba(8,8,8,.1) 55%,transparent 100%);transition:opacity .4s}
+.mc-shine{position:absolute;inset:0;background:linear-gradient(135deg,rgba(201,168,124,.07) 0%,transparent 50%);opacity:0;transition:opacity .4s;pointer-events:none}
+.mc-card:hover .mc-shine{opacity:1}
+.mc-body{position:relative;z-index:2;padding:32px 36px;width:100%;text-align:right}
+.mc-lbl{font-family:var(--f-en);font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:6px}
+.mc-name{direction:ltr;text-align:right;font-family:var(--f-en);font-size:clamp(36px,4.5vw,56px);font-weight:700;color:var(--w);line-height:1;margin-bottom:10px}
+.mc-desc{font-size:13px;color:rgba(237,232,224,.55);margin-bottom:20px}
+.mc-arr{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;border:1px solid rgba(201,168,124,.3);color:var(--gold);transition:background .3s,border-color .3s,transform .4s var(--ease)}
+.mc-card:hover .mc-arr{background:var(--gold);border-color:var(--gold);color:#000;transform:rotate(45deg)}
+
+/* ── GALLERY ─────────────────── */
+.gl-title{direction:ltr;font-family:var(--f-en);font-size:clamp(30px,4.5vw,54px);font-weight:600;color:var(--w);margin:8px 0 40px}
+.gl-grid{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:240px 240px;gap:10px}
+.gl-item{border-radius:10px;overflow:hidden;background:var(--bg3);position:relative;cursor:pointer}
+.gl-item img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease);display:block}
+.gl-item:hover img{transform:scale(1.07)}
+.gl-tall{grid-row:1/3}
+.gl-more-wrap{text-align:center;margin-top:32px}
+.gl-more-btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--f-fa);font-size:14px;color:var(--gold);border:1px solid rgba(201,168,124,.3);padding:13px 32px;border-radius:100px;transition:background .3s,border-color .3s,color .3s,gap .3s}
+.gl-more-btn:hover{background:rgba(201,168,124,.1);border-color:var(--gold);color:var(--w);gap:14px}
+.gl-more-btn svg{transition:transform .3s}
+.gl-more-btn:hover svg{transform:translateY(3px)}
+
+/* ── GALLERY LIGHTBOX (grid) ─── */
+.lb{position:fixed;inset:0;z-index:3000;background:rgba(5,5,5,.97);backdrop-filter:blur(20px);opacity:0;visibility:hidden;transition:opacity .45s var(--ease),visibility 0s linear .45s;overflow-y:auto;padding:90px 24px 60px}
+.lb.open{opacity:1;visibility:visible;transition:opacity .45s var(--ease)}
+.lb-close{position:fixed;top:24px;left:24px;width:46px;height:46px;border-radius:50%;background:var(--bg3);border:1px solid var(--bdr);display:flex;align-items:center;justify-content:center;color:var(--w);z-index:10;transition:background .25s,border-color .25s,transform .3s var(--ease)}
+.lb-close:hover{background:var(--gold);color:#000;border-color:var(--gold);transform:rotate(90deg)}
+.lb-title{text-align:center;font-family:var(--f-en);font-size:13px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:40px}
+.lb-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:14px;perspective:1200px}
+.lb-item{border-radius:12px;overflow:hidden;aspect-ratio:1;cursor:pointer;opacity:0;transform:translateY(30px) scale(.9);transition:transform .15s var(--ease),box-shadow .35s;will-change:transform;background:var(--bg3)}
+.lb.open .lb-item{opacity:1;transform:translateY(0) scale(1);transition:opacity .55s var(--ease),transform .55s var(--ease)}
+.lb-item img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease),filter .4s}
+.lb-item:hover{box-shadow:0 20px 50px rgba(0,0,0,.6)}
+.lb-item:hover img{transform:scale(1.1)}
+
+/* ── VIEWER (single image 3D) ── */
+.vw{position:fixed;inset:0;z-index:3500;background:rgba(2,2,2,.97);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity .4s var(--ease),visibility 0s linear .4s;perspective:1400px}
+.vw.open{opacity:1;visibility:visible;transition:opacity .4s var(--ease)}
+.vw-img-wrap{max-width:82vw;max-height:78vh;border-radius:16px;overflow:hidden;transform:rotateY(35deg) scale(.85);opacity:0;transition:transform .55s var(--ease),opacity .55s var(--ease);box-shadow:0 40px 100px rgba(0,0,0,.7);background:var(--bg3)}
+.vw.open .vw-img-wrap{transform:rotateY(0) scale(1);opacity:1}
+.vw-img-wrap img{max-width:82vw;max-height:78vh;display:block;object-fit:contain}
+.vw-close,.vw-prev,.vw-next{position:fixed;width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;color:var(--w);transition:background .25s,border-color .25s,transform .3s var(--ease);z-index:10}
+.vw-close{top:24px;left:24px}
+.vw-close:hover{background:var(--gold);color:#000;border-color:var(--gold);transform:rotate(90deg)}
+.vw-prev{top:50%;right:24px;transform:translateY(-50%)}
+.vw-next{top:50%;left:24px;transform:translateY(-50%)}
+.vw-prev:hover,.vw-next:hover{background:var(--gold);color:#000;border-color:var(--gold)}
+.vw-counter{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);font-family:var(--f-en);font-size:12px;letter-spacing:3px;color:var(--wd)}
+
+/* ── FEATURES ────────────────── */
+.ft-g{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+.ft-img{border-radius:18px;overflow:hidden;position:relative}
+.ft-img img{width:100%;aspect-ratio:3/4;object-fit:cover;background:linear-gradient(135deg,#1c1408,#0c0c0c);transition:transform .8s var(--ease);display:block}
+.ft-img:hover img{transform:scale(1.04)}
+.ft-img-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,.45) 0%,transparent 50%);pointer-events:none}
+.ft-h{font-family:var(--f-fa);font-size:clamp(26px,3.2vw,42px);font-weight:600;line-height:1.35;margin-bottom:18px}
+.ft-h em{display:block;font-style:italic;font-weight:300;color:var(--gold)}
+.ft-p{font-size:15px;line-height:1.9;color:var(--wd);margin-bottom:32px}
+.ft-list{list-style:none;display:flex;flex-direction:column;gap:14px}
+.ft-list li{display:flex;align-items:flex-start;gap:12px;font-size:15px;color:var(--wd);line-height:1.5}
+.ft-ico{width:30px;height:30px;border:1px solid var(--bdr);border-radius:7px;display:flex;align-items:center;justify-content:center;color:var(--gold);flex-shrink:0;font-size:12px;margin-top:1px}
+
+/* ── FOOTER ──────────────────── */
+footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:52px 56px 36px}
+.ft-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:36px;padding-bottom:36px;border-bottom:1px solid var(--bdr)}
+.ft-logo{display:flex;align-items:center;gap:12px}
+.ft-logo img{height:42px;border-radius:6px}
+.ft-logo b{font-family:var(--f-en);font-size:16px;letter-spacing:3px;color:var(--w)}
+.ft-nav{display:flex;gap:24px;list-style:none}
+.ft-nav a{font-size:14px;color:var(--wd);transition:color .3s}
+.ft-nav a:hover{color:var(--gold)}
+.ft-bot{display:flex;align-items:center;justify-content:space-between;font-size:13px;color:rgba(237,232,224,.3);flex-wrap:wrap;gap:10px}
+.ft-tag{font-family:var(--f-en);font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(201,168,124,.4)}
+
+/* ── RESPONSIVE ──────────────── */
+@media(max-width:1024px){
+  .story-g,.ft-g{grid-template-columns:1fr;gap:40px}
+  .sec{padding:72px 32px}
+  .gl-grid{grid-template-rows:200px 200px}
+  .lb-grid{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:860px){
+  :root{--nh:62px}
+  #nav{padding:0 18px}
+  .n-logo img{height:38px}
+  .n-logo-text b{font-size:15px;letter-spacing:2px}
+  .n-logo-text span{display:none}
+  .n-links{display:none}
+  .n-burger{display:flex}
+  .sec{padding:56px 20px}
+  .mc-cards{grid-template-columns:1fr}
+  .gl-grid{grid-template-columns:1fr 1fr;grid-template-rows:180px 180px}
+  .gl-tall{grid-row:auto}
+  .lb-grid{grid-template-columns:1fr 1fr;gap:10px}
+  .lb{padding:80px 16px 40px}
+  .vw-img-wrap,.vw-img-wrap img{max-width:94vw;max-height:62vh}
+  .vw-prev,.vw-next{width:42px;height:42px}
+  .vw-prev{right:10px}.vw-next{left:10px}
+  footer{padding:40px 20px}
+  .ft-top{flex-direction:column;gap:20px;text-align:center}
+  .ft-bot{justify-content:center;text-align:center}
+  .h-title{font-size:clamp(48px,15vw,90px)}
+  .mm-link{padding:10px 0}
+  .s-visual{transform:none!important}
+  .s-frame{inset:10px}
+  .mm-en{font-size:clamp(26px,9vw,36px)}
+}
+@media(max-width:480px){
+  .h-btns{flex-direction:column;align-items:center}
+}
+</style>
+</head>
+<body>
+
+<div id="cd"></div>
+<div id="cr"></div>
+
+<!-- ═══ NAVBAR ═══ -->
+<nav id="nav">
+  <a href="index.html" class="n-logo">
+    <img src="assets/images/logo.png" alt="Casablanca"
+         onerror="this.style.display='none'"/>
+    <div class="n-logo-text">
+      <b>CASABLANCA</b>
+      <span>Café &amp; Restaurant</span>
+    </div>
+  </a>
+  <div class="n-right">
+    <ul class="n-links">
+      <li><a href="#story">داستان ما</a></li>
+      <li><a href="#menu">منو</a></li>
+      <li><a href="#gallery">گالری</a></li>
+      <li><a href="#features">فضا</a></li>
+      <li><a href="cafe-menu.html" class="n-cta">منوی کافه</a></li>
+    </ul>
+    <button class="n-burger" id="nburger" aria-label="باز کردن منو">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ═══ MOBILE FULLSCREEN MENU ═══ -->
+<div id="mmenu">
+  <div class="mm-marquee"><div class="mm-marquee-track">CASABLANCA&nbsp;&nbsp;·&nbsp;&nbsp;MENU&nbsp;&nbsp;·&nbsp;&nbsp;CASABLANCA&nbsp;&nbsp;·&nbsp;&nbsp;MENU&nbsp;&nbsp;·&nbsp;&nbsp;CASABLANCA&nbsp;&nbsp;·&nbsp;&nbsp;MENU&nbsp;&nbsp;·</div></div>
+  <div class="mm-glow"></div>
+  <div class="mm-glow2"></div>
+
+  <button class="mm-close" id="mmClose">
+    <span class="mm-close-circle">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 3l12 12M15 3L3 15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </span>
+    <span class="mm-close-label">بستن</span>
+  </button>
+
+  <nav class="mm-links">
+    <a href="#story" class="mm-link"><span class="mm-num">01</span><span class="mm-en">STORY</span><span class="mm-fa">داستان ما</span></a>
+    <a href="#menu" class="mm-link"><span class="mm-num">02</span><span class="mm-en">MENU</span><span class="mm-fa">منو</span></a>
+    <a href="#gallery" class="mm-link"><span class="mm-num">03</span><span class="mm-en">GALLERY</span><span class="mm-fa">گالری</span></a>
+    <a href="#features" class="mm-link"><span class="mm-num">04</span><span class="mm-en">AMBIANCE</span><span class="mm-fa">فضا</span></a>
+    <div class="mm-divider"></div>
+    <div class="mm-cta-wrap">
+      <a href="cafe-menu.html" class="mm-cta">مشاهده منوی کافه</a>
+    </div>
+  </nav>
+</div>
+
+<!-- ═══ HERO ═══ -->
+<section id="hero">
+  <div class="h-video-wrap">
+    <video id="hero-video" autoplay muted loop playsinline preload="auto"
+      poster="https://images.unsplash.com/photo-1559925393-8be0ec4767c8?w=1600&q=80&auto=format&fit=crop">
+      <source src="https://assets.mixkit.co/videos/4350/4350-720.mp4" type="video/mp4"/>
+    </video>
+    <div class="h-video-ov"></div>
+  </div>
+  <div class="h-noise"></div>
+  <div class="h-ring h-r1"></div>
+  <div class="h-ring h-r2"></div>
+  <div class="h-ring h-r3"></div>
+  <div class="h-content">
+    <p class="h-label"><span class="lbl-dot"></span>کافه و رستوران</p>
+    <h1 class="h-title">
+      <span class="h-word">CASA</span><span class="h-word h-word-g">BLANCA</span>
+    </h1>
+    <div class="h-line" id="hline"></div>
+    <p class="h-tag">جایی که هر لحظه، یک تجربه ناب است</p>
+    <div class="h-btns">
+      <a href="cafe-menu.html" class="btn-g"><span>منوی کافه</span></a>
+      <a href="restaurant-menu.html" class="btn-o">منوی رستوران</a>
+    </div>
+  </div>
+  <div class="h-scroll" id="hscroll">
+    <div class="h-sline"></div>
+    <span>اسکرول</span>
+  </div>
+</section>
+
+<!-- ═══ MARQUEE ═══ -->
+<div class="mq" aria-hidden="true">
+  <div class="mq-inner">
+    <div class="mq-item">CASABLANCA<span class="mq-dot"></span></div>
+    <div class="mq-item fa">کازابلانکا<span class="mq-dot"></span></div>
+    <div class="mq-item">FINE DINING<span class="mq-dot"></span></div>
+    <div class="mq-item fa">تجربه ناب<span class="mq-dot"></span></div>
+    <div class="mq-item">CAFÉ &amp; RESTAURANT<span class="mq-dot"></span></div>
+    <div class="mq-item fa">طعم اصالت<span class="mq-dot"></span></div>
+    <div class="mq-item">SINCE 1400<span class="mq-dot"></span></div>
+    <div class="mq-item">CASABLANCA<span class="mq-dot"></span></div>
+    <div class="mq-item fa">کازابلانکا<span class="mq-dot"></span></div>
+    <div class="mq-item">FINE DINING<span class="mq-dot"></span></div>
+    <div class="mq-item fa">تجربه ناب<span class="mq-dot"></span></div>
+    <div class="mq-item">CAFÉ &amp; RESTAURANT<span class="mq-dot"></span></div>
+    <div class="mq-item fa">طعم اصالت<span class="mq-dot"></span></div>
+    <div class="mq-item">SINCE 1400<span class="mq-dot"></span></div>
+  </div>
+</div>
+
+<!-- ═══ STORY ═══ -->
+<section id="story" class="sec sec-dark">
+  <div class="inner">
+    <div class="story-g">
+      <div class="rv">
+        <div class="lbl"><span class="lbl-dot"></span>داستان ما</div>
+        <h2 class="s-h">فضایی برای<em>لحظه‌های ماندگار</em></h2>
+        <p class="s-p">کازابلانکا با الهام از زیبایی‌های معماری مراکش و اشتیاق به هنر آشپزی، فضایی ساخته که هر گوشه‌اش داستانی دارد. از دسرهای ظریف گرفته تا استیک‌های درجه یک، هر تجربه با دقت و محبت طراحی شده.</p>
+        <p class="s-p">ما باور داریم که یک وعده خوب چیزی بیشتر از غذاست — یک خاطره است.</p>
+        <div class="stats">
+          <div class="stat">
+            <span class="stat-n" data-count="5">۰</span>
+            <span class="stat-l">سال تجربه</span>
+          </div>
+          <div class="stat">
+            <span class="stat-n" data-count="80">۰</span>
+            <span class="stat-l">آیتم منو</span>
+          </div>
+          <div class="stat">
+            <span class="stat-n" data-count="10000">۰</span>
+            <span class="stat-l">مشتری راضی</span>
+          </div>
+        </div>
+      </div>
+      <div class="s-visual rv-s" id="storyVisual">
+        <video id="storyVideo" autoplay muted loop playsinline preload="auto"
+               poster="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=700&q=80&auto=format&fit=crop">
+          <source src="https://assets.mixkit.co/videos/236/236-720.mp4" type="video/mp4"/>
+        </video>
+        <div class="s-visual-ov"></div>
+        <div class="s-visual-vig"></div>
+        <div class="s-visual-grain"></div>
+
+        <div class="s-steam s-steam-1"></div>
+        <div class="s-steam s-steam-2"></div>
+        <div class="s-steam s-steam-3"></div>
+
+        <div class="s-frame">
+          <span class="s-corner tl"></span>
+          <span class="s-corner br"></span>
+        </div>
+
+        <div class="s-live"><span class="s-live-dot"></span>پخش زنده</div>
+
+        <button class="s-play" id="storyPlayBtn" aria-label="پخش یا توقف ویدیو">
+          <svg class="ic-pause" viewBox="0 0 14 14" fill="none"><rect x="2" y="1.5" width="3.2" height="11" rx="1" fill="currentColor"/><rect x="8.8" y="1.5" width="3.2" height="11" rx="1" fill="currentColor"/></svg>
+          <svg class="ic-play" viewBox="0 0 14 14" fill="none"><path d="M3 1.7v10.6c0 .8.9 1.3 1.6.9l8-5.3c.6-.4.6-1.4 0-1.8l-8-5.3C3.9.4 3 .9 3 1.7z" fill="currentColor"/></svg>
+        </button>
+
+        <div class="s-badge">
+          <strong>۱۴۰۰</strong>
+          <span>از همین سال</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ MENU CHOICE ═══ -->
+<section id="menu" class="sec">
+  <div class="inner">
+    <div style="text-align:center" class="rv">
+      <div class="lbl lbl-c"><span class="lbl-dot"></span>تجربه کامل</div>
+      <h2 class="mc-title">Choose Your Experience</h2>
+      <p class="mc-sub">دو دنیای متفاوت، یک کیفیت بی‌نظیر</p>
+    </div>
+    <div class="mc-cards">
+      <a href="cafe-menu.html" class="mc-card rv-s" id="card-cafe">
+        <div class="mc-card-bg">
+          <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=700&q=80&auto=format&fit=crop"
+               alt="کافه" loading="lazy" onerror="this.onerror=null;this.src='https://picsum.photos/seed/casablanca-cafe/700/840'"/>
+        </div>
+        <div class="mc-ov"></div><div class="mc-shine"></div>
+        <div class="mc-body">
+          <span class="mc-lbl">کافه</span>
+          <h3 class="mc-name">CAFÉ</h3>
+          <p class="mc-desc">قهوه‌های تخصصی · دسرهای فرانسوی · صبحانه</p>
+          <div class="mc-arr">
+            <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+              <path d="M2.5 7.5h10M8 3l4.5 4.5L8 12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+      </a>
+      <a href="restaurant-menu.html" class="mc-card rv-s" id="card-rest" style="--d:.12s">
+        <div class="mc-card-bg">
+          <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=700&q=80&auto=format&fit=crop"
+               alt="رستوران" loading="lazy" onerror="this.onerror=null;this.src='https://picsum.photos/seed/casablanca-rest/700/840'"/>
+        </div>
+        <div class="mc-ov"></div><div class="mc-shine"></div>
+        <div class="mc-body">
+          <span class="mc-lbl">رستوران</span>
+          <h3 class="mc-name">RESTAURANT</h3>
+          <p class="mc-desc">استیک‌های اعلا · پاستا · غذاهای دریایی</p>
+          <div class="mc-arr">
+            <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+              <path d="M2.5 7.5h10M8 3l4.5 4.5L8 12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ GALLERY ═══ -->
+<section id="gallery" class="sec sec-dark">
+  <div class="inner">
+    <div style="text-align:center" class="rv">
+      <div class="lbl lbl-c"><span class="lbl-dot"></span>گالری</div>
+      <h2 class="gl-title">A Glimpse Inside</h2>
+    </div>
+    <div class="gl-grid" id="glMainGrid"></div>
+    <div class="gl-more-wrap rv">
+      <button class="gl-more-btn" onclick="openLightbox()">
+        <span>نمایش تصاویر بیشتر</span>
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ GALLERY LIGHTBOX ═══ -->
+<div class="lb" id="lightbox">
+  <button class="lb-close" id="lbClose" aria-label="بستن">
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 3l12 12M15 3L3 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+  </button>
+  <p class="lb-title">Full Gallery</p>
+  <div class="lb-grid" id="lbGrid"></div>
+</div>
+
+<!-- ═══ SINGLE IMAGE VIEWER ═══ -->
+<div class="vw" id="viewer">
+  <button class="vw-close" id="vwClose" aria-label="بستن">
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 3l12 12M15 3L3 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+  </button>
+  <button class="vw-prev" id="vwPrev" aria-label="قبلی">
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M11 4l-6 5 6 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  <button class="vw-next" id="vwNext" aria-label="بعدی">
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M7 4l6 5-6 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  <div class="vw-img-wrap" id="vwImgWrap">
+    <img id="vwImg" src="" alt=""/>
+  </div>
+  <div class="vw-counter" id="vwCounter"></div>
+</div>
+
+<!-- ═══ FEATURES ═══ -->
+<section id="features" class="sec">
+  <div class="inner">
+    <div class="ft-g">
+      <div class="ft-img rv-l">
+        <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?w=700&q=80&auto=format&fit=crop"
+             alt="فضای کازابلانکا" loading="lazy" onerror="this.onerror=null;this.src='https://picsum.photos/seed/casablanca-features/700/930'"/>
+        <div class="ft-img-ov"></div>
+      </div>
+      <div class="rv-r">
+        <div class="lbl"><span class="lbl-dot"></span>فضای ما</div>
+        <h2 class="ft-h">طراحی که<em>احساس می‌شود</em></h2>
+        <p class="ft-p">طراحی داخلی کازابلانکا از دل معماری مراکشی و مدرنیته معاصر برآمده — یک ترکیب که باید دید تا باور کرد. از نورپردازی گرفته تا انتخاب مبلمان، هر جزء با عشق انتخاب شده.</p>
+        <ul class="ft-list">
+          <li><span class="ft-ico">✦</span><span>فضای نشیمن با ظرفیت ۱۲۰ نفر</span></li>
+          <li><span class="ft-ico">✦</span><span>اتاق خصوصی برای مجالس ویژه</span></li>
+          <li><span class="ft-ico">✦</span><span>تراس روباز با چشم‌انداز شهری</span></li>
+          <li><span class="ft-ico">✦</span><span>موزیک زنده در آخر هفته‌ها</span></li>
+          <li><span class="ft-ico">✦</span><span>سرویس کیترینگ و پذیرایی ویژه</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="inner">
+    <div class="ft-top">
+      <div class="ft-logo">
+        <img src="assets/images/logo.png" alt="Casablanca" onerror="this.style.display='none'"/>
+        <b>CASABLANCA</b>
+      </div>
+      <ul class="ft-nav">
+        <li><a href="cafe-menu.html">منوی کافه</a></li>
+        <li><a href="restaurant-menu.html">منوی رستوران</a></li>
+        <li><a href="#story">داستان ما</a></li>
+        <li><a href="#gallery">گالری</a></li>
+      </ul>
+    </div>
+    <div class="ft-bot">
+      <span>© ۱۴۰۴ کازابلانکا — تمام حقوق محفوظ است</span>
+      <span class="ft-tag">Where Every Moment Is An Experience</span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+'use strict';
+
+// ── Gallery image pool (12 total) — reliable URLs + guaranteed fallback ──
+const FALLBACK_IMG = 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=900&q=80&auto=format&fit=crop';
+const GALLERY_IMAGES = [
+  'https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=900&q=80&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1559305616-3f99cd43e353?w=900&q=80&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1453614512568-c4024d13c247?w=900&q=80&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1481833761820-0509d3217039?w=900&q=80&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=900&q=80&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1521017432531-fbd92d768814?w=900&q=80&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1428515613728-6b4607e44363?w=900&q=80&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1559925393-8be0ec4767c8?w=900&q=80&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=900&q=80&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1551218808-94e220e084d2?w=900&q=80&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1559339352-11d035aa65de?w=900&q=80&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=900&q=80&auto=format&fit=crop',
+];
+
+// ── Render main 4-photo preview grid ────────────────
+(function(){
+  const grid=document.getElementById('glMainGrid');
+  const idxs=[0,1,2,3];
+  const tallClass=[true,false,true,false];
+  grid.innerHTML=idxs.map((gi,i)=>`
+    <div class="gl-item${tallClass[i]?' gl-tall':''} rv-s" style="--d:${(i*0.04).toFixed(2)}s" onclick="openLightbox()">
+      <img src="${GALLERY_IMAGES[gi]}" alt="گالری کازابلانکا" loading="lazy"
+           onerror="this.onerror=null;this.src='${FALLBACK_IMG}'"/>
+    </div>`).join('');
+})();
+
+// ── Cursor ──────────────────────────────────────────
+(function(){
+  const d=document.getElementById('cd'),r=document.getElementById('cr');
+  if(!d||!window.matchMedia('(hover:hover)').matches)return;
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{
+    mx=e.clientX;my=e.clientY;
+    d.style.left=mx+'px';d.style.top=my+'px';
+  });
+  (function L(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;
+    r.style.left=rx+'px';r.style.top=ry+'px';
+    requestAnimationFrame(L);
+  })();
+  document.addEventListener('mouseover',e=>{
+    if(e.target.closest('a,button')){
+      r.style.width='50px';r.style.height='50px';r.style.borderColor='var(--gold)';
+      d.style.transform='translate(-50%,-50%) scale(1.8)';
+    }
+  });
+  document.addEventListener('mouseout',e=>{
+    if(e.target.closest('a,button')){
+      r.style.width='30px';r.style.height='30px';r.style.borderColor='rgba(201,168,124,.4)';
+      d.style.transform='translate(-50%,-50%) scale(1)';
+    }
+  });
+  document.addEventListener('mouseleave',()=>{d.style.opacity='0';r.style.opacity='0'});
+  document.addEventListener('mouseenter',()=>{d.style.opacity='1';r.style.opacity='1'});
+})();
+
+// ── Navbar scroll bg ─────────────────────────────────
+(function(){
+  const nav=document.getElementById('nav');
+  window.addEventListener('scroll',()=>{
+    nav.classList.toggle('bg',window.scrollY>30);
+  },{passive:true});
+})();
+
+// ── Mobile Fullscreen Menu (circular reveal) ─────────
+(function(){
+  const burger=document.getElementById('nburger');
+  const mmenu=document.getElementById('mmenu');
+  const closeBtn=document.getElementById('mmClose');
+
+  function openMenu(){
+    mmenu.classList.add('open');
+    burger.classList.add('open');
+    document.body.style.overflow='hidden';
+  }
+  function closeMenu(){
+    burger.classList.remove('open');
+    mmenu.classList.remove('open');
+    document.body.style.overflow='';
+  }
+  burger.addEventListener('click',()=>{
+    mmenu.classList.contains('open') ? closeMenu() : openMenu();
+  });
+  closeBtn.addEventListener('click',closeMenu);
+  mmenu.querySelectorAll('.mm-link, .mm-cta').forEach(a=>a.addEventListener('click',closeMenu));
+  document.addEventListener('keydown',e=>{
+    if(e.key==='Escape' && mmenu.classList.contains('open'))closeMenu();
+  });
+})();
+
+// ── Hero reveal ─────────────────────────────────────
+function heroReveal(){
+  if(typeof gsap==='undefined'){
+    document.querySelectorAll('.h-label,.h-word,.h-tag,.h-btns,.h-scroll').forEach(el=>{
+      el.style.opacity='1';el.style.transform='none';
+    });
+    const hl=document.getElementById('hline');
+    if(hl){hl.style.width='40px';hl.style.opacity='1';}
+    return;
+  }
+  const tl=gsap.timeline({defaults:{ease:'power4.out'}});
+  tl.to('.h-label',   {opacity:1,y:0,duration:.9},.1)
+    .to('.h-word',    {opacity:1,y:0,duration:1.1,stagger:.1},.25)
+    .to('#hline',     {width:40,opacity:1,duration:.7},.75)
+    .to('.h-tag',     {opacity:1,y:0,duration:.9},.65)
+    .to('.h-btns',    {opacity:1,y:0,duration:.8},.85)
+    .to('#hscroll',   {opacity:1,duration:.6},1.05);
+}
+
+// ── Scroll reveals ──────────────────────────────────
+function initReveal(){
+  if(typeof gsap==='undefined'||typeof ScrollTrigger==='undefined'){
+    document.querySelectorAll('.rv,.rv-l,.rv-r,.rv-s').forEach(el=>{
+      el.style.opacity='1';el.style.transform='none';
+    });return;
+  }
+  gsap.registerPlugin(ScrollTrigger);
+  const trig=el=>({trigger:el,start:'top 87%',once:true});
+  gsap.utils.toArray('.rv').forEach(el=>{
+    const delay=parseFloat(el.style.getPropertyValue('--d')||0);
+    gsap.to(el,{opacity:1,y:0,duration:1,delay,ease:'power3.out',scrollTrigger:trig(el)});
+  });
+  gsap.utils.toArray('.rv-l').forEach(el=>{
+    gsap.to(el,{opacity:1,x:0,duration:1.1,ease:'power3.out',scrollTrigger:trig(el)});
+  });
+  gsap.utils.toArray('.rv-r').forEach(el=>{
+    gsap.to(el,{opacity:1,x:0,duration:1.1,ease:'power3.out',scrollTrigger:trig(el)});
+  });
+  gsap.utils.toArray('.rv-s').forEach(el=>{
+    const delay=parseFloat(el.style.getPropertyValue('--d')||0);
+    gsap.to(el,{opacity:1,scale:1,duration:1.1,delay,ease:'power3.out',scrollTrigger:trig(el)});
+  });
+}
+
+// ── Counters ────────────────────────────────────────
+function initCounters(){
+  document.querySelectorAll('[data-count]').forEach(el=>{
+    const target=parseInt(el.dataset.count);
+    const io=new IntersectionObserver(entries=>{
+      if(!entries[0].isIntersecting)return;
+      io.disconnect();
+      let start=null;
+      (function step(ts){
+        if(!start)start=ts;
+        const p=Math.min((ts-start)/1800,1);
+        const v=Math.floor((1-Math.pow(1-p,3))*target);
+        el.textContent=v.toLocaleString('fa-IR');
+        if(p<1)requestAnimationFrame(step);
+        else el.textContent=target.toLocaleString('fa-IR');
+      })(performance.now());
+    },{threshold:.5});
+    io.observe(el);
+  });
+}
+
+// ── Parallax rings ──────────────────────────────────
+function initParallax(){
+  const rings=document.querySelectorAll('.h-ring');
+  window.addEventListener('scroll',()=>{
+    const y=window.scrollY;
+    rings.forEach((r,i)=>{
+      r.style.transform=`translate(-50%,calc(-50% + ${y*(0.04+i*.04)}px))`;
+    });
+  },{passive:true});
+}
+
+// ── Gallery tilt (main grid) ─────────────────────────
+function initTilt(){
+  document.querySelectorAll('.gl-item').forEach(item=>{
+    item.addEventListener('mousemove',e=>{
+      const rect=item.getBoundingClientRect();
+      const x=(e.clientX-rect.left)/rect.width-.5;
+      const y=(e.clientY-rect.top)/rect.height-.5;
+      item.style.transform=`perspective(600px) rotateY(${x*6}deg) rotateX(${-y*6}deg) scale(1.02)`;
+    });
+    item.addEventListener('mouseleave',()=>{item.style.transform='';});
+  });
+}
+
+// ── Story cinematic video: tilt + play/pause + fallback ──
+function initStoryVideo(){
+  const wrap=document.getElementById('storyVisual');
+  const video=document.getElementById('storyVideo');
+  const btn=document.getElementById('storyPlayBtn');
+  if(!wrap||!video)return;
+
+  // reveal video once it actually has a frame ready (fallback to poster bg otherwise)
+  video.addEventListener('loadeddata',()=>video.classList.add('ready'));
+  video.addEventListener('error',()=>{ video.style.display='none'; });
+  video.play().catch(()=>{});
+
+  // play/pause toggle
+  if(btn){
+    btn.addEventListener('click',()=>{
+      if(video.paused){ video.play().catch(()=>{}); btn.classList.remove('paused'); }
+      else{ video.pause(); btn.classList.add('paused'); }
+    });
+  }
+
+  // 3D tilt on mouse — desktop only
+  if(window.matchMedia('(hover:hover)').matches){
+    wrap.addEventListener('mousemove',e=>{
+      const rect=wrap.getBoundingClientRect();
+      const x=(e.clientX-rect.left)/rect.width-.5;
+      const y=(e.clientY-rect.top)/rect.height-.5;
+      wrap.style.transform=`perspective(1000px) rotateY(${x*7}deg) rotateX(${-y*7}deg)`;
+    });
+    wrap.addEventListener('mouseleave',()=>{ wrap.style.transform='perspective(1000px) rotateY(0) rotateX(0)'; });
+  }
+}
+
+
+// ── Lightbox (full gallery grid) ─────────────────────
+const lb=document.getElementById('lightbox');
+const lbGrid=document.getElementById('lbGrid');
+let lbBuilt=false;
+
+function buildLightbox(){
+  if(lbBuilt)return;
+  lbBuilt=true;
+  lbGrid.innerHTML=GALLERY_IMAGES.map((src,i)=>`
+    <div class="lb-item" data-idx="${i}" style="transition-delay:${i*0.04}s" onclick="openViewer(${i})">
+      <img src="${src}" alt="گالری کازابلانکا" loading="lazy"
+           onerror="this.onerror=null;this.src='${FALLBACK_IMG}'"/>
+    </div>`).join('');
+  lbGrid.querySelectorAll('.lb-item').forEach(item=>{
+    item.addEventListener('mousemove',e=>{
+      const rect=item.getBoundingClientRect();
+      const x=(e.clientX-rect.left)/rect.width-.5;
+      const y=(e.clientY-rect.top)/rect.height-.5;
+      item.style.transform=`translateY(0) scale(1.03) perspective(600px) rotateY(${x*10}deg) rotateX(${-y*10}deg)`;
+    });
+    item.addEventListener('mouseleave',()=>{item.style.transform='translateY(0) scale(1)';});
+  });
+}
+
+function openLightbox(){
+  buildLightbox();
+  lb.classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeLightbox(){
+  lb.classList.remove('open');
+  if(!viewer.classList.contains('open'))document.body.style.overflow='';
+}
+document.getElementById('lbClose').addEventListener('click',closeLightbox);
+window.openLightbox=openLightbox;
+
+// ── Single Image Viewer ──────────────────────────────
+const viewer=document.getElementById('viewer');
+const vwImg=document.getElementById('vwImg');
+const vwCounter=document.getElementById('vwCounter');
+let currentIdx=0;
+
+function openViewer(idx){
+  currentIdx=idx;
+  updateViewer();
+  viewer.classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function updateViewer(){
+  vwImg.src=GALLERY_IMAGES[currentIdx];
+  vwImg.onerror=function(){this.onerror=null;this.src=FALLBACK_IMG;};
+  vwCounter.textContent=`${(currentIdx+1).toString().padStart(2,'0')} / ${GALLERY_IMAGES.length.toString().padStart(2,'0')}`;
+}
+function closeViewer(){
+  viewer.classList.remove('open');
+  if(!lb.classList.contains('open'))document.body.style.overflow='';
+}
+function nextImg(){ currentIdx=(currentIdx+1)%GALLERY_IMAGES.length; updateViewer(); }
+function prevImg(){ currentIdx=(currentIdx-1+GALLERY_IMAGES.length)%GALLERY_IMAGES.length; updateViewer(); }
+
+document.getElementById('vwClose').addEventListener('click',closeViewer);
+document.getElementById('vwNext').addEventListener('click',nextImg);
+document.getElementById('vwPrev').addEventListener('click',prevImg);
+document.addEventListener('keydown',e=>{
+  if(viewer.classList.contains('open')){
+    if(e.key==='Escape')closeViewer();
+    if(e.key==='ArrowLeft')nextImg();
+    if(e.key==='ArrowRight')prevImg();
+  }else if(lb.classList.contains('open')&&e.key==='Escape'){
+    closeLightbox();
+  }
+});
+window.openViewer=openViewer;
+
+// ── Boot ────────────────────────────────────────────
+window.addEventListener('load',()=>{
+  heroReveal();
+  initReveal();
+  initCounters();
+  initParallax();
+  initTilt();
+  initStoryVideo();
+  const v=document.getElementById('hero-video');
+  if(v){ v.play().catch(()=>{}); }
+});
+</script>
+</body>
+</html>

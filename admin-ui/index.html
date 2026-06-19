@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>پنل مدیریت | کازابلانکا</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#0C0C0C;--bg2:#131313;--bg3:#1A1A1A;--bg4:#222;
+  --gold:#C9A87C;--gold2:#E2CBA8;--gold3:#9A7A55;
+  --teal:#4ECDC4;--red:#E07070;--green:#6BCB77;
+  --w:#F0EBE3;--wd:rgba(240,235,227,.6);--wf:rgba(240,235,227,.1);
+  --bdr:rgba(201,168,124,.12);
+  --f:'Vazirmatn','Tahoma',sans-serif;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --sw:260px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:var(--f);background:var(--bg);color:var(--w);font-size:14px;direction:rtl}
+[v-cloak]{display:none}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer;background:none;border:none}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:4px;height:4px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--gold3);border-radius:2px}
+
+/* ── LOGIN ── */
+.login-wrap{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:9999;padding:20px}
+.login-card{background:var(--bg2);border:1px solid var(--bdr);border-radius:20px;padding:44px 40px;width:100%;max-width:420px;display:flex;flex-direction:column;gap:24px}
+.login-logo{text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px}
+.login-logo img{height:54px;border-radius:8px}
+.login-logo-text{font-size:19px;font-weight:700;letter-spacing:2px;color:var(--w)}
+.login-logo-sub{font-size:12px;color:var(--gold);letter-spacing:1px}
+.f-group{display:flex;flex-direction:column;gap:7px}
+.f-label{font-size:12px;color:var(--gold);letter-spacing:.5px}
+.f-input{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--bdr);border-radius:10px;padding:13px 16px;color:var(--w);font-family:var(--f);font-size:14px;outline:none;transition:border-color .3s,background .3s}
+.f-input:focus{border-color:rgba(201,168,124,.5);background:rgba(255,255,255,.07)}
+.f-input::placeholder{color:rgba(240,235,227,.3)}
+.btn-login{background:var(--gold);color:#000;border:none;border-radius:10px;padding:14px;font-family:var(--f);font-size:15px;font-weight:700;width:100%;cursor:pointer;transition:background .3s,opacity .3s,transform .2s;letter-spacing:.5px}
+.btn-login:hover:not(:disabled){background:var(--gold2);transform:translateY(-1px)}
+.btn-login:disabled{opacity:.55;cursor:not-allowed;transform:none}
+.login-err{background:rgba(224,112,112,.1);border:1px solid rgba(224,112,112,.35);border-radius:8px;padding:10px 14px;color:var(--red);font-size:13px;text-align:center}
+
+/* ── APP LAYOUT ── */
+#app-shell{display:flex;height:100vh;overflow:hidden}
+
+/* ── SIDEBAR ── */
+.sidebar{width:var(--sw);flex-shrink:0;background:var(--bg2);border-left:1px solid var(--bdr);display:flex;flex-direction:column;overflow-y:auto;overflow-x:hidden;transition:transform .4s var(--ease)}
+.sb-head{padding:22px 18px 16px;border-bottom:1px solid var(--bdr);flex-shrink:0}
+.sb-logo{display:flex;align-items:center;gap:10px}
+.sb-logo img{height:38px;border-radius:6px}
+.sb-logo-t{display:flex;flex-direction:column;line-height:1.2}
+.sb-logo-t b{font-size:15px;font-weight:700;letter-spacing:1.5px;color:var(--w)}
+.sb-logo-t span{font-size:10px;color:var(--gold);letter-spacing:1px}
+.sb-user{display:flex;align-items:center;gap:10px;margin-top:14px;padding:10px 12px;background:rgba(201,168,124,.05);border-radius:10px;border:1px solid var(--bdr)}
+.sb-avatar{width:34px;height:34px;border-radius:50%;background:var(--gold);color:#000;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0}
+.sb-uname{font-size:13px;font-weight:600}
+.sb-urole{font-size:10px;color:var(--gold);margin-top:1px}
+.sb-nav{padding:14px 10px;flex:1}
+.sb-sec{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(201,168,124,.45);padding:12px 8px 6px}
+.sb-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:9px;color:var(--wd);cursor:pointer;transition:background .2s,color .2s;font-size:14px;user-select:none}
+.sb-item:hover{background:var(--bg3);color:var(--w)}
+.sb-item.active{background:rgba(201,168,124,.12);color:var(--gold)}
+.sb-item svg{opacity:.7;flex-shrink:0;width:16px;height:16px}
+.sb-item.active svg{opacity:1}
+.sb-foot{padding:14px;border-top:1px solid var(--bdr);flex-shrink:0}
+.btn-logout{width:100%;padding:10px;border:1px solid var(--bdr);border-radius:8px;color:var(--wd);font-family:var(--f);font-size:13px;cursor:pointer;background:none;transition:all .2s}
+.btn-logout:hover{border-color:var(--red);color:var(--red);background:rgba(224,112,112,.06)}
+
+/* ── MOBILE SIDEBAR TOGGLE ── */
+.sb-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:400;backdrop-filter:blur(4px)}
+.mob-header{display:none;position:fixed;top:0;left:0;right:0;height:58px;background:rgba(12,12,12,.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--bdr);z-index:300;align-items:center;justify-content:space-between;padding:0 16px}
+.mob-logo{font-size:15px;font-weight:700;letter-spacing:2px;color:var(--w)}
+.mob-burger{width:38px;height:38px;border-radius:8px;border:1px solid var(--bdr);display:flex;flex-direction:column;justify-content:center;align-items:center;gap:4px;cursor:pointer;transition:background .2s,border-color .2s}
+.mob-burger span{display:block;width:16px;height:1.5px;background:var(--w);transition:transform .3s,opacity .2s}
+.mob-burger.open span:nth-child(1){transform:translateY(5.5px) rotate(45deg)}
+.mob-burger.open span:nth-child(2){opacity:0}
+.mob-burger.open span:nth-child(3){transform:translateY(-5.5px) rotate(-45deg)}
+
+/* ── MAIN AREA ── */
+.main{flex:1;overflow-y:auto;display:flex;flex-direction:column;min-width:0}
+.topbar{height:60px;background:var(--bg2);border-bottom:1px solid var(--bdr);display:flex;align-items:center;justify-content:space-between;padding:0 28px;flex-shrink:0}
+.topbar-title{font-size:18px;font-weight:700}
+.topbar-actions{display:flex;gap:10px}
+.page-body{padding:24px 28px;flex:1}
+
+/* ── STATS GRID ── */
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px}
+.stat-card{background:var(--bg2);border:1px solid var(--bdr);border-radius:12px;padding:22px 18px;position:relative;overflow:hidden}
+.stat-card::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(201,168,124,.04) 0%,transparent 60%);pointer-events:none}
+.stat-lbl{font-size:12px;color:var(--wd);margin-bottom:10px}
+.stat-val{font-size:34px;font-weight:700;color:var(--gold);line-height:1}
+.stat-sub{font-size:11px;color:var(--wd);margin-top:6px}
+
+/* ── TABLE CARD ── */
+.table-card{background:var(--bg2);border:1px solid var(--bdr);border-radius:12px;overflow:hidden}
+.table-head{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--bdr);gap:12px;flex-wrap:wrap}
+.table-title{font-size:15px;font-weight:600}
+.search-inp{background:rgba(255,255,255,.04);border:1px solid var(--bdr);border-radius:8px;padding:8px 14px;color:var(--w);font-family:var(--f);font-size:13px;outline:none;width:220px;transition:border-color .3s}
+.search-inp:focus{border-color:rgba(201,168,124,.4)}
+.tbl-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:600px}
+th{text-align:right;padding:11px 16px;font-size:11px;letter-spacing:1px;color:rgba(201,168,124,.6);border-bottom:1px solid var(--bdr);white-space:nowrap;font-weight:600}
+td{padding:13px 16px;border-bottom:1px solid rgba(201,168,124,.05);font-size:13px;color:var(--wd);vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:rgba(255,255,255,.02)}
+.td-name{color:var(--w);font-weight:600}
+.td-price{color:var(--gold);font-weight:700;font-size:14px;white-space:nowrap}
+.td-img{width:46px;height:46px;border-radius:8px;object-fit:cover;background:var(--bg3);display:block}
+
+/* ── BADGE PILL ── */
+.pill{display:inline-flex;align-items:center;gap:5px;padding:3px 11px;border-radius:100px;font-size:11px;font-weight:600}
+.pill-teal{background:rgba(78,205,196,.15);color:var(--teal)}
+.pill-red{background:rgba(224,112,112,.12);color:var(--red)}
+.pill-gold{background:rgba(201,168,124,.12);color:var(--gold)}
+.pill::before{content:'';width:5px;height:5px;border-radius:50%;background:currentColor;flex-shrink:0}
+
+/* ── TOGGLE ── (RTL-safe, LTR forced) */
+.tgl-wrap{display:inline-flex;align-items:center}
+.tgl{position:relative;width:40px;height:22px;cursor:pointer;display:block;direction:ltr}
+.tgl input{opacity:0;width:0;height:0;position:absolute}
+.tgl-track{position:absolute;inset:0;background:#333;border-radius:11px;transition:background .3s;border:1px solid rgba(255,255,255,.1)}
+.tgl input:checked~.tgl-track{background:var(--teal);border-color:var(--teal)}
+.tgl-thumb{position:absolute;top:3px;left:3px;width:14px;height:14px;background:#fff;border-radius:50%;transition:transform .3s var(--ease);box-shadow:0 1px 4px rgba(0,0,0,.4);z-index:1}
+.tgl input:checked~.tgl-thumb{transform:translateX(18px)}
+
+/* ── ROW ACTIONS ── */
+.row-acts{display:flex;gap:6px;justify-content:flex-end}
+.act-btn{width:30px;height:30px;border-radius:7px;border:1px solid var(--bdr);background:none;color:var(--wd);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.act-btn:hover{background:var(--bg3);color:var(--w);border-color:rgba(255,255,255,.15)}
+.act-btn.del:hover{border-color:var(--red);color:var(--red);background:rgba(224,112,112,.08)}
+
+/* ── TABS ── */
+.tabs{display:flex;gap:4px;margin-bottom:18px;flex-wrap:wrap}
+.tab{padding:8px 18px;border-radius:8px;font-size:13px;cursor:pointer;border:1px solid transparent;color:var(--wd);transition:all .2s}
+.tab:hover{color:var(--w);border-color:var(--bdr)}
+.tab.active{background:rgba(201,168,124,.12);color:var(--gold);border-color:rgba(201,168,124,.25)}
+
+/* ── BUTTONS ── */
+.btn-primary{display:inline-flex;align-items:center;gap:7px;background:var(--gold);color:#000;border:none;border-radius:9px;padding:10px 20px;font-family:var(--f);font-size:13px;font-weight:700;cursor:pointer;transition:background .3s,transform .2s}
+.btn-primary:hover{background:var(--gold2);transform:translateY(-1px)}
+.btn-primary:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.btn-secondary{display:inline-flex;align-items:center;gap:7px;background:var(--bg3);color:var(--wd);border:1px solid var(--bdr);border-radius:9px;padding:10px 20px;font-family:var(--f);font-size:13px;cursor:pointer;transition:all .2s}
+.btn-secondary:hover{color:var(--w);border-color:rgba(255,255,255,.2)}
+
+/* ── MODAL OVERLAY ── */
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);z-index:500;display:flex;align-items:center;justify-content:center;padding:20px}
+.modal-box{background:var(--bg2);border:1px solid var(--bdr);border-radius:20px;width:100%;max-width:600px;max-height:90vh;overflow-y:auto;padding:32px}
+.modal-title{font-size:18px;font-weight:700;margin-bottom:26px}
+.m-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.m-full{grid-column:1/-1}
+.m-label{display:block;font-size:11px;color:var(--gold);margin-bottom:7px;letter-spacing:.5px}
+.m-input,.m-select,.m-textarea{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--bdr);border-radius:9px;padding:11px 14px;color:var(--w);font-family:var(--f);font-size:13px;outline:none;transition:border-color .3s,background .3s}
+.m-input:focus,.m-select:focus,.m-textarea:focus{border-color:rgba(201,168,124,.45);background:rgba(255,255,255,.06)}
+.m-textarea{resize:vertical;min-height:80px}
+.m-select option{background:var(--bg2)}
+.m-checks{display:flex;gap:20px;flex-wrap:wrap;padding:4px 0}
+.chk-lbl{display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;color:var(--wd);user-select:none}
+.chk-lbl input{accent-color:var(--gold);width:15px;height:15px}
+.modal-acts{display:flex;gap:10px;margin-top:24px;justify-content:flex-start}
+
+/* ── IMAGE UPLOAD ZONE ── */
+.img-zone{border:2px dashed rgba(201,168,124,.25);border-radius:12px;padding:20px;text-align:center;cursor:pointer;transition:border-color .3s,background .3s;position:relative;overflow:hidden;background:rgba(255,255,255,.02)}
+.img-zone:hover,.img-zone.drag-over{border-color:var(--gold);background:rgba(201,168,124,.05)}
+.img-zone-placeholder{display:flex;flex-direction:column;align-items:center;gap:10px;color:var(--wd);padding:8px 0}
+.img-zone-placeholder svg{color:var(--gold);opacity:.7}
+.img-zone-placeholder p{font-size:13px;line-height:1.5}
+.img-zone-placeholder span{font-size:11px;color:rgba(240,235,227,.4)}
+.img-preview-wrap{position:relative;display:inline-block}
+.img-preview{width:100%;max-height:180px;object-fit:cover;border-radius:8px;display:block}
+.img-preview-del{position:absolute;top:8px;left:8px;width:28px;height:28px;border-radius:50%;background:rgba(224,112,112,.9);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;border:none;transition:transform .2s}
+.img-preview-del:hover{transform:scale(1.1)}
+.img-uploading{position:absolute;inset:0;background:rgba(12,12,12,.75);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;border-radius:12px;font-size:13px;color:var(--gold)}
+.img-spinner{width:28px;height:28px;border:2px solid rgba(201,168,124,.2);border-top-color:var(--gold);border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ── EMPTY / LOADING ── */
+.empty{padding:60px;text-align:center;color:var(--wd)}
+.tbl-spinner{width:32px;height:32px;border:2px solid rgba(201,168,124,.2);border-top-color:var(--gold);border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 14px}
+
+/* ── NOTIFICATION ── */
+.notif{position:fixed;bottom:24px;right:24px;z-index:9000;background:var(--bg3);border:1px solid var(--bdr);border-radius:12px;padding:14px 20px;font-size:13px;display:flex;align-items:center;gap:10px;box-shadow:0 8px 32px rgba(0,0,0,.4);max-width:320px;animation:slideUp .35s var(--ease)}
+@keyframes slideUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.notif.ok{border-color:rgba(78,205,196,.35);color:var(--teal)}
+.notif.err{border-color:rgba(224,112,112,.35);color:var(--red)}
+.notif-dot{width:8px;height:8px;border-radius:50%;background:currentColor;flex-shrink:0}
+
+/* ── RESPONSIVE ── */
+@media(max-width:960px){
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .sidebar{position:fixed;top:0;bottom:0;right:0;z-index:500;transform:translateX(100%)}
+  .sidebar.open{transform:translateX(0)}
+  .sb-overlay{display:block;opacity:0;pointer-events:none;transition:opacity .35s}
+  .sb-overlay.open{opacity:1;pointer-events:all}
+  .mob-header{display:flex}
+  .main{padding-top:58px}
+  .page-body{padding:16px}
+  .topbar{display:none}
+  .m-grid{grid-template-columns:1fr}
+  .m-full{grid-column:1}
+  .search-inp{width:100%}
+}
+@media(max-width:540px){
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .stat-val{font-size:26px}
+  .modal-box{padding:20px}
+}
+</style>
+</head>
+<body>
+<div id="app" v-cloak>
+
+  <!-- ════ LOGIN ════ -->
+  <div class="login-wrap" v-if="!token">
+    <div class="login-card">
+      <div class="login-logo">
+        <img src="../frontend/assets/images/logo.png" alt="Casablanca"
+             onerror="this.style.display='none'"/>
+        <div class="login-logo-text">CASABLANCA</div>
+        <div class="login-logo-sub">Admin Panel</div>
+      </div>
+      <div class="f-group">
+        <label class="f-label">نام کاربری</label>
+        <input class="f-input" v-model="lf.username" placeholder="username"
+               @keyup.enter="doLogin" :disabled="lLoading" autocomplete="username"/>
+      </div>
+      <div class="f-group">
+        <label class="f-label">رمز عبور</label>
+        <input class="f-input" type="password" v-model="lf.password" placeholder="••••••••"
+               @keyup.enter="doLogin" :disabled="lLoading" autocomplete="current-password"/>
+      </div>
+      <div class="login-err" v-if="lErr">{{ lErr }}</div>
+      <button class="btn-login" @click="doLogin" :disabled="lLoading">
+        {{ lLoading ? 'در حال ورود...' : 'ورود به پنل' }}
+      </button>
+    </div>
+  </div>
+
+  <!-- ════ MAIN APP ════ -->
+  <template v-else>
+    <!-- mobile overlay -->
+    <div class="sb-overlay" :class="{open:sbOpen}" @click="sbOpen=false"></div>
+
+    <!-- mobile header -->
+    <div class="mob-header">
+      <span class="mob-logo">CASABLANCA</span>
+      <button class="mob-burger" :class="{open:sbOpen}" @click="sbOpen=!sbOpen">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <!-- SHELL: flex wrapper for sidebar + main -->
+    <div id="app-shell">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" :class="{open:sbOpen}">
+      <div class="sb-head">
+        <div class="sb-logo">
+          <img src="../frontend/assets/images/logo.png" style="height:36px;border-radius:6px"
+               onerror="this.style.display='none'"/>
+          <div class="sb-logo-t"><b>CASABLANCA</b><span>Admin Panel</span></div>
+        </div>
+        <div class="sb-user" v-if="me.username">
+          <div class="sb-avatar">{{ (me.first_name||me.username||'م')[0] }}</div>
+          <div>
+            <div class="sb-uname">{{ me.first_name||me.username }}</div>
+            <div class="sb-urole">مدیر سیستم</div>
+          </div>
+        </div>
+      </div>
+      <nav class="sb-nav">
+        <div class="sb-sec">داشبورد</div>
+        <div class="sb-item" :class="{active:pg==='dash'}" @click="nav('dash')">
+          <svg viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.3"/><rect x="9" y="1" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.3"/><rect x="1" y="9" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.3"/><rect x="9" y="9" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.3"/></svg>
+          داشبورد
+        </div>
+        <div class="sb-sec">منو</div>
+        <div class="sb-item" :class="{active:pg==='cafe'}" @click="nav('cafe')">
+          <svg viewBox="0 0 16 16" fill="none"><path d="M3 4h10v6a4 4 0 01-4 4H7a4 4 0 01-4-4V4z" stroke="currentColor" stroke-width="1.3"/><path d="M13 6h1a1 1 0 011 1v1a2 2 0 01-2 2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+          منوی کافه
+        </div>
+        <div class="sb-item" :class="{active:pg==='rest'}" @click="nav('rest')">
+          <svg viewBox="0 0 16 16" fill="none"><path d="M5 1v5.5a2.5 2.5 0 005 0V1M7.5 7v8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M12 1v14" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+          منوی رستوران
+        </div>
+        <div class="sb-sec">دسته‌بندی‌ها</div>
+        <div class="sb-item" :class="{active:pg==='cats'}" @click="nav('cats')">
+          <svg viewBox="0 0 16 16" fill="none"><path d="M2 4h12M2 8h8M2 12h5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+          مدیریت دسته‌بندی‌ها
+        </div>
+      </nav>
+      <div class="sb-foot">
+        <button class="btn-logout" @click="doLogout">خروج از حساب</button>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <div class="main">
+      <div class="topbar">
+        <span class="topbar-title">{{ pgTitle }}</span>
+        <div class="topbar-actions">
+          <button class="btn-primary" v-if="pg==='cafe'||pg==='rest'" @click="openAddItem">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            افزودن آیتم
+          </button>
+          <button class="btn-primary" v-if="pg==='cats'" @click="openAddCat">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            افزودن دسته‌بندی
+          </button>
+        </div>
+      </div>
+
+      <div class="page-body">
+
+        <!-- DASHBOARD -->
+        <template v-if="pg==='dash'">
+          <div class="stats-grid">
+            <div class="stat-card"><div class="stat-lbl">آیتم‌های کافه</div><div class="stat-val">{{ stats.cafe }}</div><div class="stat-sub">آیتم فعال</div></div>
+            <div class="stat-card"><div class="stat-lbl">آیتم‌های رستوران</div><div class="stat-val">{{ stats.rest }}</div><div class="stat-sub">آیتم فعال</div></div>
+            <div class="stat-card"><div class="stat-lbl">دسته‌بندی‌ها</div><div class="stat-val">{{ stats.cats }}</div><div class="stat-sub">کل دسته‌بندی</div></div>
+            <div class="stat-card"><div class="stat-lbl">آیتم‌های مخفی</div><div class="stat-val">{{ stats.hidden }}</div><div class="stat-sub">غیرفعال</div></div>
+          </div>
+          <div class="table-card">
+            <div class="table-head"><span class="table-title">آخرین آیتم‌ها</span></div>
+            <div class="empty" v-if="loading"><div class="tbl-spinner"></div><p>در حال بارگذاری...</p></div>
+            <div class="tbl-wrap" v-else>
+              <table>
+                <thead><tr><th>تصویر</th><th>نام</th><th>دسته</th><th>قیمت</th><th>وضعیت</th></tr></thead>
+                <tbody>
+                  <tr v-for="item in recentItems.slice(0,10)" :key="item.id">
+                    <td><img class="td-img" :src="item.image_url||'https://picsum.photos/seed/'+item.id+'/46/46'" :alt="item.name_fa" onerror="this.src='https://picsum.photos/seed/'+Math.random()+'/46/46'"/></td>
+                    <td class="td-name">{{ item.name_fa }}</td>
+                    <td><span class="pill pill-gold">{{ item.menu_type==='cafe'?'کافه':'رستوران' }}</span></td>
+                    <td class="td-price">{{ fmtPrice(item.price) }}</td>
+                    <td><span class="pill" :class="item.is_visible?'pill-teal':'pill-red'">{{ item.is_visible?'فعال':'مخفی' }}</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </template>
+
+        <!-- CAFE / REST MENU -->
+        <template v-if="pg==='cafe'||pg==='rest'">
+          <!-- mobile add btn -->
+          <div style="margin-bottom:14px;display:flex;justify-content:flex-end">
+            <button class="btn-primary" @click="openAddItem" style="display:none" id="mob-add-btn">+ افزودن آیتم</button>
+          </div>
+          <div class="tabs">
+            <div class="tab" v-for="cat in pageCats" :key="cat.id"
+                 :class="{active:activeCat===cat.id}" @click="activeCat=cat.id">
+              {{ cat.name_fa }}
+            </div>
+          </div>
+          <div class="table-card">
+            <div class="table-head">
+              <span class="table-title">
+                {{ pageCats.find(c=>c.id===activeCat)?.name_fa||'همه' }}
+                <span style="color:var(--wd);font-size:12px;margin-right:6px">({{ filteredItems.length }} آیتم)</span>
+              </span>
+              <input class="search-inp" v-model="srch" placeholder="جستجو..."/>
+            </div>
+            <div class="empty" v-if="loading"><div class="tbl-spinner"></div><p>در حال بارگذاری...</p></div>
+            <div class="tbl-wrap" v-else>
+              <table>
+                <thead><tr><th>تصویر</th><th>نام فارسی</th><th>نام انگلیسی</th><th>قیمت</th><th>وضعیت</th><th>عملیات</th></tr></thead>
+                <tbody>
+                  <tr v-for="item in filteredItems" :key="item.id">
+                    <td><img class="td-img" :src="item.image_url||'https://picsum.photos/seed/'+item.id+'-cb/46/46'" :alt="item.name_fa" @error="e=>e.target.src='https://picsum.photos/seed/'+item.id+'a/46/46'"/></td>
+                    <td class="td-name">{{ item.name_fa }}</td>
+                    <td>{{ item.name_en||'—' }}</td>
+                    <td class="td-price">{{ fmtPrice(item.price) }}</td>
+                    <td>
+                      <label class="tgl" :title="item.is_visible?'مخفی کردن':'نمایش دادن'">
+                        <input type="checkbox" :checked="item.is_visible" @change="toggleItem(item)"/>
+                        <div class="tgl-track"></div>
+                        <div class="tgl-thumb"></div>
+                      </label>
+                    </td>
+                    <td>
+                      <div class="row-acts">
+                        <button class="act-btn" @click="openEditItem(item)" title="ویرایش">
+                          <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M8.5 1.5L11.5 4.5 4.5 11.5H1.5V8.5L8.5 1.5z" stroke="currentColor" stroke-width="1.2"/></svg>
+                        </button>
+                        <button class="act-btn del" @click="deleteItem(item)" title="حذف">
+                          <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 3h9M5 3V2h3v1M4.5 5.5v5M8.5 5.5v5M2.5 3l.6 7.5h6.8L10.5 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr v-if="!filteredItems.length"><td colspan="6" style="text-align:center;padding:40px;color:var(--wd)">آیتمی یافت نشد</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </template>
+
+        <!-- CATEGORIES -->
+        <template v-if="pg==='cats'">
+          <div class="tabs">
+            <div class="tab" :class="{active:catF==='all'}" @click="catF='all'">همه</div>
+            <div class="tab" :class="{active:catF==='cafe'}" @click="catF='cafe'">کافه</div>
+            <div class="tab" :class="{active:catF==='restaurant'}" @click="catF='restaurant'">رستوران</div>
+          </div>
+          <div class="table-card">
+            <div class="table-head"><span class="table-title">دسته‌بندی‌ها</span></div>
+            <div class="tbl-wrap">
+              <table>
+                <thead><tr><th>نام فارسی</th><th>نام انگلیسی</th><th>نوع</th><th>تعداد آیتم</th><th>وضعیت</th><th>عملیات</th></tr></thead>
+                <tbody>
+                  <tr v-for="cat in filteredCats" :key="cat.id">
+                    <td class="td-name">{{ cat.name_fa }}</td>
+                    <td>{{ cat.name_en||'—' }}</td>
+                    <td><span class="pill pill-gold">{{ cat.menu_type==='cafe'?'کافه':'رستوران' }}</span></td>
+                    <td>{{ cat.items_count||0 }}</td>
+                    <td><span class="pill" :class="cat.is_visible?'pill-teal':'pill-red'">{{ cat.is_visible?'فعال':'مخفی' }}</span></td>
+                    <td>
+                      <div class="row-acts">
+                        <button class="act-btn" @click="openEditCat(cat)">
+                          <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M8.5 1.5L11.5 4.5 4.5 11.5H1.5V8.5L8.5 1.5z" stroke="currentColor" stroke-width="1.2"/></svg>
+                        </button>
+                        <button class="act-btn del" @click="deleteCat(cat)">
+                          <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 3h9M5 3V2h3v1M4.5 5.5v5M8.5 5.5v5M2.5 3l.6 7.5h6.8L10.5 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </template>
+
+      </div>
+    </div><!-- /main -->
+    </div><!-- /app-shell -->
+
+    <!-- ════ ITEM MODAL ════ -->
+    <div class="modal-bg" v-if="showItemModal" @click.self="showItemModal=false">
+      <div class="modal-box">
+        <div class="modal-title">{{ iForm.id?'ویرایش آیتم':'افزودن آیتم جدید' }}</div>
+        <div class="m-grid">
+
+          <!-- IMAGE UPLOAD -->
+          <div class="m-full">
+            <label class="m-label">تصویر آیتم</label>
+            <div class="img-zone" :class="{'drag-over':dragOver}"
+                 @click="$refs.fileInp.click()"
+                 @dragover.prevent="dragOver=true"
+                 @dragleave="dragOver=false"
+                 @drop.prevent="onDrop">
+              <div class="img-zone-placeholder" v-if="!iForm.previewUrl">
+                <svg width="36" height="36" viewBox="0 0 36 36" fill="none"><rect x="3" y="3" width="30" height="30" rx="6" stroke="currentColor" stroke-width="1.5"/><circle cx="13" cy="13" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M3 24l8-8 6 6 4-4 12 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <p>عکس را اینجا بکشید یا کلیک کنید</p>
+                <span>JPG، PNG، WebP — حداکثر ۵ مگابایت</span>
+              </div>
+              <div class="img-preview-wrap" v-else @click.stop>
+                <img class="img-preview" :src="iForm.previewUrl" alt="preview"/>
+                <button class="img-preview-del" @click.stop="clearImg" title="حذف عکس">✕</button>
+              </div>
+              <div class="img-uploading" v-if="imgUploading">
+                <div class="img-spinner"></div>
+                <span>در حال آپلود...</span>
+              </div>
+            </div>
+            <input type="file" ref="fileInp" accept="image/jpeg,image/png,image/webp" style="display:none" @change="onFileChange"/>
+          </div>
+
+          <div>
+            <label class="m-label">نام فارسی *</label>
+            <input class="m-input" v-model="iForm.name_fa" placeholder="مثلاً: اپرا"/>
+          </div>
+          <div>
+            <label class="m-label">نام انگلیسی</label>
+            <input class="m-input" v-model="iForm.name_en" placeholder="Opera" style="direction:ltr"/>
+          </div>
+          <div>
+            <label class="m-label">قیمت (هزار تومان) *</label>
+            <input class="m-input" type="number" v-model="iForm.price" placeholder="280" min="0"/>
+          </div>
+          <div>
+            <label class="m-label">دسته‌بندی *</label>
+            <select class="m-select" v-model="iForm.category">
+              <option v-for="cat in allCats.filter(c=>c.menu_type===(pg==='cafe'?'cafe':'restaurant'))" :key="cat.id" :value="cat.id">{{ cat.name_fa }}</option>
+            </select>
+          </div>
+          <div class="m-full">
+            <label class="m-label">توضیحات</label>
+            <textarea class="m-textarea" v-model="iForm.description" placeholder="توضیح کوتاه آیتم..."></textarea>
+          </div>
+          <div class="m-full m-checks">
+            <label class="chk-lbl"><input type="checkbox" v-model="iForm.is_visible"/> نمایش داده شود</label>
+            <label class="chk-lbl"><input type="checkbox" v-model="iForm.is_new"/> جدید</label>
+            <label class="chk-lbl"><input type="checkbox" v-model="iForm.is_special"/> ویژه</label>
+          </div>
+        </div>
+        <div class="modal-acts">
+          <button class="btn-primary" @click="saveItem" :disabled="saving">{{ saving?'در حال ذخیره...':'ذخیره' }}</button>
+          <button class="btn-secondary" @click="showItemModal=false">انصراف</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════ CATEGORY MODAL ════ -->
+    <div class="modal-bg" v-if="showCatModal" @click.self="showCatModal=false">
+      <div class="modal-box">
+        <div class="modal-title">{{ cForm.id?'ویرایش دسته‌بندی':'افزودن دسته‌بندی' }}</div>
+        <div class="m-grid">
+          <div>
+            <label class="m-label">نام فارسی *</label>
+            <input class="m-input" v-model="cForm.name_fa"/>
+          </div>
+          <div>
+            <label class="m-label">نام انگلیسی</label>
+            <input class="m-input" v-model="cForm.name_en" style="direction:ltr"/>
+          </div>
+          <div>
+            <label class="m-label">نوع منو *</label>
+            <select class="m-select" v-model="cForm.menu_type">
+              <option value="cafe">کافه</option>
+              <option value="restaurant">رستوران</option>
+            </select>
+          </div>
+          <div>
+            <label class="m-label">ترتیب</label>
+            <input class="m-input" type="number" v-model="cForm.order" min="0"/>
+          </div>
+          <div class="m-full m-checks">
+            <label class="chk-lbl"><input type="checkbox" v-model="cForm.is_visible"/> نمایش داده شود</label>
+          </div>
+        </div>
+        <div class="modal-acts">
+          <button class="btn-primary" @click="saveCat" :disabled="saving">{{ saving?'در حال ذخیره...':'ذخیره' }}</button>
+          <button class="btn-secondary" @click="showCatModal=false">انصراف</button>
+        </div>
+      </div>
+    </div>
+
+  </template><!-- /main template -->
+
+  <!-- NOTIFICATION -->
+  <div class="notif" :class="notif.type==='ok'?'ok':'err'" v-if="notif.show">
+    <span class="notif-dot"></span>{{ notif.msg }}
+  </div>
+
+</div><!-- /app -->
+
+<script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+<script>
+const API = 'http://127.0.0.1:8000/api';
+const {createApp,ref,computed,onMounted,nextTick} = Vue;
+
+createApp({
+  setup(){
+    // ── Auth ──────────────────────────────────────────
+    const token = ref(localStorage.getItem('cb_token')||'');
+    const me    = ref(JSON.parse(localStorage.getItem('cb_user')||'{}'));
+    const lf    = ref({username:'',password:''});
+    const lLoading = ref(false);
+    const lErr  = ref('');
+
+    async function doLogin(){
+      if(lLoading.value) return;
+      const u = lf.value.username.trim();
+      const p = lf.value.password;
+      if(!u||!p){ lErr.value='نام کاربری و رمز عبور الزامی است'; return; }
+      lLoading.value = true;
+      lErr.value = '';
+      try{
+        const res = await fetch(`${API}/auth/login/`,{
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({username:u,password:p})
+        });
+        const data = await res.json();
+        if(!res.ok) throw new Error(data.error||data.detail||`خطا: ${res.status}`);
+        localStorage.setItem('cb_token', data.access);
+        localStorage.setItem('cb_user', JSON.stringify(data.user||{}));
+        me.value  = data.user||{};
+        token.value = data.access;
+        await nextTick();
+        loadDashboard();
+      }catch(e){
+        lErr.value = e.message||'خطا در ورود — سرور در دسترس نیست';
+      }finally{
+        lLoading.value = false;
+      }
+    }
+
+    async function doLogout(){
+      try{ await apiFetch('/auth/logout/',{method:'POST',body:{refresh:''}}); }catch(_){}
+      token.value=''; me.value={};
+      localStorage.removeItem('cb_token');
+      localStorage.removeItem('cb_user');
+    }
+
+    // ── Navigation ────────────────────────────────────
+    const pg    = ref('dash');
+    const sbOpen = ref(false);
+    const pgTitle = computed(()=>({dash:'داشبورد',cafe:'منوی کافه',rest:'منوی رستوران',cats:'دسته‌بندی‌ها'})[pg.value]||'');
+
+    function nav(p){
+      pg.value=p; sbOpen.value=false;
+      if(p==='cafe') loadItems('cafe');
+      else if(p==='rest') loadItems('restaurant');
+      else if(p==='cats') loadAllCats();
+    }
+
+    // ── Data ──────────────────────────────────────────
+    const loading   = ref(false);
+    const saving    = ref(false);
+    const srch      = ref('');
+    const activeCat = ref(null);
+    const catF      = ref('all');
+    const allItems  = ref([]);
+    const allCats   = ref([]);
+    const recentItems = ref([]);
+    const stats     = ref({cafe:0,rest:0,cats:0,hidden:0});
+
+    const pageCats = computed(()=> allCats.value.filter(c=>c.menu_type===(pg.value==='cafe'?'cafe':'restaurant')));
+
+    const filteredItems = computed(()=>{
+      let items = allItems.value;
+      if(activeCat.value) items = items.filter(i=>i.category===activeCat.value);
+      if(srch.value){
+        const q=srch.value.trim().toLowerCase();
+        items = items.filter(i=>i.name_fa.includes(srch.value)||(i.name_en||'').toLowerCase().includes(q));
+      }
+      return items;
+    });
+
+    const filteredCats = computed(()=>
+      catF.value==='all' ? allCats.value : allCats.value.filter(c=>c.menu_type===catF.value)
+    );
+
+    async function loadDashboard(){
+      loading.value=true;
+      try{
+        const [cafe,rest,cats] = await Promise.all([
+          apiFetch('/admin/menu/cafe/'),
+          apiFetch('/admin/menu/restaurant/'),
+          apiFetch('/admin/categories/'),
+        ]);
+        allCats.value = cats;
+        stats.value = {
+          cafe: cafe.filter(i=>i.is_visible).length,
+          rest: rest.filter(i=>i.is_visible).length,
+          cats: cats.length,
+          hidden: [...cafe,...rest].filter(i=>!i.is_visible).length,
+        };
+        recentItems.value = [...cafe,...rest].sort((a,b)=>b.id-a.id).slice(0,20);
+      }catch(e){notify(e.message,'err');}
+      finally{loading.value=false;}
+    }
+
+    async function loadItems(type){
+      loading.value=true; srch.value='';
+      try{
+        const [items,cats] = await Promise.all([
+          apiFetch(`/admin/menu/${type}/`),
+          apiFetch(`/admin/categories/?type=${type}`),
+        ]);
+        allItems.value = items;
+        const mtype = type==='cafe'?'cafe':'restaurant';
+        allCats.value = [...allCats.value.filter(c=>c.menu_type!==mtype),...cats];
+        activeCat.value = cats[0]?.id||null;
+      }catch(e){notify(e.message,'err');}
+      finally{loading.value=false;}
+    }
+
+    async function loadAllCats(){
+      loading.value=true;
+      try{ allCats.value = await apiFetch('/admin/categories/'); }
+      catch(e){notify(e.message,'err');}
+      finally{loading.value=false;}
+    }
+
+    // ── Item CRUD ─────────────────────────────────────
+    const showItemModal = ref(false);
+    const iForm = ref({});
+    const dragOver = ref(false);
+    const imgUploading = ref(false);
+
+    function openAddItem(){
+      const mtype = pg.value==='cafe'?'cafe':'restaurant';
+      iForm.value = {
+        name_fa:'',name_en:'',description:'',price:'',
+        category: pageCats.value[0]?.id||null,
+        is_visible:true,is_new:false,is_special:false,
+        image:'',previewUrl:''
+      };
+      showItemModal.value=true;
+    }
+    function openEditItem(item){
+      iForm.value = {
+        ...item,
+        previewUrl: item.image_url||'',
+        image: item.image||'',
+      };
+      showItemModal.value=true;
+    }
+
+    async function saveItem(){
+      if(!iForm.value.name_fa||!iForm.value.price){notify('نام و قیمت الزامی است','err');return;}
+      saving.value=true;
+      try{
+        const payload = {
+          name_fa: iForm.value.name_fa,
+          name_en: iForm.value.name_en||'',
+          description: iForm.value.description||'',
+          price: iForm.value.price,
+          category: iForm.value.category,
+          is_visible: iForm.value.is_visible,
+          is_new: iForm.value.is_new,
+          is_special: iForm.value.is_special,
+        };
+        if(iForm.value.image) payload.image_url = iForm.value.image;
+
+        if(iForm.value.id){
+          await apiFetch(`/admin/menu/item/${iForm.value.id}/`,{method:'PATCH',body:payload});
+          const idx = allItems.value.findIndex(i=>i.id===iForm.value.id);
+          if(idx>-1) allItems.value[idx] = {...allItems.value[idx],...payload,image_url:iForm.value.previewUrl||allItems.value[idx].image_url};
+          notify('آیتم ویرایش شد','ok');
+        } else {
+          const created = await apiFetch(`/admin/menu/${pg.value==='cafe'?'cafe':'restaurant'}/`,{method:'POST',body:payload});
+          if(created) allItems.value.push({...created,image_url:iForm.value.previewUrl||''});
+          notify('آیتم جدید اضافه شد','ok');
+        }
+        showItemModal.value=false;
+      }catch(e){notify(e.message,'err');}
+      finally{saving.value=false;}
+    }
+
+    async function deleteItem(item){
+      if(!confirm(`آیا از حذف "${item.name_fa}" مطمئنید؟`)) return;
+      try{
+        await apiFetch(`/admin/menu/item/${item.id}/`,{method:'DELETE'});
+        allItems.value = allItems.value.filter(i=>i.id!==item.id);
+        notify('آیتم حذف شد','ok');
+      }catch(e){notify(e.message,'err');}
+    }
+
+    async function toggleItem(item){
+      try{
+        const res = await apiFetch(`/admin/menu/item/${item.id}/toggle/`,{method:'PATCH'});
+        item.is_visible = res.is_visible;
+        notify(res.is_visible?'آیتم فعال شد':'آیتم مخفی شد','ok');
+      }catch(e){notify(e.message,'err');}
+    }
+
+    // ── Image upload ─────────────────────────────────
+    async function onFileChange(e){
+      const file = e.target.files?.[0];
+      if(file) await uploadFile(file);
+      e.target.value='';
+    }
+    function onDrop(e){
+      dragOver.value=false;
+      const file = e.dataTransfer.files?.[0];
+      if(file) uploadFile(file);
+    }
+    async function uploadFile(file){
+      if(file.size > 5*1024*1024){notify('حجم فایل بیشتر از ۵ مگابایت است','err');return;}
+      // local preview immediately
+      const reader = new FileReader();
+      reader.onload = ev => { iForm.value.previewUrl = ev.target.result; };
+      reader.readAsDataURL(file);
+      // upload to server
+      imgUploading.value=true;
+      try{
+        const fd = new FormData();
+        fd.append('image',file);
+        const res = await fetch(`${API}/admin/upload/image/`,{
+          method:'POST',
+          headers:{'Authorization':`Bearer ${token.value}`},
+          body:fd
+        });
+        if(res.ok){
+          const data = await res.json();
+          iForm.value.image = data.url||'';
+        }
+      }catch(_){/* keep local preview */}
+      finally{imgUploading.value=false;}
+    }
+    function clearImg(){
+      iForm.value.previewUrl='';
+      iForm.value.image='';
+    }
+
+    // ── Category CRUD ─────────────────────────────────
+    const showCatModal = ref(false);
+    const cForm = ref({});
+
+    function openAddCat(){
+      cForm.value={name_fa:'',name_en:'',menu_type:'cafe',order:0,is_visible:true};
+      showCatModal.value=true;
+    }
+    function openEditCat(cat){
+      cForm.value={...cat};
+      showCatModal.value=true;
+    }
+    async function saveCat(){
+      if(!cForm.value.name_fa){notify('نام دسته‌بندی الزامی است','err');return;}
+      saving.value=true;
+      try{
+        if(cForm.value.id){
+          await apiFetch(`/admin/categories/${cForm.value.id}/`,{method:'PATCH',body:cForm.value});
+          const idx=allCats.value.findIndex(c=>c.id===cForm.value.id);
+          if(idx>-1) allCats.value[idx]={...allCats.value[idx],...cForm.value};
+          notify('دسته‌بندی ویرایش شد','ok');
+        }else{
+          const c=await apiFetch('/admin/categories/',{method:'POST',body:cForm.value});
+          allCats.value.push(c);
+          notify('دسته‌بندی اضافه شد','ok');
+        }
+        showCatModal.value=false;
+      }catch(e){notify(e.message,'err');}
+      finally{saving.value=false;}
+    }
+    async function deleteCat(cat){
+      if(!confirm(`حذف دسته‌بندی "${cat.name_fa}"؟`)) return;
+      try{
+        await apiFetch(`/admin/categories/${cat.id}/`,{method:'DELETE'});
+        allCats.value=allCats.value.filter(c=>c.id!==cat.id);
+        notify('دسته‌بندی حذف شد','ok');
+      }catch(e){notify(e.message,'err');}
+    }
+
+    // ── Helpers ───────────────────────────────────────
+    const notif = ref({show:false,msg:'',type:'ok'});
+    let nTimer;
+    function notify(msg,type='ok'){
+      clearTimeout(nTimer);
+      notif.value={show:true,msg,type};
+      nTimer=setTimeout(()=>{notif.value.show=false;},3500);
+    }
+    function fmtPrice(p){
+      return parseInt(p||0).toLocaleString('fa-IR')+' هزار تومان';
+    }
+
+    async function apiFetch(path,opts={}){
+      const headers={'Content-Type':'application/json'};
+      if(token.value) headers['Authorization']=`Bearer ${token.value}`;
+      const res = await fetch(`${API}${path}`,{
+        method:opts.method||'GET',
+        headers,
+        body:opts.body?JSON.stringify(opts.body):undefined,
+      });
+      if(res.status===401){doLogout();throw new Error('نشست منقضی شده — دوباره وارد شوید');}
+      if(!res.ok){
+        let msg=`خطا: ${res.status}`;
+        try{const e=await res.json();msg=e.error||e.detail||msg;}catch(_){}
+        throw new Error(msg);
+      }
+      if(res.status===204) return null;
+      return res.json();
+    }
+
+    onMounted(()=>{
+      if(token.value) loadDashboard();
+    });
+
+    return {
+      token,me,lf,lLoading,lErr,doLogin,doLogout,
+      pg,sbOpen,pgTitle,nav,
+      loading,saving,srch,activeCat,catF,
+      allItems,allCats,pageCats,recentItems,stats,
+      filteredItems,filteredCats,
+      showItemModal,iForm,dragOver,imgUploading,
+      openAddItem,openEditItem,saveItem,deleteItem,toggleItem,
+      onFileChange,onDrop,clearImg,
+      showCatModal,cForm,openAddCat,openEditCat,saveCat,deleteCat,
+      notif,fmtPrice,
+    };
+  }
+}).mount('#app');
+</script>
+</body>
+</html>
