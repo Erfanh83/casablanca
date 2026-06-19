@@ -2,6 +2,7 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8"/>
+<base href="/"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>کازابلانکا | Casablanca — Café &amp; Restaurant</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -193,11 +194,10 @@ button{background:none;border:none;font:inherit;cursor:pointer}
 .stats{display:flex;background:var(--bg3);border:1px solid var(--bdr);border-radius:14px;overflow:hidden;margin-top:36px}
 .stat{flex:1;padding:22px 16px;text-align:center;border-left:1px solid var(--bdr)}
 .stat:last-child{border-left:none}
-.stat-n{display:block;font-family:var(--f-en);font-size:32px;font-weight:700;color:var(--gold);line-height:1;margin-bottom:6px}
+.stat-n{display:block;font-family:var(--f-fa);font-size:36px;font-weight:700;color:var(--gold);line-height:1;margin-bottom:6px;letter-spacing:-.5px}
 .stat-l{font-size:12px;color:var(--wd)}
 .s-visual{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:4/5;background:linear-gradient(135deg,#1c1408,#0c0c0c) center/cover;box-shadow:0 30px 90px rgba(0,0,0,.55);transform:perspective(1000px) rotateY(0) rotateX(0);transition:transform .15s linear,box-shadow .4s ease;will-change:transform}
-.s-visual video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.02);opacity:0;transition:opacity .6s ease,transform 1.4s var(--ease)}
-.s-visual video.ready{opacity:1}
+.s-visual video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.02);opacity:1;transition:transform 1.4s var(--ease)}
 .s-visual:hover video{transform:scale(1.09)}
 .s-visual-grain{position:absolute;inset:0;opacity:.05;mix-blend-mode:overlay;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 .s-visual-ov{position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,8,8,.08) 0%,rgba(8,8,8,.04) 38%,rgba(8,8,8,.55) 82%,rgba(8,8,8,.78) 100%);pointer-events:none}
@@ -211,18 +211,6 @@ button{background:none;border:none;font:inherit;cursor:pointer}
 .s-corner{position:absolute;width:24px;height:24px;border-color:var(--gold);opacity:.75}
 .s-corner.tl{top:0;right:0;border-top:1.5px solid;border-right:1.5px solid;border-radius:0 8px 0 0}
 .s-corner.br{bottom:0;left:0;border-bottom:1.5px solid;border-left:1.5px solid;border-radius:0 0 8px 0}
-.s-live{position:absolute;top:20px;right:20px;z-index:3;display:flex;align-items:center;gap:7px;background:rgba(8,8,8,.55);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.14);border-radius:100px;padding:6px 14px 6px 11px;font-size:11px;font-weight:600;color:var(--w);letter-spacing:.3px}
-.s-live-dot{width:7px;height:7px;border-radius:50%;background:#FF5D5D;flex-shrink:0;animation:liveBlink 1.7s ease-in-out infinite}
-@keyframes liveBlink{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(255,93,93,.55)}50%{opacity:.55;box-shadow:0 0 0 7px rgba(255,93,93,0)}}
-.s-play{position:absolute;bottom:20px;left:20px;z-index:3;width:42px;height:42px;border-radius:50%;background:rgba(8,8,8,.55);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.16);display:flex;align-items:center;justify-content:center;color:#fff;cursor:pointer;transition:background .3s,transform .3s var(--ease),border-color .3s}
-.s-play:hover{background:var(--gold);color:#000;border-color:var(--gold);transform:scale(1.08)}
-.s-play svg{width:14px;height:14px}
-.s-play .ic-play{display:none}
-.s-play.paused .ic-pause{display:none}
-.s-play.paused .ic-play{display:block}
-.s-badge{position:absolute;bottom:20px;right:20px;z-index:3;background:rgba(8,8,8,.88);backdrop-filter:blur(10px);border:1px solid var(--bdr);border-radius:10px;padding:12px 18px;text-align:center}
-.s-badge strong{display:block;font-family:var(--f-en);font-size:20px;color:var(--gold);line-height:1}
-.s-badge span{font-size:11px;color:var(--wd);margin-top:3px;display:block}
 
 /* ── MENU CHOICE ─────────────────────── */
 .mc-title{direction:ltr;font-family:var(--f-en);font-size:clamp(34px,5vw,62px);font-weight:600;color:var(--w);margin:8px 0}
@@ -336,14 +324,29 @@ button{background:none;border:none;font:inherit;cursor:pointer}
 .ft-ico{width:30px;height:30px;border:1px solid var(--bdr);border-radius:7px;display:flex;align-items:center;justify-content:center;color:var(--gold);flex-shrink:0;font-size:12px;margin-top:1px}
 
 /* ── FOOTER ──────────────────────────── */
-footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:52px 56px 36px}
-.ft-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:36px;padding-bottom:36px;border-bottom:1px solid var(--bdr)}
-.ft-logo{display:flex;align-items:center;gap:12px}
+footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:64px 56px 36px}
+.ft-main{display:grid;grid-template-columns:1.4fr 1fr 1.3fr;gap:56px;margin-bottom:48px;padding-bottom:48px;border-bottom:1px solid var(--bdr)}
+.ft-logo{display:flex;align-items:center;gap:12px;margin-bottom:18px}
 .ft-logo img{height:42px;border-radius:6px}
 .ft-logo b{font-family:var(--f-en);font-size:16px;letter-spacing:3px;color:var(--w)}
-.ft-nav{display:flex;gap:24px;list-style:none}
-.ft-nav a{font-size:14px;color:var(--wd);transition:color .3s}
-.ft-nav a:hover{color:var(--gold)}
+.ft-tagline{font-size:13px;color:var(--wd);line-height:1.75}
+.ft-col-h{font-family:var(--f-en);font-size:10px;letter-spacing:3.5px;text-transform:uppercase;color:var(--gold);margin-bottom:22px;opacity:.7}
+.ft-nav{display:flex;flex-direction:column;gap:12px;list-style:none}
+.ft-nav a{font-size:14px;color:var(--wd);transition:color .3s;display:inline-flex;align-items:center;gap:8px}
+.ft-nav a::before{content:'';width:12px;height:1px;background:var(--gold);opacity:.35;flex-shrink:0;transition:width .3s,opacity .3s}
+.ft-nav a:hover{color:var(--gold)}.ft-nav a:hover::before{width:18px;opacity:.7}
+.ft-contact{display:flex;flex-direction:column;gap:20px}
+.ft-ci{display:flex;align-items:flex-start;gap:13px}
+.ft-ci-ico{width:34px;height:34px;flex-shrink:0;border:1px solid rgba(201,168,124,.2);border-radius:9px;display:flex;align-items:center;justify-content:center;color:var(--gold)}
+.ft-ci-ico svg{width:15px;height:15px}
+.ft-ci-body{display:flex;flex-direction:column;gap:4px}
+.ft-ci-label{font-family:var(--f-en);font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(237,232,224,.28)}
+.ft-ci-val{font-size:14px;color:var(--wd);transition:color .25s;line-height:1.45;text-decoration:none}
+a.ft-ci-val:hover{color:var(--gold)}
+.ft-socs{display:flex;gap:9px;margin-top:2px}
+.ft-soc{width:38px;height:38px;border:1px solid rgba(201,168,124,.2);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--wd);transition:border-color .3s,color .3s,background .3s;flex-shrink:0}
+.ft-soc:hover{border-color:var(--gold);color:var(--gold);background:rgba(201,168,124,.07)}
+.ft-soc svg{width:17px;height:17px}
 .ft-bot{display:flex;align-items:center;justify-content:space-between;font-size:13px;color:rgba(237,232,224,.3);flex-wrap:wrap;gap:10px}
 .ft-tag{font-family:var(--f-en);font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(201,168,124,.4)}
 
@@ -368,7 +371,9 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:52px 56px 3
   .vw-prev,.vw-next{width:42px;height:42px}
   .vw-prev{right:10px}.vw-next{left:10px}
   footer{padding:40px 20px}
-  .ft-top{flex-direction:column;gap:20px;text-align:center}
+  .ft-main{grid-template-columns:1fr;gap:32px}
+  .ft-nav{flex-direction:row;flex-wrap:wrap;gap:8px 16px}
+  .ft-nav a::before{display:none}
   .ft-bot{justify-content:center;text-align:center}
   .h-title{font-size:clamp(48px,15vw,90px)}
   .mm-link{padding:10px 0}
@@ -443,7 +448,8 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:52px 56px 3
 <section id="hero">
   <div class="h-video-wrap">
     <video id="hero-video" autoplay muted loop playsinline preload="auto"
-      poster="https://images.unsplash.com/photo-1559925393-8be0ec4767c8?w=1600&q=80&auto=format&fit=crop">
+      poster="assets/images/hero-poster.jpg">
+      <source src="assets/video/hero.mp4" type="video/mp4"/>
       <source src="https://assets.mixkit.co/videos/4350/4350-720.mp4" type="video/mp4"/>
     </video>
     <div class="h-video-ov"></div>
@@ -507,7 +513,8 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:52px 56px 3
       </div>
       <div class="s-visual rv-s" id="storyVisual">
         <video id="storyVideo" autoplay muted loop playsinline preload="auto"
-               poster="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=700&q=80&auto=format&fit=crop">
+               poster="assets/images/story-poster.jpg">
+          <source src="assets/video/story.mp4" type="video/mp4"/>
           <source src="https://assets.mixkit.co/videos/236/236-720.mp4" type="video/mp4"/>
         </video>
         <div class="s-visual-ov"></div>
@@ -520,12 +527,6 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:52px 56px 3
           <span class="s-corner tl"></span>
           <span class="s-corner br"></span>
         </div>
-        <div class="s-live"><span class="s-live-dot"></span>پخش زنده</div>
-        <button class="s-play" id="storyPlayBtn" aria-label="پخش یا توقف ویدیو">
-          <svg class="ic-pause" viewBox="0 0 14 14" fill="none"><rect x="2" y="1.5" width="3.2" height="11" rx="1" fill="currentColor"/><rect x="8.8" y="1.5" width="3.2" height="11" rx="1" fill="currentColor"/></svg>
-          <svg class="ic-play" viewBox="0 0 14 14" fill="none"><path d="M3 1.7v10.6c0 .8.9 1.3 1.6.9l8-5.3c.6-.4.6-1.4 0-1.8l-8-5.3C3.9.4 3 .9 3 1.7z" fill="currentColor"/></svg>
-        </button>
-        <div class="s-badge"><strong>۱۴۰۰</strong><span>از همین سال</span></div>
       </div>
     </div>
   </div>
@@ -542,8 +543,8 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:52px 56px 3
     <div class="mc-cards">
       <a href="cafe-menu.html" class="mc-card rv-s" id="card-cafe">
         <div class="mc-card-bg">
-          <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=700&q=80&auto=format&fit=crop"
-               alt="کافه" loading="lazy" onerror="this.onerror=null;this.src='https://picsum.photos/seed/casablanca-cafe/700/840'"/>
+          <img src="assets/images/cafe-card.jpg"
+               alt="کافه" loading="lazy" onerror="this.onerror=null;this.src='assets/images/placeholder.svg'"/>
         </div>
         <div class="mc-ov"></div><div class="mc-shine"></div>
         <div class="mc-body">
@@ -557,8 +558,8 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:52px 56px 3
       </a>
       <a href="restaurant-menu.html" class="mc-card rv-s" id="card-rest" style="--d:.12s">
         <div class="mc-card-bg">
-          <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=700&q=80&auto=format&fit=crop"
-               alt="رستوران" loading="lazy" onerror="this.onerror=null;this.src='https://picsum.photos/seed/casablanca-rest/700/840'"/>
+          <img src="assets/images/restaurant-card.jpg"
+               alt="رستوران" loading="lazy" onerror="this.onerror=null;this.src='assets/images/placeholder.svg'"/>
         </div>
         <div class="mc-ov"></div><div class="mc-shine"></div>
         <div class="mc-body">
@@ -593,8 +594,8 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:52px 56px 3
   <div class="inner">
     <div class="ft-g">
       <div class="ft-img rv-l">
-        <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?w=700&q=80&auto=format&fit=crop"
-             alt="فضای کازابلانکا" loading="lazy" onerror="this.onerror=null;this.src='https://picsum.photos/seed/casablanca-features/700/930'"/>
+        <img src="assets/images/ambiance.jpg"
+             alt="فضای کازابلانکا" loading="lazy" onerror="this.onerror=null;this.src='assets/images/placeholder.svg'"/>
         <div class="ft-img-ov"></div>
       </div>
       <div class="rv-r">
@@ -616,17 +617,77 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:52px 56px 3
 <!-- ═══ FOOTER ═══ -->
 <footer>
   <div class="inner">
-    <div class="ft-top">
-      <div class="ft-logo">
-        <img src="assets/images/logo.png" alt="Casablanca" onerror="this.style.display='none'"/>
-        <b>CASABLANCA</b>
+    <div class="ft-main">
+
+      <!-- Brand -->
+      <div>
+        <div class="ft-logo">
+          <img src="assets/images/logo.png" alt="Casablanca" onerror="this.style.display='none'"/>
+          <b>CASABLANCA</b>
+        </div>
+        <p class="ft-tagline">کافه و رستوران کازابلانکا<br>جایی که هر لحظه، یک تجربه ناب است</p>
       </div>
-      <ul class="ft-nav">
-        <li><a href="cafe-menu.html">منوی کافه</a></li>
-        <li><a href="restaurant-menu.html">منوی رستوران</a></li>
-        <li><a href="#story">داستان ما</a></li>
-        <li><a href="#gallery">گالری</a></li>
-      </ul>
+
+      <!-- Navigation -->
+      <div>
+        <p class="ft-col-h">Navigation</p>
+        <ul class="ft-nav">
+          <li><a href="cafe-menu.html">منوی کافه</a></li>
+          <li><a href="restaurant-menu.html">منوی رستوران</a></li>
+          <li><a href="#story">داستان ما</a></li>
+          <li><a href="#gallery">گالری</a></li>
+          <li><a href="#features">فضا</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div>
+        <p class="ft-col-h">Contact</p>
+        <div class="ft-contact">
+
+          <div class="ft-ci">
+            <span class="ft-ci-ico">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 4.5a1 1 0 011-1h2.382a1 1 0 01.894.553l1.5 3a1 1 0 01-.234 1.118L7.7 9.5c1.189 2.09 2.711 3.611 4.8 4.8l1.33-1.342a1 1 0 011.118-.234l3 1.5A1 1 0 0118.5 15.118V17a1 1 0 01-1 1C8.163 18 2 11.837 2 4.5a1 1 0 011-1h.5z"/></svg>
+            </span>
+            <div class="ft-ci-body">
+              <span class="ft-ci-label">Phone</span>
+              <a href="tel:+988131234567" class="ft-ci-val">۰۸۱۳۱۲۳۴۵۶۷</a>
+            </div>
+          </div>
+
+          <div class="ft-ci">
+            <span class="ft-ci-ico">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 11.5a3 3 0 100-6 3 3 0 000 6z"/><path d="M10 2C6.686 2 4 4.686 4 8c0 4.5 6 10 6 10s6-5.5 6-10c0-3.314-2.686-6-6-6z"/></svg>
+            </span>
+            <div class="ft-ci-body">
+              <span class="ft-ci-label">Address</span>
+              <a href="https://maps.google.com/?q=35.69,51.36" target="_blank" rel="noopener" class="ft-ci-val">
+                همدان، استادان
+                <span style="display:block;font-size:11px;color:rgba(201,168,124,.55);margin-top:2px">مشاهده روی نقشه ↗</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="ft-ci">
+            <span class="ft-ci-ico">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="15" cy="4" r="2"/><circle cx="5" cy="10" r="2"/><circle cx="15" cy="16" r="2"/><path d="M7 9l6-4M7 11l6 4"/></svg>
+            </span>
+            <div class="ft-ci-body">
+              <span class="ft-ci-label">Social</span>
+              <div class="ft-socs">
+                <a href="https://instagram.com/lcasablancal" target="_blank" rel="noopener" class="ft-soc" title="Instagram @lcasablancal">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r=".9" fill="currentColor" stroke="none"/></svg>
+                </a>
+                <a href="https://wa.me/989022110021" target="_blank" rel="noopener" class="ft-soc" title="WhatsApp ۰۹۰۲۲۱۱۰۰۲۱">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.556 4.116 1.528 5.843L.057 23.885c-.076.339.232.647.571.571l6.044-1.471A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.817 9.817 0 01-5.004-1.371l-.36-.213-3.737.909.934-3.617-.235-.374A9.818 9.818 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182c5.43 0 9.818 4.388 9.818 9.818 0 5.43-4.388 9.818-9.818 9.818z"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
     </div>
     <div class="ft-bot">
       <span>© ۱۴۰۴ کازابلانکا — تمام حقوق محفوظ است</span>
@@ -666,20 +727,20 @@ footer{background:var(--bg2);border-top:1px solid var(--bdr);padding:52px 56px 3
 'use strict';
 
 /* ── Gallery images ─────────────────────────────── */
-const FALLBACK_IMG='https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=900&q=80&auto=format&fit=crop';
+const FALLBACK_IMG='assets/images/placeholder.svg';
 const GALLERY_IMAGES=[
-  'https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=900&q=80&auto=format&fit=crop',
-  'https://images.unsplash.com/photo-1559305616-3f99cd43e353?w=900&q=80&auto=format&fit=crop',
-  'https://images.unsplash.com/photo-1453614512568-c4024d13c247?w=900&q=80&auto=format&fit=crop',
-  'https://images.unsplash.com/photo-1481833761820-0509d3217039?w=900&q=80&auto=format&fit=crop',
-  'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=900&q=80&auto=format&fit=crop',
-  'https://images.unsplash.com/photo-1521017432531-fbd92d768814?w=900&q=80&auto=format&fit=crop',
-  'https://images.unsplash.com/photo-1428515613728-6b4607e44363?w=900&q=80&auto=format&fit=crop',
-  'https://images.unsplash.com/photo-1559925393-8be0ec4767c8?w=900&q=80&auto=format&fit=crop',
-  'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=900&q=80&auto=format&fit=crop',
-  'https://images.unsplash.com/photo-1551218808-94e220e084d2?w=900&q=80&auto=format&fit=crop',
-  'https://images.unsplash.com/photo-1559339352-11d035aa65de?w=900&q=80&auto=format&fit=crop',
-  'https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=900&q=80&auto=format&fit=crop',
+  'assets/images/gallery/g01.jpg',
+  'assets/images/gallery/g02.jpg',
+  'assets/images/gallery/g03.jpg',
+  'assets/images/gallery/g04.jpg',
+  'assets/images/gallery/g05.jpg',
+  'assets/images/gallery/g06.jpg',
+  'assets/images/gallery/g07.jpg',
+  'assets/images/gallery/g08.jpg',
+  'assets/images/gallery/g09.jpg',
+  'assets/images/gallery/g10.jpg',
+  'assets/images/gallery/g11.jpg',
+  'assets/images/gallery/g12.jpg',
 ];
 
 /* ── Populate horizontal gallery strip ─────────── */
@@ -688,7 +749,7 @@ const GALLERY_IMAGES=[
   if(!inner)return;
   inner.innerHTML=GALLERY_IMAGES.map((src,i)=>`
     <div class="hstrip-item" onclick="openViewer(${i})">
-      <img src="${src}" alt="گالری کازابلانکا" loading="${i<3?'eager':'lazy'}"
+      <img src="${src}" alt="گالری کازابلانکا" loading="eager"
            onerror="this.onerror=null;this.src='${FALLBACK_IMG}'"/>
     </div>`).join('');
 })();
@@ -823,7 +884,16 @@ function initHorizontalGallery(){
   const inner=document.getElementById('hstrip-inner');
   if(!strip||!inner||typeof gsap==='undefined'||window.innerWidth<=860)return;
 
-  const getTotal=()=>inner.scrollWidth-window.innerWidth;
+  const items=inner.querySelectorAll('.hstrip-item');
+  if(!items.length)return;
+
+  /* Measure from actual rendered item width to avoid scrollWidth quirks */
+  const getTotal=()=>{
+    const w=items[0].getBoundingClientRect().width||items[0].offsetWidth;
+    const gap=14;
+    const pad=112; /* 56px each side on #hstrip-inner */
+    return Math.max(0,(w+gap)*items.length-gap+pad-window.innerWidth);
+  };
 
   gsap.to(inner,{
     x:()=>-getTotal(),
@@ -839,7 +909,7 @@ function initHorizontalGallery(){
     }
   });
 
-  inner.querySelectorAll('.hstrip-item').forEach(item=>{
+  items.forEach(item=>{
     item.addEventListener('mousemove',e=>{
       const rect=item.getBoundingClientRect();
       const x=(e.clientX-rect.left)/rect.width-.5;
@@ -890,17 +960,8 @@ function initParallax(){
 function initStoryVideo(){
   const wrap=document.getElementById('storyVisual');
   const video=document.getElementById('storyVideo');
-  const btn=document.getElementById('storyPlayBtn');
   if(!wrap||!video)return;
-  video.addEventListener('loadeddata',()=>video.classList.add('ready'));
-  video.addEventListener('error',()=>{video.style.display='none';});
   video.play().catch(()=>{});
-  if(btn){
-    btn.addEventListener('click',()=>{
-      if(video.paused){video.play().catch(()=>{});btn.classList.remove('paused');}
-      else{video.pause();btn.classList.add('paused');}
-    });
-  }
   if(window.matchMedia('(hover:hover)').matches){
     wrap.addEventListener('mousemove',e=>{
       const rect=wrap.getBoundingClientRect();
@@ -1027,17 +1088,27 @@ window.addEventListener('load',()=>{
   const v=document.getElementById('hero-video');
   if(v)v.play().catch(()=>{});
 
-  if(typeof gsap!=='undefined'&&typeof ScrollTrigger!=='undefined'){
-    gsap.registerPlugin(ScrollTrigger);
-    initReveal();
-    initScrubParallax();
-    initHorizontalGallery();
-  }
   initCounters();
   initParallax();
   initStoryVideo();
   initMagneticCards();
+
+  if(typeof gsap!=='undefined'&&typeof ScrollTrigger!=='undefined'){
+    gsap.registerPlugin(ScrollTrigger);
+    initReveal();
+    initScrubParallax();
+  }
+
+  /* Lenis must start before gallery so ScrollTrigger gets correct scroll proxy */
   initLenis();
+
+  /* Gallery needs Lenis running + full layout settled — delay one rAF cycle */
+  if(typeof gsap!=='undefined'&&typeof ScrollTrigger!=='undefined'){
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{
+      initHorizontalGallery();
+      ScrollTrigger.refresh();
+    }));
+  }
 });
 </script>
 </body>

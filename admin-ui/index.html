@@ -2,6 +2,7 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8"/>
+<base href="/"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>پنل مدیریت | کازابلانکا</title>
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
@@ -686,12 +687,11 @@ createApp({
     const imgUploading = ref(false);
 
     function openAddItem(){
-      const mtype = pg.value==='cafe'?'cafe':'restaurant';
       iForm.value = {
         name_fa:'',name_en:'',description:'',price:'',
         category: pageCats.value[0]?.id||null,
         is_visible:true,is_new:false,is_special:false,
-        image:'',previewUrl:''
+        image:'',previewUrl:'',fileObj:null,
       };
       showItemModal.value=true;
     }
@@ -700,6 +700,7 @@ createApp({
         ...item,
         previewUrl: item.image_url||'',
         image: item.image||'',
+        fileObj: null,
       };
       showItemModal.value=true;
     }
@@ -708,26 +709,55 @@ createApp({
       if(!iForm.value.name_fa||!iForm.value.price){notify('نام و قیمت الزامی است','err');return;}
       saving.value=true;
       try{
-        const payload = {
-          name_fa: iForm.value.name_fa,
-          name_en: iForm.value.name_en||'',
-          description: iForm.value.description||'',
-          price: iForm.value.price,
-          category: iForm.value.category,
-          is_visible: iForm.value.is_visible,
-          is_new: iForm.value.is_new,
-          is_special: iForm.value.is_special,
-        };
-        if(iForm.value.image) payload.image_url = iForm.value.image;
+        const isEdit = !!iForm.value.id;
+        const url = isEdit
+          ? `${API}/admin/menu/item/${iForm.value.id}/`
+          : `${API}/admin/menu/${pg.value==='cafe'?'cafe':'restaurant'}/`;
+        const method = isEdit ? 'PATCH' : 'POST';
 
-        if(iForm.value.id){
-          await apiFetch(`/admin/menu/item/${iForm.value.id}/`,{method:'PATCH',body:payload});
+        let res;
+        if(iForm.value.fileObj){
+          // Multipart — image file included
+          const fd = new FormData();
+          fd.append('name_fa',   iForm.value.name_fa);
+          fd.append('name_en',   iForm.value.name_en||'');
+          fd.append('description', iForm.value.description||'');
+          fd.append('price',     iForm.value.price);
+          fd.append('category',  iForm.value.category);
+          fd.append('is_visible', iForm.value.is_visible);
+          fd.append('is_new',    iForm.value.is_new);
+          fd.append('is_special', iForm.value.is_special);
+          fd.append('image',     iForm.value.fileObj);
+          res = await fetch(url,{method,headers:{'Authorization':`Bearer ${token.value}`},body:fd});
+        } else {
+          // JSON — no image change
+          const payload = {
+            name_fa: iForm.value.name_fa,
+            name_en: iForm.value.name_en||'',
+            description: iForm.value.description||'',
+            price: iForm.value.price,
+            category: iForm.value.category,
+            is_visible: iForm.value.is_visible,
+            is_new: iForm.value.is_new,
+            is_special: iForm.value.is_special,
+          };
+          res = await fetch(url,{method,headers:{'Content-Type':'application/json','Authorization':`Bearer ${token.value}`},body:JSON.stringify(payload)});
+        }
+
+        if(res.status===401){doLogout();throw new Error('نشست منقضی شده — دوباره وارد شوید');}
+        if(!res.ok){
+          let msg=`خطا: ${res.status}`;
+          try{const e=await res.json();msg=e.error||e.detail||JSON.stringify(e)||msg;}catch(_){}
+          throw new Error(msg);
+        }
+        const saved = res.status===204 ? null : await res.json();
+
+        if(isEdit){
           const idx = allItems.value.findIndex(i=>i.id===iForm.value.id);
-          if(idx>-1) allItems.value[idx] = {...allItems.value[idx],...payload,image_url:iForm.value.previewUrl||allItems.value[idx].image_url};
+          if(idx>-1) allItems.value[idx] = saved || allItems.value[idx];
           notify('آیتم ویرایش شد','ok');
         } else {
-          const created = await apiFetch(`/admin/menu/${pg.value==='cafe'?'cafe':'restaurant'}/`,{method:'POST',body:payload});
-          if(created) allItems.value.push({...created,image_url:iForm.value.previewUrl||''});
+          if(saved) allItems.value.push(saved);
           notify('آیتم جدید اضافه شد','ok');
         }
         showItemModal.value=false;
@@ -763,32 +793,17 @@ createApp({
       const file = e.dataTransfer.files?.[0];
       if(file) uploadFile(file);
     }
-    async function uploadFile(file){
+    function uploadFile(file){
       if(file.size > 5*1024*1024){notify('حجم فایل بیشتر از ۵ مگابایت است','err');return;}
-      // local preview immediately
+      iForm.value.fileObj = file;
       const reader = new FileReader();
       reader.onload = ev => { iForm.value.previewUrl = ev.target.result; };
       reader.readAsDataURL(file);
-      // upload to server
-      imgUploading.value=true;
-      try{
-        const fd = new FormData();
-        fd.append('image',file);
-        const res = await fetch(`${API}/admin/upload/image/`,{
-          method:'POST',
-          headers:{'Authorization':`Bearer ${token.value}`},
-          body:fd
-        });
-        if(res.ok){
-          const data = await res.json();
-          iForm.value.image = data.url||'';
-        }
-      }catch(_){/* keep local preview */}
-      finally{imgUploading.value=false;}
     }
     function clearImg(){
       iForm.value.previewUrl='';
       iForm.value.image='';
+      iForm.value.fileObj=null;
     }
 
     // ── Category CRUD ─────────────────────────────────

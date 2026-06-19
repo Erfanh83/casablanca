@@ -1,32 +1,35 @@
 # Casablanca Media Guide
 
-## Drop files here when you have real assets:
+All image/video references in the HTML now point to LOCAL paths.
+When a file doesn't exist, the page falls back to `images/placeholder.svg` (dark gold placeholder — no network needed).
 
-### Images
-- `images/logo.png` — Brand logo (used in navbar + footer)
-- `images/gallery/01.jpg` ... `12.jpg` — Gallery photos (used in horizontal strip + lightbox)
-- `images/hero-poster.jpg` — Hero section poster (shown before video loads)
-- `images/story-poster.jpg` — Story section poster
-- `images/cafe-hero.jpg` — Café menu page hero background
-- `images/restaurant-hero.jpg` — Restaurant menu page hero background
-- `images/ambiance.jpg` — Features section image
-- `images/menu/cafe/` — Individual café menu item photos (named by item, e.g. `espresso.jpg`)
-- `images/menu/restaurant/` — Individual restaurant menu item photos
+## Drop your real files here:
 
-### Video
-- `video/hero.mp4` — Hero section background video (720p minimum, H.264)
-- `video/story.mp4` — Story section video card
+### Images (`frontend/assets/images/`)
+| File | Used in |
+|------|---------|
+| `logo.png` | Navbar + footer (already exists) |
+| `hero-poster.jpg` | Hero section — shown before/instead of hero video |
+| `story-poster.jpg` | Story section video card poster |
+| `cafe-card.jpg` | "Choose Your Experience" café card background |
+| `restaurant-card.jpg` | "Choose Your Experience" restaurant card background |
+| `ambiance.jpg` | Features / ambiance section left image |
 
-## After dropping files, update these src attributes:
+### Gallery (`frontend/assets/images/gallery/`)
+Drop 12 photos named exactly `g01.jpg` through `g12.jpg`.
+They appear in the horizontal scroll strip and the lightbox.
+Recommended: 900×1200 px, JPEG, under 300 KB each.
 
-**index.html**
-- Hero video: `<source src="assets/video/hero.mp4"` and `poster="assets/images/hero-poster.jpg"`
-- Story video: `<source src="assets/video/story.mp4"` and `poster="assets/images/story-poster.jpg"`
-- Gallery: Change `GALLERY_IMAGES` array to use `assets/images/gallery/01.jpg` etc.
-- Café card: `src="assets/images/cafe-hero.jpg"`
-- Restaurant card: `src="assets/images/restaurant-hero.jpg"`
-- Features: `src="assets/images/ambiance.jpg"`
+### Video (`frontend/assets/video/`)
+| File | Used in |
+|------|---------|
+| `hero.mp4` | Full-screen hero background video |
+| `story.mp4` | Story section video card |
+Recommended: 720p, H.264, under 8 MB. If file is missing, the poster image shows instead.
 
-**cafe-menu.html / restaurant-menu.html**
-- Hero background: `<img src="assets/images/cafe-hero.jpg"` / `restaurant-hero.jpg`
-- Menu items: each item's `image` field in MENU_DATA, or serve from Django `/media/`
+## Nothing else to update in the HTML
+All `src` attributes already point to these local paths. Just drop the files and refresh.
+
+## Admin panel uploads
+Menu item images are managed through the admin panel at `/c4z4bl4nc4-x9k2/`.
+Uploaded images are stored by Django under `backend/media/menu_images/` and served at `/media/`.

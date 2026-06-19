@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <rect width="400" height="400" fill="#0d0d0d"/>
+  <rect x="1" y="1" width="398" height="398" fill="none" stroke="#c9a87c" stroke-width="0.5" opacity="0.25"/>
+  <g transform="translate(200,186)" fill="none" stroke="#c9a87c" stroke-width="1.4" opacity="0.4">
+    <rect x="-44" y="-30" width="88" height="60" rx="7"/>
+    <circle cx="0" cy="0" r="18"/>
+    <circle cx="0" cy="0" r="10"/>
+    <path d="-8,-30 L-4,-42 4,-42 8,-30" fill="#c9a87c" stroke="none" opacity="0.4"/>
+    <rect x="20" y="-26" width="14" height="8" rx="2" fill="#c9a87c" opacity="0.4" stroke="none"/>
+  </g>
+  <text x="200" y="252" text-anchor="middle" fill="#c9a87c" font-family="Georgia,serif" font-size="11" letter-spacing="7" opacity="0.45">CASABLANCA</text>
+</svg>
