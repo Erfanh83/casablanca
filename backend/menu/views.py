@@ -2,6 +2,7 @@
 Views کازابلانکا — Public API + Admin API
 """
 from django.contrib.auth import authenticate
+from axes.utils import reset_request as axes_reset_request
 from rest_framework import status, generics
 from rest_framework.decorators import api_view, permission_classes, throttle_classes
 from rest_framework.permissions import AllowAny, IsAuthenticated
@@ -97,6 +98,13 @@ def login_view(request):
             {'error': 'دسترسی مجاز نیست.'},
             status=status.HTTP_403_FORBIDDEN
         )
+
+    # Clear axes failure counter — the JWT flow never calls login() so
+    # AXES_RESET_ON_SUCCESS would never fire without this explicit reset.
+    try:
+        axes_reset_request(request=request)
+    except Exception:
+        pass
 
     refresh = RefreshToken.for_user(user)
     return Response({

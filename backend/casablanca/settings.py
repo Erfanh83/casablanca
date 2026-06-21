@@ -113,7 +113,7 @@ REST_FRAMEWORK = {
     'DEFAULT_THROTTLE_RATES': {
         'anon': '100/hour',
         'user': '1000/hour',
-        'login': '5/15min',
+        'login': '20/hour',
     },
 }
 
@@ -145,8 +145,8 @@ CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_ALL_ORIGINS = True
 
 # ─── Django Axes (Brute-force protection) ────────────────────────────────────
-AXES_FAILURE_LIMIT = 5
-AXES_COOLOFF_TIME = timedelta(minutes=15)
+AXES_FAILURE_LIMIT = 10
+AXES_COOLOFF_TIME = timedelta(minutes=10)
 AXES_LOCKOUT_TEMPLATE = None
 AXES_RESET_ON_SUCCESS = True
 
