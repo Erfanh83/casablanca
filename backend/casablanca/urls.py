@@ -8,6 +8,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.http import HttpResponse
 from django.urls import include, path, re_path
+from django.views.decorators.cache import cache_control
 from django.views.static import serve as file_serve
 
 FRONTEND = Path(settings.BASE_DIR).parent / 'frontend'
@@ -39,7 +40,8 @@ urlpatterns = [
     path('api/', include('menu.urls')),
 
     # ─── Frontend static assets (/assets/…) ─────────────────────────────────
-    re_path(r'^assets/(?P<path>.*)$', file_serve,
+    re_path(r'^assets/(?P<path>.*)$',
+            cache_control(max_age=86400, public=True)(file_serve),
             {'document_root': FRONTEND / 'assets'}),
 ]
 

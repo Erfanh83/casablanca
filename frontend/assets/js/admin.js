@@ -1,4 +1,4 @@
-const API = 'http://127.0.0.1:8000/api';
+const API = '/api';
 const {createApp,ref,computed,onMounted,nextTick} = Vue;
 let _loginGrace = false;
 
