@@ -1,4 +1,4 @@
-﻿(function(){
+(function(){
   const d=document.getElementById('cd'),r=document.getElementById('cr');
   if(!d||!window.matchMedia('(hover:hover)').matches)return;
   let mx=0,my=0,rx=0,ry=0;
@@ -17,6 +17,17 @@
   mmenu.querySelectorAll('.mm-link,.mm-cta').forEach(a=>a.addEventListener('click',closeMenu));
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&mmenu.classList.contains('open'))closeMenu();});
 })();
+
+function escHtml(s){
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+
+document.addEventListener('error',function(e){
+  const el=e.target;
+  if(el.tagName!=='IMG')return;
+  if(el.dataset.fallback){el.src=el.dataset.fallback;el.removeAttribute('data-fallback');}
+  else if(el.dataset.hide){el.style.display='none';}
+},true);
 
 let allData=[], filtered=[];
 
@@ -49,15 +60,14 @@ function render(data){
     const sec=document.createElement('section');
     sec.className='cat-section';sec.id='cat-'+ci;
     const items=cat.items.filter(it=>it.is_visible!==false);
-    sec.innerHTML=`<div class="cat-head"><h2 class="cat-fa">${cat.category_fa}</h2>${cat.category_en?`<span class="cat-en">${cat.category_en}</span>`:''}<span class="cat-count">${items.length} آیتم</span></div><div class="items-grid" id="grid-${ci}">${items.map(item=>cardHTML(item,cat.category_fa)).join('')}</div>`;
+    sec.innerHTML=`<div class="cat-head"><h2 class="cat-fa">${escHtml(cat.category_fa)}</h2>${cat.category_en?`<span class="cat-en">${escHtml(cat.category_en)}</span>`:''}<span class="cat-count">${items.length} آیتم</span></div><div class="items-grid" id="grid-${ci}">${items.map(item=>cardHTML(item,cat.category_fa)).join('')}</div>`;
     wrap.appendChild(sec);
   });
   animateCards();
   setupCatArrows();
-  setTimeout(setupCatArrows,350); // re-check after fonts/layout settle
+  setTimeout(setupCatArrows,350);
 }
 
-/* ── Category nav arrows (smooth horizontal navigation) ── */
 function setupCatArrows(){
   const navWrap=document.querySelector('.cat-nav');
   const inner=document.getElementById('cat-nav-inner');
@@ -76,20 +86,19 @@ function setupCatArrows(){
 
 function cardHTML(item,catFa){
   const price=parseInt(item.price||0).toLocaleString('fa-IR');
-  const seed=(item.name_en||item.name_fa||'food').replace(/\s+/g,'-').toLowerCase();
-  const img=item.image_url||`https://picsum.photos/seed/${seed}-cb/400/300`;
+  const seed=escHtml((item.name_en||item.name_fa||'food').replace(/\s+/g,'-').toLowerCase());
+  const img=escHtml(item.image_url||`https://picsum.photos/seed/${seed}-cb/400/300`);
   const bNew=item.is_new?'<span class="bdg bdg-new">جدید</span>':'';
   const bSp=item.is_special?'<span class="bdg bdg-sp">ویژه</span>':'';
-  const data=JSON.stringify(item).replace(/"/g,'&quot;').replace(/'/g,"&#39;");
-  const catEsc=catFa.replace(/'/g,"&#39;");
-  return `<article class="item-card" onclick="openModal(${data},'${catEsc}')"><div class="item-img"><img src="${img}" alt="${item.name_fa}" loading="lazy" onerror="this.src='https://picsum.photos/seed/${seed}2/400/300'"/>${bNew||bSp?`<div class="item-badges">${bNew}${bSp}</div>`:''}</div><div class="item-body"><h3 class="item-fa">${item.name_fa}</h3>${item.name_en?`<p class="item-en">${item.name_en}</p>`:''} ${item.description?`<p class="item-desc">${item.description}</p>`:''}</div><div class="item-foot"><span class="item-price">${price}<small>هزار تومان</small></span><span class="item-plus">+</span></div></article>`;
+  const itemData=encodeURIComponent(JSON.stringify(item));
+  const catData=encodeURIComponent(catFa);
+  return `<article class="item-card" data-item="${itemData}" data-cat="${catData}"><div class="item-img"><img src="${img}" alt="${escHtml(item.name_fa)}" loading="lazy" data-fallback="https://picsum.photos/seed/${seed}2/400/300"/>${bNew||bSp?`<div class="item-badges">${bNew}${bSp}</div>`:''}</div><div class="item-body"><h3 class="item-fa">${escHtml(item.name_fa)}</h3>${item.name_en?`<p class="item-en">${escHtml(item.name_en)}</p>`:''} ${item.description?`<p class="item-desc">${escHtml(item.description)}</p>`:''}</div><div class="item-foot"><span class="item-price">${price}<small>هزار تومان</small></span><span class="item-plus">+</span></div></article>`;
 }
 
 function animateCards(){
   if(typeof gsap!=='undefined'&&typeof ScrollTrigger!=='undefined'){
     gsap.registerPlugin(ScrollTrigger);
-    const cards=document.querySelectorAll('.item-card');
-    cards.forEach((c,i)=>{
+    document.querySelectorAll('.item-card').forEach((c,i)=>{
       gsap.fromTo(c,
         {opacity:0,y:28,scale:.97},
         {opacity:1,y:0,scale:1,duration:.7,delay:(i%6)*.06,ease:'power3.out',
@@ -138,7 +147,7 @@ function openModal(item,catName){
   const modal=document.getElementById('modal');
   const seed=(item.name_en||item.name_fa||'food').replace(/\s+/g,'-').toLowerCase();
   document.getElementById('m-img').src=item.image_url||`https://picsum.photos/seed/${seed}-cb/500/280`;
-  document.getElementById('m-cat').innerHTML=`<span class="lbl-dot" style="width:5px;height:5px;border-radius:50%;background:var(--gold);flex-shrink:0"></span>${catName||''}`;
+  document.getElementById('m-cat').innerHTML=`<span class="lbl-dot" style="width:5px;height:5px;border-radius:50%;background:var(--gold);flex-shrink:0"></span>${escHtml(catName||'')}`;
   document.getElementById('m-fa').textContent=item.name_fa||'';
   document.getElementById('m-en').textContent=item.name_en||'';
   document.getElementById('m-desc').textContent=item.description||'—';
@@ -146,6 +155,17 @@ function openModal(item,catName){
   document.getElementById('m-badges').innerHTML=(item.is_new?'<span class="bdg bdg-new">جدید</span>':'')+(item.is_special?'<span class="bdg bdg-sp">ویژه</span>':'');
   modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';
 }
+
+document.getElementById('cats-wrap').addEventListener('click',function(e){
+  const card=e.target.closest('.item-card');
+  if(!card)return;
+  try{
+    const item=JSON.parse(decodeURIComponent(card.dataset.item));
+    const cat=decodeURIComponent(card.dataset.cat);
+    openModal(item,cat);
+  }catch(_){}
+});
+
 document.getElementById('modal-ov').onclick=closeModal;
 document.getElementById('modal-close').onclick=closeModal;
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
@@ -158,7 +178,6 @@ btt.onclick=()=>window.scrollTo({top:0,behavior:'smooth'});
 document.addEventListener('DOMContentLoaded',()=>{
   fetchMenu();
 
-  // Lenis smooth scroll
   if(typeof Lenis!=='undefined'){
     const lenis=new Lenis({duration:1.3,easing:t=>Math.min(1,1.001-Math.pow(2,-10*t)),smoothTouch:false});
     if(typeof gsap!=='undefined'){
@@ -170,14 +189,12 @@ document.addEventListener('DOMContentLoaded',()=>{
     window._lenis=lenis;
   }
 
-  // Hero content entrance
   if(typeof gsap!=='undefined'){
     gsap.from('.mh-lbl',{opacity:0,y:20,duration:.8,ease:'power3.out',delay:.15});
     gsap.from('.mh-title',{opacity:0,y:40,duration:1,ease:'power4.out',delay:.3});
     gsap.from('.mh-sub',{opacity:0,y:20,duration:.8,ease:'power3.out',delay:.55});
   }
 
-  // Navbar hide/show on scroll
   const nav=document.getElementById('nav');
   let lastY=0;
   window.addEventListener('scroll',()=>{

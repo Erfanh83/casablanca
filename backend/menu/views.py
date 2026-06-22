@@ -248,7 +248,8 @@ def upload_image(request):
     # Save to a temporary MenuItem or return path
     import os
     from django.core.files.storage import default_storage
-    filename = f"uploads/{image_file.name}"
+    from django.utils.text import get_valid_filename
+    filename = f"uploads/{get_valid_filename(os.path.basename(image_file.name))}"
     path = default_storage.save(filename, image_file)
     url = request.build_absolute_uri(f"/media/{path}")
     return Response({'url': url, 'path': path})

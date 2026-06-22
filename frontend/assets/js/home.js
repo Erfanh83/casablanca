@@ -1,5 +1,12 @@
 'use strict';
 
+document.addEventListener('error',function(e){
+  const el=e.target;
+  if(el.tagName!=='IMG')return;
+  if(el.dataset.fallback){el.src=el.dataset.fallback;el.removeAttribute('data-fallback');}
+  else if(el.dataset.hide){el.style.display='none';}
+},true);
+
 /* ── Gallery images ─────────────────────────────── */
 const FALLBACK_IMG='assets/images/placeholder.svg';
 const GALLERY_IMAGES=[
@@ -21,14 +28,19 @@ const GALLERY_IMAGES=[
   if(!track)return;
   const eye='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>';
   track.innerHTML=GALLERY_IMAGES.map((src,i)=>`
-    <button class="gtile" type="button" onclick="openViewer(${i})" aria-label="نمایش تصویر ${i+1}">
+    <button class="gtile" type="button" data-index="${i}" aria-label="نمایش تصویر ${i+1}">
       <img src="${src}" alt="گالری کازابلانکا" loading="${i<3?'eager':'lazy'}"
-           onerror="this.onerror=null;this.src='${FALLBACK_IMG}'"/>
+           data-fallback="${FALLBACK_IMG}"/>
       <div class="gtile-ov"></div>
       <div class="gtile-bdr"></div>
       <div class="gtile-num">${String(i+1).padStart(2,'0')} / ${String(GALLERY_IMAGES.length).padStart(2,'0')}</div>
       <div class="gtile-cap"><b>Casablanca</b><span class="gtile-eye">${eye}</span></div>
     </button>`).join('');
+  track.addEventListener('click',function(e){
+    const tile=e.target.closest('.gtile');
+    if(!tile)return;
+    openViewer(parseInt(tile.dataset.index));
+  });
 })();
 
 /* ── Scroll-driven horizontal gallery (pin + translate) ── */
@@ -293,10 +305,15 @@ function buildLightbox(){
   if(lbBuilt)return;
   lbBuilt=true;
   lbGrid.innerHTML=GALLERY_IMAGES.map((src,i)=>`
-    <div class="lb-item" style="transition-delay:${i*.04}s" onclick="openViewer(${i})">
+    <div class="lb-item" style="transition-delay:${i*.04}s" data-index="${i}">
       <img src="${src}" alt="گالری کازابلانکا" loading="lazy"
-           onerror="this.onerror=null;this.src='${FALLBACK_IMG}'"/>
+           data-fallback="${FALLBACK_IMG}"/>
     </div>`).join('');
+  lbGrid.addEventListener('click',function(e){
+    const item=e.target.closest('.lb-item');
+    if(!item)return;
+    openViewer(parseInt(item.dataset.index));
+  });
   lbGrid.querySelectorAll('.lb-item').forEach(item=>{
     item.addEventListener('mousemove',e=>{
       const rect=item.getBoundingClientRect();

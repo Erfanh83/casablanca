@@ -5,6 +5,9 @@
 <base href="/"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>پنل مدیریت | کازابلانکا</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="dns-prefetch" href="https://unpkg.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="/assets/css/admin.css"/>
 </head>
@@ -16,7 +19,7 @@
     <div class="login-card">
       <div class="login-logo">
         <img src="/assets/images/logo.png" alt="Casablanca"
-             onerror="this.style.display='none'"/>
+             @error="e=>e.target.style.display='none'"/>
         <div class="login-logo-text">CASABLANCA</div>
         <div class="login-logo-sub">Admin Panel</div>
       </div>
@@ -58,8 +61,8 @@
     <aside class="sidebar" :class="{open:sbOpen}">
       <div class="sb-head">
         <div class="sb-logo">
-          <img src="../frontend/assets/images/logo.png" style="height:36px;border-radius:6px"
-               onerror="this.style.display='none'"/>
+          <img src="/assets/images/logo.png" style="height:36px;border-radius:6px"
+               @error="e=>e.target.style.display='none'"/>
           <div class="sb-logo-t"><b>CASABLANCA</b><span>Admin Panel</span></div>
         </div>
         <div class="sb-user" v-if="me.username">
@@ -130,7 +133,7 @@
                 <thead><tr><th>تصویر</th><th>نام</th><th>دسته</th><th>قیمت</th><th>وضعیت</th></tr></thead>
                 <tbody>
                   <tr v-for="item in recentItems.slice(0,10)" :key="item.id">
-                    <td><img class="td-img" :src="item.image_url||'https://picsum.photos/seed/'+item.id+'/46/46'" :alt="item.name_fa" onerror="this.src='https://picsum.photos/seed/'+Math.random()+'/46/46'"/></td>
+                    <td><img class="td-img" :src="item.image_url||'https://picsum.photos/seed/'+item.id+'/46/46'" :alt="item.name_fa" @error="e=>{e.target.onerror=null;e.target.src='https://picsum.photos/seed/'+item.id+'b/46/46'}"/></td>
                     <td class="td-name">{{ item.name_fa }}</td>
                     <td><span class="pill pill-gold">{{ item.menu_type==='cafe'?'کافه':'رستوران' }}</span></td>
                     <td class="td-price">{{ fmtPrice(item.price) }}</td>

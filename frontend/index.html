@@ -16,7 +16,7 @@
 
 <!-- ═══ PAGE LOADER ═══ -->
 <div id="loader">
-  <img src="assets/images/logo.png" class="loader-logo" alt="Casablanca" onerror="this.style.display='none'"/>
+  <img src="assets/images/logo.png" class="loader-logo" alt="Casablanca" data-hide="1"/>
   <div class="loader-bar-wrap"><div id="loader-bar"></div></div>
   <p class="loader-txt">Casablanca</p>
 </div>
@@ -27,7 +27,7 @@
 <!-- ═══ NAVBAR ═══ -->
 <nav id="nav">
   <a href="index.html" class="n-logo">
-    <img src="assets/images/logo.png" alt="Casablanca" onerror="this.style.display='none'"/>
+    <img src="assets/images/logo.png" alt="Casablanca" data-hide="1"/>
     <div class="n-logo-text">
       <b>CASABLANCA</b>
       <span>Café &amp; Restaurant</span>
@@ -170,7 +170,7 @@
       <a href="cafe-menu.html" class="mc-card rv-s" id="card-cafe">
         <div class="mc-card-bg">
           <img src="assets/images/cafe-card.jpg"
-               alt="کافه" loading="lazy" onerror="this.onerror=null;this.src='assets/images/placeholder.svg'"/>
+               alt="کافه" loading="lazy" data-fallback="assets/images/placeholder.svg"/>
         </div>
         <div class="mc-ov"></div><div class="mc-shine"></div>
         <div class="mc-body">
@@ -185,7 +185,7 @@
       <a href="restaurant-menu.html" class="mc-card rv-s" id="card-rest" style="--d:.12s">
         <div class="mc-card-bg">
           <img src="assets/images/restaurant-card.jpg"
-               alt="رستوران" loading="lazy" onerror="this.onerror=null;this.src='assets/images/placeholder.svg'"/>
+               alt="رستوران" loading="lazy" data-fallback="assets/images/placeholder.svg"/>
         </div>
         <div class="mc-ov"></div><div class="mc-shine"></div>
         <div class="mc-body">
@@ -221,7 +221,7 @@
     <div class="ft-g">
       <div class="ft-img rv-l">
         <img src="assets/images/ambiance.jpg"
-             alt="فضای کازابلانکا" loading="lazy" onerror="this.onerror=null;this.src='assets/images/placeholder.svg'"/>
+             alt="فضای کازابلانکا" loading="lazy" data-fallback="assets/images/placeholder.svg"/>
         <div class="ft-img-ov"></div>
       </div>
       <div class="rv-r">
@@ -248,7 +248,7 @@
       <!-- Brand -->
       <div>
         <div class="ft-logo">
-          <img src="assets/images/logo.png" alt="Casablanca" onerror="this.style.display='none'"/>
+          <img src="assets/images/logo.png" alt="Casablanca" data-hide="1"/>
           <b>CASABLANCA</b>
         </div>
         <p class="ft-tagline">کافه و رستوران کازابلانکا<br>جایی که هر لحظه، یک تجربه ناب است</p>
