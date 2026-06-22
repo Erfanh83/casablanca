@@ -146,7 +146,10 @@ function setActiveBtn(idx){document.querySelectorAll('.cat-btn').forEach((b,i)=>
 function openModal(item,catName){
   const modal=document.getElementById('modal');
   const seed=(item.name_en||item.name_fa||'food').replace(/\s+/g,'-').toLowerCase();
-  document.getElementById('m-img').src=item.image_url||`https://picsum.photos/seed/${seed}-cb/500/280`;
+  const mImg=document.getElementById('m-img');
+  const mUrl=item.image_url||`https://picsum.photos/seed/${seed}-cb/500/280`;
+  mImg.src=mUrl;
+  mImg.parentElement.style.setProperty('--mimg',`url("${mUrl.replace(/"/g,'%22')}")`);
   document.getElementById('m-cat').innerHTML=`<span class="lbl-dot" style="width:5px;height:5px;border-radius:50%;background:var(--gold);flex-shrink:0"></span>${escHtml(catName||'')}`;
   document.getElementById('m-fa').textContent=item.name_fa||'';
   document.getElementById('m-en').textContent=item.name_en||'';
