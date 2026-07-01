@@ -1,364 +1,755 @@
-﻿<!DOCTYPE html>
+﻿<!doctype html>
 <html lang="fa" dir="rtl">
-<head>
-<meta charset="UTF-8"/>
-<base href="/"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>کازابلانکا | Casablanca — Café &amp; Restaurant</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"/>
-<link rel="dns-prefetch" href="https://cdn.jsdelivr.net"/>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Gulzar&family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="/assets/css/home.css"/>
-</head>
-<body>
-
-<!-- ═══ PAGE LOADER ═══ -->
-<div id="loader">
-  <img src="assets/images/logo.png" class="loader-logo" alt="Casablanca" data-hide="1"/>
-  <div class="loader-bar-wrap"><div id="loader-bar"></div></div>
-  <p class="loader-txt">Casablanca</p>
-</div>
-
-<div id="cd"></div>
-<div id="cr"></div>
-
-<!-- ═══ NAVBAR ═══ -->
-<nav id="nav">
-  <a href="index.html" class="n-logo">
-    <img src="assets/images/logo.png" alt="Casablanca" data-hide="1"/>
-    <div class="n-logo-text">
-      <b>CASABLANCA</b>
-      <span>Café &amp; Restaurant</span>
-    </div>
-  </a>
-  <div class="n-right">
-    <ul class="n-links">
-      <li><a href="#story">داستان ما</a></li>
-      <li><a href="#menu">منو</a></li>
-      <li><a href="#gallery">گالری</a></li>
-      <li><a href="#features">فضا</a></li>
-      <li><a href="cafe-menu.html" class="n-cta">منوی کافه</a></li>
-    </ul>
-    <button class="n-burger" id="nburger" aria-label="باز کردن منو">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</nav>
-
-<!-- ═══ MOBILE MENU ═══ -->
-<div id="mmenu">
-  <div class="mm-marquee"><div class="mm-marquee-track">CASABLANCA&nbsp;&nbsp;·&nbsp;&nbsp;MENU&nbsp;&nbsp;·&nbsp;&nbsp;CASABLANCA&nbsp;&nbsp;·&nbsp;&nbsp;MENU&nbsp;&nbsp;·&nbsp;&nbsp;CASABLANCA&nbsp;&nbsp;·&nbsp;&nbsp;MENU&nbsp;&nbsp;·</div></div>
-  <div class="mm-glow"></div>
-  <div class="mm-glow2"></div>
-  <button class="mm-close" id="mmClose">
-    <span class="mm-close-circle">
-      <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 3l12 12M15 3L3 15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-    </span>
-    <span class="mm-close-label">بستن</span>
-  </button>
-  <nav class="mm-links">
-    <a href="#story" class="mm-link"><span class="mm-num">01</span><span class="mm-en">STORY</span><span class="mm-fa">داستان ما</span></a>
-    <a href="#menu" class="mm-link"><span class="mm-num">02</span><span class="mm-en">MENU</span><span class="mm-fa">منو</span></a>
-    <a href="#gallery" class="mm-link"><span class="mm-num">03</span><span class="mm-en">GALLERY</span><span class="mm-fa">گالری</span></a>
-    <a href="#features" class="mm-link"><span class="mm-num">04</span><span class="mm-en">AMBIANCE</span><span class="mm-fa">فضا</span></a>
-    <div class="mm-divider"></div>
-    <div class="mm-cta-wrap">
-      <a href="cafe-menu.html" class="mm-cta">مشاهده منوی کافه</a>
-    </div>
-  </nav>
-</div>
-
-<!-- ═══ HERO ═══ -->
-<section id="hero">
-  <div class="h-video-wrap">
-    <video id="hero-video" autoplay muted loop playsinline preload="auto"
-      poster="assets/images/hero-poster.jpg">
-      <source src="assets/video/hero.mp4" type="video/mp4"/>
-      <source src="https://assets.mixkit.co/videos/4350/4350-720.mp4" type="video/mp4"/>
-    </video>
-    <div class="h-video-ov"></div>
-  </div>
-  <div class="h-noise"></div>
-  <div class="h-ring h-r1"></div>
-  <div class="h-ring h-r2"></div>
-  <div class="h-ring h-r3"></div>
-  <div class="h-content">
-    <p class="h-label"><span class="lbl-dot"></span>کافه و رستوران</p>
-    <h1 class="h-title" aria-label="CASABLANCA">
-      <span class="h-char">C</span><span class="h-char">A</span><span class="h-char">S</span><span class="h-char">A</span><span class="h-char h-char-g">B</span><span class="h-char h-char-g">L</span><span class="h-char h-char-g">A</span><span class="h-char h-char-g">N</span><span class="h-char h-char-g">C</span><span class="h-char h-char-g">A</span>
-    </h1>
-    <div class="h-line" id="hline"></div>
-    <p class="h-tag">جایی که هر لحظه، یک تجربه ناب است</p>
-    <div class="h-btns">
-      <a href="cafe-menu.html" class="btn-g"><span>منوی کافه</span></a>
-      <a href="restaurant-menu.html" class="btn-o">منوی رستوران</a>
-    </div>
-  </div>
-  <div class="h-scroll" id="hscroll">
-    <div class="h-sline"></div>
-    <span>اسکرول</span>
-  </div>
-</section>
-
-<!-- ═══ MARQUEE ═══ -->
-<div class="mq" aria-hidden="true">
-  <div class="mq-inner">
-    <div class="mq-item">CASABLANCA<span class="mq-dot"></span></div>
-    <div class="mq-item fa">کازابلانکا<span class="mq-dot"></span></div>
-    <div class="mq-item">FINE DINING<span class="mq-dot"></span></div>
-    <div class="mq-item fa">تجربه ناب<span class="mq-dot"></span></div>
-    <div class="mq-item">CAFÉ &amp; RESTAURANT<span class="mq-dot"></span></div>
-    <div class="mq-item fa">طعم اصالت<span class="mq-dot"></span></div>
-    <div class="mq-item">SINCE 1400<span class="mq-dot"></span></div>
-    <div class="mq-item">CASABLANCA<span class="mq-dot"></span></div>
-    <div class="mq-item fa">کازابلانکا<span class="mq-dot"></span></div>
-    <div class="mq-item">FINE DINING<span class="mq-dot"></span></div>
-    <div class="mq-item fa">تجربه ناب<span class="mq-dot"></span></div>
-    <div class="mq-item">CAFÉ &amp; RESTAURANT<span class="mq-dot"></span></div>
-    <div class="mq-item fa">طعم اصالت<span class="mq-dot"></span></div>
-    <div class="mq-item">SINCE 1400<span class="mq-dot"></span></div>
-  </div>
-</div>
-
-<!-- ═══ STORY ═══ -->
-<section id="story" class="sec sec-dark">
-  <div class="inner">
-    <div class="story-g">
-      <div class="rv">
-        <div class="lbl"><span class="lbl-dot"></span>داستان ما</div>
-        <h2 class="s-h reveal-h">فضایی برای<em>لحظه‌های ماندگار</em></h2>
-        <p class="s-p">کازابلانکا با الهام از زیبایی‌های معماری مراکش و اشتیاق به هنر آشپزی، فضایی ساخته که هر گوشه‌اش داستانی دارد. از دسرهای ظریف گرفته تا استیک‌های درجه یک، هر تجربه با دقت و محبت طراحی شده.</p>
-        <p class="s-p">ما باور داریم که یک وعده خوب چیزی بیشتر از غذاست — یک خاطره است.</p>
-        <div class="stats">
-          <div class="stat"><span class="stat-n" data-count="5">۰</span><span class="stat-l">سال تجربه</span></div>
-          <div class="stat"><span class="stat-n" data-count="80">۰</span><span class="stat-l">آیتم منو</span></div>
-          <div class="stat"><span class="stat-n" data-count="10000">۰</span><span class="stat-l">مشتری راضی</span></div>
+    <head>
+        <meta charset="UTF-8" />
+        <base href="/" />
+        <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+        <title>کازابلانکا | Casablanca — Café &amp; Restaurant</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
+        <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Gulzar&family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="/assets/css/home.css" />
+    </head>
+    <body>
+        <!-- ═══ PAGE LOADER ═══ -->
+        <div id="loader">
+            <img
+                src="assets/images/logo.png"
+                class="loader-logo"
+                alt="Casablanca"
+                data-hide="1"
+            />
+            <div class="loader-bar-wrap"><div id="loader-bar"></div></div>
+            <p class="loader-txt">Casablanca</p>
         </div>
-      </div>
-      <div class="s-visual rv-s" id="storyVisual">
-        <video id="storyVideo" autoplay muted loop playsinline preload="auto"
-               poster="assets/images/story-poster.jpg">
-          <source src="assets/video/story.mp4" type="video/mp4"/>
-          <source src="https://assets.mixkit.co/videos/236/236-720.mp4" type="video/mp4"/>
-        </video>
-        <div class="s-visual-ov"></div>
-        <div class="s-visual-vig"></div>
-        <div class="s-visual-grain"></div>
-        <div class="s-steam s-steam-1"></div>
-        <div class="s-steam s-steam-2"></div>
-        <div class="s-steam s-steam-3"></div>
-        <div class="s-frame">
-          <span class="s-corner tl"></span>
-          <span class="s-corner br"></span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- ═══ MENU CHOICE ═══ -->
-<section id="menu" class="sec">
-  <div class="inner">
-    <div style="text-align:center" class="rv">
-      <div class="lbl lbl-c"><span class="lbl-dot"></span>تجربه کامل</div>
-      <h2 class="mc-title">Choose Your Experience</h2>
-      <p class="mc-sub">دو دنیای متفاوت، یک کیفیت بی‌نظیر</p>
-    </div>
-    <div class="mc-cards">
-      <a href="cafe-menu.html" class="mc-card rv-s" id="card-cafe">
-        <div class="mc-card-bg">
-          <img src="assets/images/cafe-card.jpg"
-               alt="کافه" loading="lazy" data-fallback="assets/images/placeholder.svg"/>
-        </div>
-        <div class="mc-ov"></div><div class="mc-shine"></div>
-        <div class="mc-body">
-          <span class="mc-lbl">کافه</span>
-          <h3 class="mc-name">CAFÉ</h3>
-          <p class="mc-desc">قهوه‌های تخصصی · دسرهای فرانسوی · صبحانه</p>
-          <div class="mc-arr">
-            <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2.5 7.5h10M8 3l4.5 4.5L8 12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-        </div>
-      </a>
-      <a href="restaurant-menu.html" class="mc-card rv-s" id="card-rest" style="--d:.12s">
-        <div class="mc-card-bg">
-          <img src="assets/images/restaurant-card.jpg"
-               alt="رستوران" loading="lazy" data-fallback="assets/images/placeholder.svg"/>
-        </div>
-        <div class="mc-ov"></div><div class="mc-shine"></div>
-        <div class="mc-body">
-          <span class="mc-lbl">رستوران</span>
-          <h3 class="mc-name">RESTAURANT</h3>
-          <p class="mc-desc">استیک‌های اعلا · پاستا · غذاهای دریایی</p>
-          <div class="mc-arr">
-            <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2.5 7.5h10M8 3l4.5 4.5L8 12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-        </div>
-      </a>
-    </div>
-  </div>
-</section>
+        <div id="cd"></div>
+        <div id="cr"></div>
 
-<!-- ═══ GALLERY ═══ -->
-<section id="gallery" class="sec sec-dark" style="padding-bottom:56px">
-  <div class="inner rv" style="text-align:center;margin-bottom:40px">
-    <div class="lbl lbl-c"><span class="lbl-dot"></span>گالری</div>
-    <h2 class="gl-title">A Glimpse Inside</h2>
-    <p style="font-size:13px;color:rgba(237,232,224,.35);margin-top:8px;font-family:'Cinzel',serif;letter-spacing:3px;text-transform:uppercase">tap any photo to explore</p>
-  </div>
-</section>
-
-<!-- ═══ GALLERY RAIL (scroll-driven) ═══ -->
-<div class="gal-stage" id="galStage" aria-label="گالری تصاویر">
-  <div class="gal-track" id="galTrack"></div>
-</div>
-
-<!-- ═══ FEATURES ═══ -->
-<section id="features" class="sec">
-  <div class="inner">
-    <div class="ft-g">
-      <div class="ft-img rv-l">
-        <img src="assets/images/ambiance.jpg"
-             alt="فضای کازابلانکا" loading="lazy" data-fallback="assets/images/placeholder.svg"/>
-        <div class="ft-img-ov"></div>
-      </div>
-      <div class="rv-r">
-        <div class="lbl"><span class="lbl-dot"></span>فضای ما</div>
-        <h2 class="ft-h reveal-h">طراحی که<em>احساس می‌شود</em></h2>
-        <p class="ft-p">طراحی داخلی کازابلانکا از دل معماری مراکشی و مدرنیته معاصر برآمده — یک ترکیب که باید دید تا باور کرد. از نورپردازی گرفته تا انتخاب مبلمان، هر جزء با عشق انتخاب شده.</p>
-        <ul class="ft-list">
-          <li><span class="ft-ico">✦</span><span>فضای نشیمن با ظرفیت ۱۲۰ نفر</span></li>
-          <li><span class="ft-ico">✦</span><span>اتاق خصوصی برای مجالس ویژه</span></li>
-          <li><span class="ft-ico">✦</span><span>تراس روباز با چشم‌انداز شهری</span></li>
-          <li><span class="ft-ico">✦</span><span>موزیک زنده در آخر هفته‌ها</span></li>
-          <li><span class="ft-ico">✦</span><span>سرویس کیترینگ و پذیرایی ویژه</span></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ FOOTER ═══ -->
-<footer>
-  <div class="inner">
-    <div class="ft-main">
-
-      <!-- Brand -->
-      <div>
-        <div class="ft-logo">
-          <img src="assets/images/logo.png" alt="Casablanca" data-hide="1"/>
-          <b>CASABLANCA</b>
-        </div>
-        <p class="ft-tagline">کافه و رستوران کازابلانکا<br>جایی که هر لحظه، یک تجربه ناب است</p>
-        <p class="ft-tagline" style="margin-top:14px;font-size:12.5px;color:rgba(237,232,224,.38);line-height:1.85">در کازابلانکا، هر وعده یک خاطره می‌شود<br>و هر مهمان، یک دوست قدیمی.</p>
-      </div>
-
-      <!-- Navigation -->
-      <div>
-        <p class="ft-col-h">Navigation</p>
-        <ul class="ft-nav">
-          <li><a href="cafe-menu.html">منوی کافه</a></li>
-          <li><a href="restaurant-menu.html">منوی رستوران</a></li>
-          <li><a href="#story">داستان ما</a></li>
-          <li><a href="#gallery">گالری</a></li>
-          <li><a href="#features">فضا</a></li>
-        </ul>
-      </div>
-
-      <!-- Contact -->
-      <div>
-        <p class="ft-col-h">Contact</p>
-        <div class="ft-contact">
-
-          <div class="ft-ci">
-            <span class="ft-ci-ico">
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 4.5a1 1 0 011-1h2.382a1 1 0 01.894.553l1.5 3a1 1 0 01-.234 1.118L7.7 9.5c1.189 2.09 2.711 3.611 4.8 4.8l1.33-1.342a1 1 0 011.118-.234l3 1.5A1 1 0 0118.5 15.118V17a1 1 0 01-1 1C8.163 18 2 11.837 2 4.5a1 1 0 011-1h.5z"/></svg>
-            </span>
-            <div class="ft-ci-body">
-              <span class="ft-ci-label">Phone</span>
-              <a href="tel:+988131234567" class="ft-ci-val">۰۸۱۳۱۲۳۴۵۶۷</a>
+        <!-- ═══ NAVBAR ═══ -->
+        <nav id="nav">
+            <a href="index.html" class="n-logo">
+                <img
+                    src="assets/images/logo.png"
+                    alt=""
+                    class="n-logo-mark"
+                    data-hide="1"
+                />
+                <img
+                    src="assets/images/icon-fa.png"
+                    alt="کازابلانکا"
+                    data-hide="1"
+                />
+            </a>
+            <div class="n-right">
+                <ul class="n-links">
+                    <li><a href="#story">داستان ما</a></li>
+                    <li><a href="#menu">منو</a></li>
+                    <li><a href="#gallery">گالری</a></li>
+                    <li><a href="#features">فضا</a></li>
+                    <li>
+                        <a href="cafe-menu.html" class="n-cta">منوی کافه</a>
+                    </li>
+                </ul>
+                <button class="n-burger" id="nburger" aria-label="باز کردن منو">
+                    <span></span><span></span><span></span>
+                </button>
             </div>
-          </div>
+        </nav>
 
-          <div class="ft-ci">
-            <span class="ft-ci-ico">
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 11.5a3 3 0 100-6 3 3 0 000 6z"/><path d="M10 2C6.686 2 4 4.686 4 8c0 4.5 6 10 6 10s6-5.5 6-10c0-3.314-2.686-6-6-6z"/></svg>
-            </span>
-            <div class="ft-ci-body">
-              <span class="ft-ci-label">Address</span>
-              <a href="https://maps.google.com/?q=35.69,51.36" target="_blank" rel="noopener" class="ft-ci-val">
-                همدان، استادان
-                <span style="display:block;font-size:11px;color:rgba(201,168,124,.55);margin-top:2px">مشاهده روی نقشه ↗</span>
-              </a>
+        <!-- ═══ MOBILE MENU ═══ -->
+        <div id="mmenu">
+            <div class="mm-marquee">
+                <div class="mm-marquee-track">
+                    CASABLANCA&nbsp;&nbsp;·&nbsp;&nbsp;MENU&nbsp;&nbsp;·&nbsp;&nbsp;CASABLANCA&nbsp;&nbsp;·&nbsp;&nbsp;MENU&nbsp;&nbsp;·&nbsp;&nbsp;CASABLANCA&nbsp;&nbsp;·&nbsp;&nbsp;MENU&nbsp;&nbsp;·
+                </div>
             </div>
-          </div>
-
-          <div class="ft-ci">
-            <span class="ft-ci-ico">
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="15" cy="4" r="2"/><circle cx="5" cy="10" r="2"/><circle cx="15" cy="16" r="2"/><path d="M7 9l6-4M7 11l6 4"/></svg>
-            </span>
-            <div class="ft-ci-body">
-              <span class="ft-ci-label">Social</span>
-              <div class="ft-socs">
-                <a href="https://instagram.com/lcasablancal" target="_blank" rel="noopener" class="ft-soc" title="Instagram @lcasablancal">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r=".9" fill="currentColor" stroke="none"/></svg>
-                </a>
-                <a href="https://wa.me/989022110021" target="_blank" rel="noopener" class="ft-soc" title="WhatsApp ۰۹۰۲۲۱۱۰۰۲۱">
-                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.556 4.116 1.528 5.843L.057 23.885c-.076.339.232.647.571.571l6.044-1.471A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.817 9.817 0 01-5.004-1.371l-.36-.213-3.737.909.934-3.617-.235-.374A9.818 9.818 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182c5.43 0 9.818 4.388 9.818 9.818 0 5.43-4.388 9.818-9.818 9.818z"/></svg>
-                </a>
-              </div>
-            </div>
-          </div>
-
+            <div class="mm-glow"></div>
+            <div class="mm-glow2"></div>
+            <button class="mm-close" id="mmClose">
+                <span class="mm-close-circle">
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                        <path
+                            d="M3 3l12 12M15 3L3 15"
+                            stroke="currentColor"
+                            stroke-width="1.6"
+                            stroke-linecap="round"
+                        />
+                    </svg>
+                </span>
+                <span class="mm-close-label">بستن</span>
+            </button>
+            <nav class="mm-links">
+                <a href="#story" class="mm-link"
+                    ><span class="mm-num">01</span
+                    ><span class="mm-en">STORY</span
+                    ><span class="mm-fa">داستان ما</span></a
+                >
+                <a href="#menu" class="mm-link"
+                    ><span class="mm-num">02</span
+                    ><span class="mm-en">MENU</span
+                    ><span class="mm-fa">منو</span></a
+                >
+                <a href="#gallery" class="mm-link"
+                    ><span class="mm-num">03</span
+                    ><span class="mm-en">GALLERY</span
+                    ><span class="mm-fa">گالری</span></a
+                >
+                <a href="#features" class="mm-link"
+                    ><span class="mm-num">04</span
+                    ><span class="mm-en">AMBIANCE</span
+                    ><span class="mm-fa">فضا</span></a
+                >
+                <div class="mm-divider"></div>
+                <div class="mm-cta-wrap">
+                    <a href="cafe-menu.html" class="mm-cta">مشاهده منوی کافه</a>
+                </div>
+            </nav>
         </div>
-      </div>
 
-    </div>
-    <div class="ft-bot">
-      <span>© ۱۴۰۵ کازابلانکا — تمام حقوق محفوظ است</span>
-      <span class="ft-tag">Where Every Moment Is An Experience</span>
-    </div>
-    <div class="ft-credit">
-      <div class="ft-credit-divider">
-        <span></span>
-        <svg viewBox="0 0 12 12" fill="rgba(201,168,124,.5)"><path d="M6 0l1.5 4.5L12 6l-4.5 1.5L6 12 4.5 7.5 0 6l4.5-1.5z"/></svg>
-        <span></span>
-      </div>
-      <p class="ft-credit-by">طراحی و توسعه وب</p>
-      <a href="mailto:ehamzei40@gmail.com" class="ft-credit-name">Erfan Hamzei</a>
-    </div>
-  </div>
-</footer>
+        <!-- ═══ HERO ═══ -->
+        <section id="hero">
+            <div class="h-video-wrap">
+                <video
+                    id="hero-video"
+                    autoplay
+                    muted
+                    loop
+                    playsinline
+                    preload="auto"
+                    poster="assets/images/hero-poster.jpg"
+                >
+                    <source src="assets/video/hero.mp4" type="video/mp4" />
+                    <source
+                        src="https://assets.mixkit.co/videos/4350/4350-720.mp4"
+                        type="video/mp4"
+                    />
+                </video>
+                <div class="h-video-ov"></div>
+            </div>
+            <div class="h-noise"></div>
+            <div class="h-ring h-r1"></div>
+            <div class="h-ring h-r2"></div>
+            <div class="h-ring h-r3"></div>
+            <div class="h-content">
+                <p class="h-label">
+                    <span class="lbl-dot"></span>کافه و رستوران
+                </p>
+                <h1 class="h-title" aria-label="CASABLANCA">
+                    <span class="h-char">C</span><span class="h-char">A</span
+                    ><span class="h-char">S</span><span class="h-char">A</span
+                    ><span class="h-char h-char-g">B</span
+                    ><span class="h-char h-char-g">L</span
+                    ><span class="h-char h-char-g">A</span
+                    ><span class="h-char h-char-g">N</span
+                    ><span class="h-char h-char-g">C</span
+                    ><span class="h-char h-char-g">A</span>
+                </h1>
+                <div class="h-line" id="hline"></div>
+                <p class="h-tag">جایی که هر لحظه، یک تجربه ناب است</p>
+                <div class="h-btns">
+                    <a href="cafe-menu.html" class="btn-g"
+                        ><span>منوی کافه</span></a
+                    >
+                    <a href="restaurant-menu.html" class="btn-o"
+                        >منوی رستوران</a
+                    >
+                </div>
+            </div>
+            <div class="h-scroll" id="hscroll">
+                <div class="h-sline"></div>
+                <span>اسکرول</span>
+            </div>
+        </section>
 
-<!-- ═══ LIGHTBOX ═══ -->
-<div class="lb" id="lightbox">
-  <button class="lb-close" id="lbClose" aria-label="بستن">
-    <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 3l12 12M15 3L3 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-  </button>
-  <p class="lb-title">Full Gallery</p>
-  <div class="lb-grid" id="lbGrid"></div>
-</div>
+        <!-- ═══ MARQUEE ═══ -->
+        <div class="mq" aria-hidden="true">
+            <div class="mq-inner">
+                <div class="mq-item">
+                    CASABLANCA<span class="mq-dot"></span>
+                </div>
+                <div class="mq-item fa">
+                    کازابلانکا<span class="mq-dot"></span>
+                </div>
+                <div class="mq-item">
+                    FINE DINING<span class="mq-dot"></span>
+                </div>
+                <div class="mq-item fa">
+                    تجربه ناب<span class="mq-dot"></span>
+                </div>
+                <div class="mq-item">
+                    CAFÉ &amp; RESTAURANT<span class="mq-dot"></span>
+                </div>
+                <div class="mq-item fa">
+                    طعم اصالت<span class="mq-dot"></span>
+                </div>
+                <div class="mq-item">
+                    SINCE 1400<span class="mq-dot"></span>
+                </div>
+                <div class="mq-item">
+                    CASABLANCA<span class="mq-dot"></span>
+                </div>
+                <div class="mq-item fa">
+                    کازابلانکا<span class="mq-dot"></span>
+                </div>
+                <div class="mq-item">
+                    FINE DINING<span class="mq-dot"></span>
+                </div>
+                <div class="mq-item fa">
+                    تجربه ناب<span class="mq-dot"></span>
+                </div>
+                <div class="mq-item">
+                    CAFÉ &amp; RESTAURANT<span class="mq-dot"></span>
+                </div>
+                <div class="mq-item fa">
+                    طعم اصالت<span class="mq-dot"></span>
+                </div>
+                <div class="mq-item">
+                    SINCE 1400<span class="mq-dot"></span>
+                </div>
+            </div>
+        </div>
 
-<!-- ═══ IMAGE VIEWER ═══ -->
-<div class="vw" id="viewer">
-  <button class="vw-close" id="vwClose" aria-label="بستن">
-    <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 3l12 12M15 3L3 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-  </button>
-  <button class="vw-prev" id="vwPrev" aria-label="قبلی">
-    <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M11 4l-6 5 6 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-  </button>
-  <button class="vw-next" id="vwNext" aria-label="بعدی">
-    <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M7 4l6 5-6 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-  </button>
-  <div class="vw-img-wrap" id="vwImgWrap"><img id="vwImg" src="" alt=""/></div>
-  <div class="vw-counter" id="vwCounter"></div>
-</div>
+        <!-- ═══ STORY ═══ -->
+        <section id="story" class="sec sec-dark">
+            <div class="inner">
+                <div class="story-g">
+                    <div class="rv">
+                        <div class="lbl">
+                            <span class="lbl-dot"></span>داستان ما
+                        </div>
+                        <h2 class="s-h reveal-h">
+                            فضایی برای<em>لحظه‌های ماندگار</em>
+                        </h2>
+                        <p class="s-p">
+                            کازابلانکا با الهام از زیبایی‌های معماری مراکش و
+                            اشتیاق به هنر آشپزی، فضایی ساخته که هر گوشه‌اش
+                            داستانی دارد. از دسرهای ظریف گرفته تا استیک‌های درجه
+                            یک، هر تجربه با دقت و محبت طراحی شده.
+                        </p>
+                        <p class="s-p">
+                            ما باور داریم که یک وعده خوب چیزی بیشتر از غذاست —
+                            یک خاطره است.
+                        </p>
+                        <div class="stats">
+                            <div class="stat">
+                                <span class="stat-n" data-count="5">۰</span
+                                ><span class="stat-l">سال تجربه</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-n" data-count="80">۰</span
+                                ><span class="stat-l">آیتم منو</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-n" data-count="10000">۰</span
+                                ><span class="stat-l">مشتری راضی</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="s-visual rv-s" id="storyVisual">
+                        <video
+                            id="storyVideo"
+                            autoplay
+                            muted
+                            loop
+                            playsinline
+                            preload="auto"
+                            poster="assets/images/story-poster.jpg"
+                        >
+                            <source
+                                src="assets/video/story.mp4"
+                                type="video/mp4"
+                            />
+                            <source
+                                src="assets/video/replace.mp4"
+                                type="video/mp4"
+                            />
+                        </video>
+                        <div class="s-visual-ov"></div>
+                        <div class="s-visual-vig"></div>
+                        <div class="s-visual-grain"></div>
+                        <div class="s-steam s-steam-1"></div>
+                        <div class="s-steam s-steam-2"></div>
+                        <div class="s-steam s-steam-3"></div>
+                        <div class="s-frame">
+                            <span class="s-corner tl"></span>
+                            <span class="s-corner br"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js" defer></script>
-<script src="/assets/js/home.js" defer></script>
-</body>
+        <!-- ═══ MENU CHOICE ═══ -->
+        <section id="menu" class="sec">
+            <div class="inner">
+                <div style="text-align: center" class="rv">
+                    <div class="lbl lbl-c">
+                        <span class="lbl-dot"></span>تجربه کامل
+                    </div>
+                    <h2 class="mc-title">Choose Your Experience</h2>
+                    <p class="mc-sub">دو دنیای متفاوت، یک کیفیت بی‌نظیر</p>
+                </div>
+                <div class="mc-cards">
+                    <a
+                        href="cafe-menu.html"
+                        class="mc-card rv-s"
+                        id="card-cafe"
+                    >
+                        <div class="mc-card-bg">
+                            <img
+                                src="assets/images/cafe-card.jpg"
+                                alt="کافه"
+                                loading="lazy"
+                                data-fallback="assets/images/placeholder.svg"
+                            />
+                        </div>
+                        <div class="mc-ov"></div>
+                        <div class="mc-shine"></div>
+                        <div class="mc-body">
+                            <span class="mc-lbl">کافه</span>
+                            <h3 class="mc-name">CAFÉ</h3>
+                            <p class="mc-desc">
+                                قهوه‌های تخصصی · دسرهای فرانسوی · صبحانه
+                            </p>
+                            <div class="mc-arr">
+                                <svg
+                                    width="15"
+                                    height="15"
+                                    viewBox="0 0 15 15"
+                                    fill="none"
+                                >
+                                    <path
+                                        d="M2.5 7.5h10M8 3l4.5 4.5L8 12"
+                                        stroke="currentColor"
+                                        stroke-width="1.4"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    />
+                                </svg>
+                            </div>
+                        </div>
+                    </a>
+                    <a
+                        href="restaurant-menu.html"
+                        class="mc-card rv-s"
+                        id="card-rest"
+                        style="--d: 0.12s"
+                    >
+                        <div class="mc-card-bg">
+                            <img
+                                src="assets/images/restaurant-card.jpg"
+                                alt="رستوران"
+                                loading="lazy"
+                                data-fallback="assets/images/placeholder.svg"
+                            />
+                        </div>
+                        <div class="mc-ov"></div>
+                        <div class="mc-shine"></div>
+                        <div class="mc-body">
+                            <span class="mc-lbl">رستوران</span>
+                            <h3 class="mc-name">RESTAURANT</h3>
+                            <p class="mc-desc">
+                                استیک‌های اعلا · پاستا · غذاهای دریایی
+                            </p>
+                            <div class="mc-arr">
+                                <svg
+                                    width="15"
+                                    height="15"
+                                    viewBox="0 0 15 15"
+                                    fill="none"
+                                >
+                                    <path
+                                        d="M2.5 7.5h10M8 3l4.5 4.5L8 12"
+                                        stroke="currentColor"
+                                        stroke-width="1.4"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    />
+                                </svg>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ GALLERY ═══ -->
+        <section id="gallery" class="sec sec-dark" style="padding-bottom: 56px">
+            <div
+                class="inner rv"
+                style="text-align: center; margin-bottom: 40px"
+            >
+                <div class="lbl lbl-c"><span class="lbl-dot"></span>گالری</div>
+                <h2 class="gl-title">A Glimpse Inside</h2>
+                <p
+                    style="
+                        font-size: 13px;
+                        color: rgba(237, 232, 224, 0.35);
+                        margin-top: 8px;
+                        font-family: &quot;Cinzel&quot;, serif;
+                        letter-spacing: 3px;
+                        text-transform: uppercase;
+                    "
+                >
+                    tap any photo to explore
+                </p>
+            </div>
+        </section>
+
+        <!-- ═══ GALLERY RAIL (scroll-driven) ═══ -->
+        <div class="gal-stage" id="galStage" aria-label="گالری تصاویر">
+            <div class="gal-track" id="galTrack"></div>
+        </div>
+
+        <!-- ═══ FEATURES ═══ -->
+        <section id="features" class="sec">
+            <div class="inner">
+                <div class="ft-g">
+                    <div class="ft-img rv-l">
+                        <img
+                            src="assets/images/ambiance.jpg"
+                            alt="فضای کازابلانکا"
+                            loading="lazy"
+                            data-fallback="assets/images/placeholder.svg"
+                        />
+                        <div class="ft-img-ov"></div>
+                    </div>
+                    <div class="rv-r">
+                        <div class="lbl">
+                            <span class="lbl-dot"></span>فضای ما
+                        </div>
+                        <h2 class="ft-h reveal-h">
+                            طراحی که<em>احساس می‌شود</em>
+                        </h2>
+                        <p class="ft-p">
+                            طراحی داخلی کازابلانکا از دل معماری مراکشی و مدرنیته
+                            معاصر برآمده — یک ترکیب که باید دید تا باور کرد. از
+                            نورپردازی گرفته تا انتخاب مبلمان، هر جزء با عشق
+                            انتخاب شده.
+                        </p>
+                        <ul class="ft-list">
+                            <li>
+                                <span class="ft-ico">✦</span
+                                ><span>فضای نشیمن با ظرفیت ۱۲۰ نفر</span>
+                            </li>
+                            <li>
+                                <span class="ft-ico">✦</span
+                                ><span>اتاق خصوصی برای مجالس ویژه</span>
+                            </li>
+                            <li>
+                                <span class="ft-ico">✦</span
+                                ><span>تراس روباز با چشم‌انداز شهری</span>
+                            </li>
+                            <li>
+                                <span class="ft-ico">✦</span
+                                ><span>موزیک زنده در آخر هفته‌ها</span>
+                            </li>
+                            <li>
+                                <span class="ft-ico">✦</span
+                                ><span>سرویس کیترینگ و پذیرایی ویژه</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ FOOTER ═══ -->
+        <footer>
+            <div class="inner">
+                <div class="ft-main">
+                    <!-- Brand -->
+                    <div>
+                        <div class="ft-logo">
+                            <img
+                                src="assets/images/icon-en.png"
+                                alt="Casablanca"
+                                data-hide="1"
+                            />
+                        </div>
+                        <p class="ft-tagline">
+                            کافه و رستوران کازابلانکا<br />جایی که هر لحظه، یک
+                            تجربه ناب است
+                        </p>
+                        <p
+                            class="ft-tagline"
+                            style="
+                                margin-top: 14px;
+                                font-size: 12.5px;
+                                color: rgba(237, 232, 224, 0.38);
+                                line-height: 1.85;
+                            "
+                        >
+                            در کازابلانکا، هر وعده یک خاطره می‌شود<br />و هر
+                            مهمان، یک دوست قدیمی.
+                        </p>
+                    </div>
+
+                    <!-- Navigation -->
+                    <div>
+                        <p class="ft-col-h">Navigation</p>
+                        <ul class="ft-nav">
+                            <li><a href="cafe-menu.html">منوی کافه</a></li>
+                            <li>
+                                <a href="restaurant-menu.html">منوی رستوران</a>
+                            </li>
+                            <li><a href="#story">داستان ما</a></li>
+                            <li><a href="#gallery">گالری</a></li>
+                            <li><a href="#features">فضا</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Contact -->
+                    <div>
+                        <p class="ft-col-h">Contact</p>
+                        <div class="ft-contact">
+                            <div class="ft-ci">
+                                <span class="ft-ci-ico">
+                                    <svg
+                                        viewBox="0 0 20 20"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="1.5"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    >
+                                        <path
+                                            d="M3.5 4.5a1 1 0 011-1h2.382a1 1 0 01.894.553l1.5 3a1 1 0 01-.234 1.118L7.7 9.5c1.189 2.09 2.711 3.611 4.8 4.8l1.33-1.342a1 1 0 011.118-.234l3 1.5A1 1 0 0118.5 15.118V17a1 1 0 01-1 1C8.163 18 2 11.837 2 4.5a1 1 0 011-1h.5z"
+                                        />
+                                    </svg>
+                                </span>
+                                <div class="ft-ci-body">
+                                    <span class="ft-ci-label">Phone</span>
+                                    <a
+                                        href="tel:+988131234567"
+                                        class="ft-ci-val"
+                                        >۰۸۱۳۱۲۳۴۵۶۷</a
+                                    >
+                                </div>
+                            </div>
+
+                            <div class="ft-ci">
+                                <span class="ft-ci-ico">
+                                    <svg
+                                        viewBox="0 0 20 20"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="1.5"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    >
+                                        <path
+                                            d="M10 11.5a3 3 0 100-6 3 3 0 000 6z"
+                                        />
+                                        <path
+                                            d="M10 2C6.686 2 4 4.686 4 8c0 4.5 6 10 6 10s6-5.5 6-10c0-3.314-2.686-6-6-6z"
+                                        />
+                                    </svg>
+                                </span>
+                                <div class="ft-ci-body">
+                                    <span class="ft-ci-label">Address</span>
+                                    <a
+                                        href="https://maps.google.com/?q=35.69,51.36"
+                                        target="_blank"
+                                        rel="noopener"
+                                        class="ft-ci-val"
+                                    >
+                                        همدان، استادان
+                                        <span
+                                            style="
+                                                display: block;
+                                                font-size: 11px;
+                                                color: rgba(
+                                                    201,
+                                                    168,
+                                                    124,
+                                                    0.55
+                                                );
+                                                margin-top: 2px;
+                                            "
+                                            >مشاهده روی نقشه ↗</span
+                                        >
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="ft-ci">
+                                <span class="ft-ci-ico">
+                                    <svg
+                                        viewBox="0 0 20 20"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="1.5"
+                                        stroke-linecap="round"
+                                    >
+                                        <circle cx="15" cy="4" r="2" />
+                                        <circle cx="5" cy="10" r="2" />
+                                        <circle cx="15" cy="16" r="2" />
+                                        <path d="M7 9l6-4M7 11l6 4" />
+                                    </svg>
+                                </span>
+                                <div class="ft-ci-body">
+                                    <span class="ft-ci-label">Social</span>
+                                    <div class="ft-socs">
+                                        <a
+                                            href="https://instagram.com/lcasablancal"
+                                            target="_blank"
+                                            rel="noopener"
+                                            class="ft-soc"
+                                            title="Instagram @lcasablancal"
+                                        >
+                                            <svg
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="1.6"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                            >
+                                                <rect
+                                                    x="2"
+                                                    y="2"
+                                                    width="20"
+                                                    height="20"
+                                                    rx="5"
+                                                />
+                                                <circle
+                                                    cx="12"
+                                                    cy="12"
+                                                    r="4.5"
+                                                />
+                                                <circle
+                                                    cx="17.5"
+                                                    cy="6.5"
+                                                    r=".9"
+                                                    fill="currentColor"
+                                                    stroke="none"
+                                                />
+                                            </svg>
+                                        </a>
+                                        <a
+                                            href="https://wa.me/989022110021"
+                                            target="_blank"
+                                            rel="noopener"
+                                            class="ft-soc"
+                                            title="WhatsApp ۰۹۰۲۲۱۱۰۰۲۱"
+                                        >
+                                            <svg
+                                                viewBox="0 0 24 24"
+                                                fill="currentColor"
+                                            >
+                                                <path
+                                                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"
+                                                />
+                                                <path
+                                                    d="M12 0C5.373 0 0 5.373 0 12c0 2.123.556 4.116 1.528 5.843L.057 23.885c-.076.339.232.647.571.571l6.044-1.471A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.817 9.817 0 01-5.004-1.371l-.36-.213-3.737.909.934-3.617-.235-.374A9.818 9.818 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182c5.43 0 9.818 4.388 9.818 9.818 0 5.43-4.388 9.818-9.818 9.818z"
+                                                />
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ft-bot">
+                    <span>© ۱۴۰۵ کازابلانکا — تمام حقوق محفوظ است</span>
+                    <span class="ft-tag"
+                        >Where Every Moment Is An Experience</span
+                    >
+                </div>
+                <div class="ft-credit">
+                    <div class="ft-credit-divider">
+                        <span></span>
+                        <svg viewBox="0 0 12 12" fill="rgba(201,168,124,.5)">
+                            <path
+                                d="M6 0l1.5 4.5L12 6l-4.5 1.5L6 12 4.5 7.5 0 6l4.5-1.5z"
+                            />
+                        </svg>
+                        <span></span>
+                    </div>
+                    <p class="ft-credit-by">طراحی و توسعه وب</p>
+                    <a href="mailto:ehamzei40@gmail.com" class="ft-credit-name"
+                        >Erfan Hamzei</a
+                    >
+                </div>
+            </div>
+        </footer>
+
+        <!-- ═══ LIGHTBOX ═══ -->
+        <div class="lb" id="lightbox">
+            <button class="lb-close" id="lbClose" aria-label="بستن">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                    <path
+                        d="M3 3l12 12M15 3L3 15"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                    />
+                </svg>
+            </button>
+            <p class="lb-title">Full Gallery</p>
+            <div class="lb-grid" id="lbGrid"></div>
+        </div>
+
+        <!-- ═══ IMAGE VIEWER ═══ -->
+        <div class="vw" id="viewer">
+            <button class="vw-close" id="vwClose" aria-label="بستن">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                    <path
+                        d="M3 3l12 12M15 3L3 15"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                    />
+                </svg>
+            </button>
+            <button class="vw-prev" id="vwPrev" aria-label="قبلی">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                    <path
+                        d="M11 4l-6 5 6 5"
+                        stroke="currentColor"
+                        stroke-width="1.6"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+                </svg>
+            </button>
+            <button class="vw-next" id="vwNext" aria-label="بعدی">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                    <path
+                        d="M7 4l6 5-6 5"
+                        stroke="currentColor"
+                        stroke-width="1.6"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+                </svg>
+            </button>
+            <div class="vw-img-wrap" id="vwImgWrap">
+                <img id="vwImg" src="" alt="" />
+            </div>
+            <div class="vw-counter" id="vwCounter"></div>
+        </div>
+
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+            defer
+        ></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
+            defer
+        ></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"
+            defer
+        ></script>
+        <script src="/assets/js/home.js" defer></script>
+    </body>
 </html>

@@ -1,104 +1,454 @@
-﻿<!DOCTYPE html>
+﻿<!doctype html>
 <html lang="fa" dir="rtl">
-<head>
-<meta charset="UTF-8"/>
-<base href="/"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>قهوه‌های تخصصی · دسرهای فرانسوی · صبحانه | کازابلانکا</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"/>
-<link rel="dns-prefetch" href="https://cdn.jsdelivr.net"/>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="/assets/css/menu.css?v=6"/>
-</head>
-<body>
-<div id="cd"></div><div id="cr"></div>
+    <head>
+        <meta charset="UTF-8" />
+        <base href="/" />
+        <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+        <title>قهوه‌های تخصصی · دسرهای فرانسوی · صبحانه | کازابلانکا</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
+        <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Vazirmatn:wght@300;400;500;600;700;800&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="/assets/css/menu.css?v=6" />
+    </head>
+    <body>
+        <div id="cd"></div>
+        <div id="cr"></div>
 
-<nav id="nav">
-  <a href="index.html" class="n-logo">
-    <img src="assets/images/logo.png" alt="Casablanca" data-hide="1"/>
-    <div class="n-logo-text"><b>CASABLANCA</b><span>Café &amp; Restaurant</span></div>
-  </a>
-  <div class="n-right">
-    <ul class="n-links">
-      <li><a href="index.html">صفحه اصلی</a></li>
-      <li><a href="cafe-menu.html" class="active">کافه</a></li>
-      <li><a href="restaurant-menu.html">رستوران</a></li>
-    </ul>
-    <button class="n-burger" id="nburger" aria-label="منو"><span></span><span></span><span></span></button>
-  </div>
-</nav>
+        <nav id="nav">
+            <a href="index.html" class="n-logo">
+                <img
+                    src="assets/images/logo.png"
+                    alt=""
+                    class="n-logo-mark"
+                    data-hide="1"
+                />
+                <img
+                    src="assets/images/icon-fa.png"
+                    alt="کازابلانکا"
+                    data-hide="1"
+                />
+            </a>
+            <div class="n-right">
+                <ul class="n-links">
+                    <li><a href="index.html">صفحه اصلی</a></li>
+                    <li><a href="cafe-menu.html" class="active">کافه</a></li>
+                    <li><a href="restaurant-menu.html">رستوران</a></li>
+                </ul>
+                <button class="n-burger" id="nburger" aria-label="منو">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </nav>
 
-<div id="mmenu">
-  <div class="mm-marquee"><div class="mm-marquee-track">CASABLANCA&nbsp;&nbsp;·&nbsp;&nbsp;MENU&nbsp;&nbsp;·&nbsp;&nbsp;CASABLANCA&nbsp;&nbsp;·&nbsp;&nbsp;MENU&nbsp;&nbsp;·&nbsp;&nbsp;CASABLANCA&nbsp;&nbsp;·&nbsp;&nbsp;MENU&nbsp;&nbsp;·</div></div>
-  <div class="mm-glow"></div><div class="mm-glow2"></div>
-  <button class="mm-close" id="mmClose">
-    <span class="mm-close-circle"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 3l12 12M15 3L3 15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
-    <span class="mm-close-label">بستن</span>
-  </button>
-  <nav class="mm-links">
-    <a href="index.html" class="mm-link"><span class="mm-num">01</span><span class="mm-en">HOME</span><span class="mm-fa">صفحه اصلی</span></a>
-    <a href="cafe-menu.html" class="mm-link"><span class="mm-num">02</span><span class="mm-en">CAFÉ</span><span class="mm-fa">منوی کافه</span></a>
-    <a href="restaurant-menu.html" class="mm-link"><span class="mm-num">03</span><span class="mm-en">RESTAURANT</span><span class="mm-fa">منوی رستوران</span></a>
-    <div class="mm-divider"></div>
-    <div class="mm-cta-wrap"><a href="index.html" class="mm-cta">صفحه اصلی</a></div>
-  </nav>
-</div>
+        <div id="mmenu">
+            <div class="mm-marquee">
+                <div class="mm-marquee-track">
+                    CASABLANCA&nbsp;&nbsp;·&nbsp;&nbsp;MENU&nbsp;&nbsp;·&nbsp;&nbsp;CASABLANCA&nbsp;&nbsp;·&nbsp;&nbsp;MENU&nbsp;&nbsp;·&nbsp;&nbsp;CASABLANCA&nbsp;&nbsp;·&nbsp;&nbsp;MENU&nbsp;&nbsp;·
+                </div>
+            </div>
+            <div class="mm-glow"></div>
+            <div class="mm-glow2"></div>
+            <button class="mm-close" id="mmClose">
+                <span class="mm-close-circle"
+                    ><svg
+                        width="18"
+                        height="18"
+                        viewBox="0 0 18 18"
+                        fill="none"
+                    >
+                        <path
+                            d="M3 3l12 12M15 3L3 15"
+                            stroke="currentColor"
+                            stroke-width="1.6"
+                            stroke-linecap="round"
+                        /></svg
+                ></span>
+                <span class="mm-close-label">بستن</span>
+            </button>
+            <nav class="mm-links">
+                <a href="index.html" class="mm-link"
+                    ><span class="mm-num">01</span
+                    ><span class="mm-en">HOME</span
+                    ><span class="mm-fa">صفحه اصلی</span></a
+                >
+                <a href="cafe-menu.html" class="mm-link"
+                    ><span class="mm-num">02</span
+                    ><span class="mm-en">CAFÉ</span
+                    ><span class="mm-fa">منوی کافه</span></a
+                >
+                <a href="restaurant-menu.html" class="mm-link"
+                    ><span class="mm-num">03</span
+                    ><span class="mm-en">RESTAURANT</span
+                    ><span class="mm-fa">منوی رستوران</span></a
+                >
+                <div class="mm-divider"></div>
+                <div class="mm-cta-wrap">
+                    <a href="index.html" class="mm-cta">صفحه اصلی</a>
+                </div>
+            </nav>
+        </div>
 
-<header class="menu-hero">
-  <div class="mh-bg">
-    <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1600&q=80&auto=format&fit=crop" alt="" loading="eager" data-fallback="https://picsum.photos/seed/cafe-hero/1600/900"/>
-  </div>
-  <div class="mh-ov"></div>
-  <div class="mh-content">
-    <span class="mh-lbl"><span class="lbl-dot" style="width:5px;height:5px;border-radius:50%;background:var(--gold);flex-shrink:0"></span>کازابلانکا</span>
-    <h1 class="mh-title">CAFÉ MENU</h1>
-    <p class="mh-sub">قهوه‌های تخصصی · دسرهای فرانسوی · صبحانه</p>
-  </div>
-</header>
+        <header class="menu-hero">
+            <div class="mh-bg">
+                <img
+                    src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1600&q=80&auto=format&fit=crop"
+                    alt=""
+                    loading="eager"
+                    data-fallback="https://picsum.photos/seed/cafe-hero/1600/900"
+                />
+            </div>
+            <div class="mh-ov"></div>
+            <div class="mh-content">
+                <span class="mh-lbl"
+                    ><span
+                        class="lbl-dot"
+                        style="
+                            width: 5px;
+                            height: 5px;
+                            border-radius: 50%;
+                            background: var(--gold);
+                            flex-shrink: 0;
+                        "
+                    ></span
+                    >کازابلانکا</span
+                >
+                <h1 class="mh-title">CAFÉ MENU</h1>
+                <p class="mh-sub">قهوه‌های تخصصی · دسرهای فرانسوی · صبحانه</p>
+            </div>
+        </header>
 
-<div class="cat-nav">
-  <button class="cat-arrow cat-arrow-next" id="catNext" type="button" aria-label="دسته‌های بعدی"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
-  <div class="cat-nav-inner" id="cat-nav-inner"></div>
-  <button class="cat-arrow cat-arrow-prev" id="catPrev" type="button" aria-label="دسته‌های قبلی"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
-</div>
+        <div class="cat-nav">
+            <button
+                class="cat-arrow cat-arrow-next"
+                id="catNext"
+                type="button"
+                aria-label="دسته‌های بعدی"
+            >
+                <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" /></svg>
+            </button>
+            <div class="cat-nav-inner" id="cat-nav-inner"></div>
+            <button
+                class="cat-arrow cat-arrow-prev"
+                id="catPrev"
+                type="button"
+                aria-label="دسته‌های قبلی"
+            >
+                <svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" /></svg>
+            </button>
+        </div>
 
-<div class="search-wrap">
-  <div class="search-box">
-    <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><circle cx="6" cy="6" r="4.5" stroke="currentColor" stroke-width="1.4"/><path d="M10 10l3.5 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-    <input type="search" id="search-inp" placeholder="جستجوی آیتم..."/>
-    <button class="search-clear" id="search-clear">✕</button>
-  </div>
-</div>
+        <div class="search-wrap">
+            <div class="search-box">
+                <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+                    <circle
+                        cx="6"
+                        cy="6"
+                        r="4.5"
+                        stroke="currentColor"
+                        stroke-width="1.4"
+                    />
+                    <path
+                        d="M10 10l3.5 3.5"
+                        stroke="currentColor"
+                        stroke-width="1.4"
+                        stroke-linecap="round"
+                    />
+                </svg>
+                <input
+                    type="search"
+                    id="search-inp"
+                    placeholder="جستجوی آیتم..."
+                />
+                <button class="search-clear" id="search-clear">✕</button>
+            </div>
+        </div>
 
-<main id="main-content">
-  <div class="loading" id="loading"><div class="spinner"></div><span>در حال بارگذاری منو...</span></div>
-  <div id="cats-wrap" style="display:none"></div>
-</main>
+        <main id="main-content">
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <span>در حال بارگذاری منو...</span>
+            </div>
+            <div id="cats-wrap" style="display: none"></div>
+        </main>
 
-<div class="modal" id="modal" aria-hidden="true">
-  <div class="modal-ov" id="modal-ov"></div>
-  <div class="modal-box">
-    <button class="modal-close" id="modal-close"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
-    <div class="modal-img"><img id="m-img" src="" alt=""/></div>
-    <div class="modal-body">
-      <span class="modal-cat" id="m-cat"></span>
-      <h2 class="modal-fa" id="m-fa"></h2>
-      <p class="modal-en" id="m-en"></p>
-      <p class="modal-desc" id="m-desc"></p>
-      <div class="modal-foot"><span class="modal-price" id="m-price"></span><div class="modal-badges" id="m-badges"></div></div>
-    </div>
-  </div>
-</div>
+        <!-- ═══ FOOTER ═══ -->
+        <footer>
+            <div class="inner">
+                <div class="ft-main">
+                    <!-- Brand -->
+                    <div>
+                        <div class="ft-logo">
+                            <img
+                                src="assets/images/icon-en.png"
+                                alt="Casablanca"
+                                data-hide="1"
+                            />
+                        </div>
+                        <p class="ft-tagline">
+                            کافه و رستوران کازابلانکا<br />جایی که هر لحظه، یک
+                            تجربه ناب است
+                        </p>
+                        <p
+                            class="ft-tagline"
+                            style="
+                                margin-top: 14px;
+                                font-size: 12.5px;
+                                color: rgba(237, 232, 224, 0.38);
+                                line-height: 1.85;
+                            "
+                        >
+                            در کازابلانکا، هر وعده یک خاطره می‌شود<br />و هر
+                            مهمان، یک دوست قدیمی.
+                        </p>
+                    </div>
 
-<button id="btt" aria-label="بازگشت به بالا">
-  <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 11V3M2.5 6.5L7 2l4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-</button>
+                    <!-- Navigation -->
+                    <div>
+                        <p class="ft-col-h">Navigation</p>
+                        <ul class="ft-nav">
+                            <li><a href="cafe-menu.html">منوی کافه</a></li>
+                            <li>
+                                <a href="restaurant-menu.html">منوی رستوران</a>
+                            </li>
+                            <li><a href="index.html#story">داستان ما</a></li>
+                            <li><a href="index.html#gallery">گالری</a></li>
+                            <li><a href="index.html#features">فضا</a></li>
+                        </ul>
+                    </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js" defer></script>
-<script src="/assets/js/cafe-menu.js?v=3" defer></script>
-</body>
+                    <!-- Contact -->
+                    <div>
+                        <p class="ft-col-h">Contact</p>
+                        <div class="ft-contact">
+                            <div class="ft-ci">
+                                <span class="ft-ci-ico">
+                                    <svg
+                                        viewBox="0 0 20 20"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="1.5"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    >
+                                        <path
+                                            d="M3.5 4.5a1 1 0 011-1h2.382a1 1 0 01.894.553l1.5 3a1 1 0 01-.234 1.118L7.7 9.5c1.189 2.09 2.711 3.611 4.8 4.8l1.33-1.342a1 1 0 011.118-.234l3 1.5A1 1 0 0118.5 15.118V17a1 1 0 01-1 1C8.163 18 2 11.837 2 4.5a1 1 0 011-1h.5z"
+                                        />
+                                    </svg>
+                                </span>
+                                <div class="ft-ci-body">
+                                    <span class="ft-ci-label">Phone</span>
+                                    <a
+                                        href="tel:+988131234567"
+                                        class="ft-ci-val"
+                                        >۰۸۱۳۱۲۳۴۵۶۷</a
+                                    >
+                                </div>
+                            </div>
+
+                            <div class="ft-ci">
+                                <span class="ft-ci-ico">
+                                    <svg
+                                        viewBox="0 0 20 20"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="1.5"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    >
+                                        <path
+                                            d="M10 11.5a3 3 0 100-6 3 3 0 000 6z"
+                                        />
+                                        <path
+                                            d="M10 2C6.686 2 4 4.686 4 8c0 4.5 6 10 6 10s6-5.5 6-10c0-3.314-2.686-6-6-6z"
+                                        />
+                                    </svg>
+                                </span>
+                                <div class="ft-ci-body">
+                                    <span class="ft-ci-label">Address</span>
+                                    <a
+                                        href="https://maps.google.com/?q=35.69,51.36"
+                                        target="_blank"
+                                        rel="noopener"
+                                        class="ft-ci-val"
+                                    >
+                                        همدان، استادان
+                                        <span
+                                            style="
+                                                display: block;
+                                                font-size: 11px;
+                                                color: rgba(
+                                                    201,
+                                                    168,
+                                                    124,
+                                                    0.55
+                                                );
+                                                margin-top: 2px;
+                                            "
+                                            >مشاهده روی نقشه ↗</span
+                                        >
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="ft-ci">
+                                <span class="ft-ci-ico">
+                                    <svg
+                                        viewBox="0 0 20 20"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="1.5"
+                                        stroke-linecap="round"
+                                    >
+                                        <circle cx="15" cy="4" r="2" />
+                                        <circle cx="5" cy="10" r="2" />
+                                        <circle cx="15" cy="16" r="2" />
+                                        <path d="M7 9l6-4M7 11l6 4" />
+                                    </svg>
+                                </span>
+                                <div class="ft-ci-body">
+                                    <span class="ft-ci-label">Social</span>
+                                    <div class="ft-socs">
+                                        <a
+                                            href="https://instagram.com/lcasablancal"
+                                            target="_blank"
+                                            rel="noopener"
+                                            class="ft-soc"
+                                            title="Instagram @lcasablancal"
+                                        >
+                                            <svg
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="1.6"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                            >
+                                                <rect
+                                                    x="2"
+                                                    y="2"
+                                                    width="20"
+                                                    height="20"
+                                                    rx="5"
+                                                />
+                                                <circle
+                                                    cx="12"
+                                                    cy="12"
+                                                    r="4.5"
+                                                />
+                                                <circle
+                                                    cx="17.5"
+                                                    cy="6.5"
+                                                    r=".9"
+                                                    fill="currentColor"
+                                                    stroke="none"
+                                                />
+                                            </svg>
+                                        </a>
+                                        <a
+                                            href="https://wa.me/989022110021"
+                                            target="_blank"
+                                            rel="noopener"
+                                            class="ft-soc"
+                                            title="WhatsApp ۰۹۰۲۲۱۱۰۰۲۱"
+                                        >
+                                            <svg
+                                                viewBox="0 0 24 24"
+                                                fill="currentColor"
+                                            >
+                                                <path
+                                                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"
+                                                />
+                                                <path
+                                                    d="M12 0C5.373 0 0 5.373 0 12c0 2.123.556 4.116 1.528 5.843L.057 23.885c-.076.339.232.647.571.571l6.044-1.471A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.817 9.817 0 01-5.004-1.371l-.36-.213-3.737.909.934-3.617-.235-.374A9.818 9.818 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182c5.43 0 9.818 4.388 9.818 9.818 0 5.43-4.388 9.818-9.818 9.818z"
+                                                />
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ft-bot">
+                    <span>© ۱۴۰۵ کازابلانکا — تمام حقوق محفوظ است</span>
+                    <span class="ft-tag"
+                        >Where Every Moment Is An Experience</span
+                    >
+                </div>
+                <div class="ft-credit">
+                    <div class="ft-credit-divider">
+                        <span></span>
+                        <svg viewBox="0 0 12 12" fill="rgba(201,168,124,.5)">
+                            <path
+                                d="M6 0l1.5 4.5L12 6l-4.5 1.5L6 12 4.5 7.5 0 6l4.5-1.5z"
+                            />
+                        </svg>
+                        <span></span>
+                    </div>
+                    <p class="ft-credit-by">طراحی و توسعه وب</p>
+                    <a href="mailto:ehamzei40@gmail.com" class="ft-credit-name"
+                        >Erfan Hamzei</a
+                    >
+                </div>
+            </div>
+        </footer>
+
+        <div class="modal" id="modal" aria-hidden="true">
+            <div class="modal-ov" id="modal-ov"></div>
+            <div class="modal-box">
+                <button class="modal-close" id="modal-close">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                        <path
+                            d="M2 2l10 10M12 2L2 12"
+                            stroke="currentColor"
+                            stroke-width="1.5"
+                            stroke-linecap="round"
+                        />
+                    </svg>
+                </button>
+                <div class="modal-img"><img id="m-img" src="" alt="" /></div>
+                <div class="modal-body">
+                    <span class="modal-cat" id="m-cat"></span>
+                    <h2 class="modal-fa" id="m-fa"></h2>
+                    <p class="modal-en" id="m-en"></p>
+                    <p class="modal-desc" id="m-desc"></p>
+                    <div class="modal-foot">
+                        <span class="modal-price" id="m-price"></span>
+                        <div class="modal-badges" id="m-badges"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button id="btt" aria-label="بازگشت به بالا">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path
+                    d="M7 11V3M2.5 6.5L7 2l4.5 4.5"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                />
+            </svg>
+        </button>
+
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+            defer
+        ></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
+            defer
+        ></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"
+            defer
+        ></script>
+        <script src="/assets/js/cafe-menu.js?v=3" defer></script>
+    </body>
 </html>
